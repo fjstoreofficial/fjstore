@@ -41,7 +41,6 @@
       text-align: left;
     }
 
-    /* Container produk */
     .container {
       width: 90%;
       max-width: 700px; /* desktop tetap kecil */
@@ -67,16 +66,10 @@
       align-items: start;
     }
 
-    /* Gambar produk bisa diklik */
     .product img {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .product img:hover {
-      transform: scale(1.05);
     }
 
     .info h3 {
@@ -121,13 +114,7 @@
       color: #000;
     }
 
-    /* Responsif tablet & HP */
-    @media (max-width: 768px) {
-      .product {
-        grid-template-columns: 1fr; /* satu kolom */
-      }
-    }
-
+    /* Responsif HP */
     @media (max-width: 600px) {
       header .logo {
         font-size: 22px;
@@ -139,13 +126,25 @@
       }
 
       .container {
-        max-width: 95%;   /* container lebih kecil di HP */
-        padding: 15px;    /* padding lebih ringkas */
+        width: 95%;       /* container penuh lebar layar */
+        padding: 15px;    /* padding lebih kecil supaya tidak terlalu tinggi */
+        margin: 20px auto;
+        border-radius: 12px;
+      }
+
+      .product {
+        display: flex;
+        flex-direction: row; /* gambar & info tetap horizontal */
+        gap: 10px;
+        align-items: flex-start;
       }
 
       .product img {
-        width: 80%;       /* gambar lebih kecil supaya container tidak panjang */
-        margin: 0 auto;   /* center */
+        width: 35%;   /* gambar lebih kecil supaya container tidak panjang */
+      }
+
+      .info {
+        width: 65%;   /* info di samping gambar */
       }
     }
   </style>
@@ -165,10 +164,8 @@
   <h2>Produk Unggulan</h2>
 
   <div class="product">
-    <!-- Gambar bisa diklik -->
-    <a href="hoodie.jpg" target="_blank">
-      <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
-    </a>
+    <!-- Gambar hanya tampilan -->
+    <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
 
     <div class="info">
       <h3>Hoodie HOLIGANS</h3>
@@ -197,6 +194,7 @@
 
 </body>
 </html>
+
 
 
 
