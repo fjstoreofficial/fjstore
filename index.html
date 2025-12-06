@@ -111,43 +111,47 @@
       color: #000;
     }
 
-    /* Responsif HP - super compact */
+    /* Responsif HP - super compact untuk <600px */
     @media (max-width: 600px) {
-      header .logo {
-        font-size: 22px;
-      }
-      header .contact {
-        font-size: 12px;
-        max-width: 220px;
-        margin-left: 10px;
-      }
+      header .logo { font-size: 22px; }
+      header .contact { font-size: 12px; max-width: 220px; margin-left: 10px; }
 
       .container {
-        width: 95%;        /* penuh lebar layar HP */
-        padding: 10px;     /* padding lebih kecil agar compact */
+        width: 95%;
+        padding: 10px;
         margin: 15px auto;
         border-radius: 12px;
       }
 
       .product {
         display: flex;
-        flex-direction: row;  /* gambar & info tetap horizontal */
+        flex-direction: row;
         gap: 8px;
         align-items: flex-start;
       }
 
-      .product img {
-        width: 30%;   /* gambar lebih kecil sehingga container tidak tinggi */
-      }
-
-      .info {
-        width: 70%;   /* info di samping gambar */
-      }
-
+      .product img { width: 30%; }
+      .info { width: 70%; }
       .info h3 { font-size: 16px; }
       .info p { font-size: 13px; }
       .price { font-size: 15px; }
       .buy-btn { font-size: 14px; padding: 6px 12px; }
+    }
+
+    /* Ekstra safe untuk HP sangat kecil <360px */
+    @media (max-width: 359px) {
+      .container {
+        width: 98%;       /* hampir penuh layar */
+        padding: 8px;     /* lebih compact */
+        margin: 10px auto;
+      }
+
+      .product img { width: 28%; }  /* gambar lebih kecil */
+      .info { width: 72%; }         /* info lebih luas di samping */
+      .info h3 { font-size: 15px; }
+      .info p { font-size: 12px; }
+      .price { font-size: 14px; }
+      .buy-btn { font-size: 13px; padding: 5px 10px; }
     }
   </style>
 </head>
@@ -196,6 +200,7 @@
 
 </body>
 </html>
+
 
 
 
