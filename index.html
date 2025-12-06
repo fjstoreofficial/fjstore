@@ -42,13 +42,14 @@
     }
 
     .container {
-      width: 90%;       /* mengikuti 90% layar, fleksibel di HP */
-      max-width: 700px; /* ukuran container di desktop lebih kecil */
+      width: 90%;       /* mengikuti layar */
+      max-width: 700px; /* desktop tetap kecil */
       margin: 40px auto;
-      background: rgba(255,255,255,0.95); /* putih agak transparan */
+      background: rgba(255,255,255,0.95);
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: width 0.3s;
     }
 
     h2 {
@@ -112,9 +113,10 @@
       color: #000;
     }
 
+    /* Responsif untuk tablet dan HP */
     @media (max-width: 768px) {
       .product {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* satu kolom */
       }
     }
 
@@ -131,6 +133,12 @@
         max-width: 220px;
         margin-left: 15px;
         white-space: normal;
+      }
+      .container {
+        width: 100%; /* penuh lebar layar HP */
+        margin: 20px 0;
+        border-radius: 0; /* biar pas layar penuh */
+        padding: 20px;
       }
     }
   </style>
@@ -179,6 +187,7 @@
 
 </body>
 </html>
+
 
 
 
