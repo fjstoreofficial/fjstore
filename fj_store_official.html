@@ -1,0 +1,322 @@
+
+
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FJ.Store.Official — Koleksi Fashion</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f4f6f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#ef6b66;
+      --accent-2:#ff8a80;
+      --glass: rgba(255,255,255,0.8);
+      --radius:14px;
+      --shadow: 0 8px 30px rgba(16,24,40,0.06);
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#f7f8fb 0%,var(--bg) 100%);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* layout container */
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:28px}
+    header{display:flex;align-items:center;gap:20px}
+    .brand{font-weight:800;font-size:20px;letter-spacing:0.2px}
+    nav.top-right{margin-left:auto;color:var(--muted);font-size:14px}
+
+    /* hero */
+    .hero{
+      display:flex;
+      gap:28px;
+      align-items:flex-start;
+      margin:28px 0 32px;
+    }
+    .hero .left{flex:1}
+    .hero h1{margin:0;font-size:36px;line-height:1.03}
+    .hero p.lead{margin:12px 0 0;color:var(--muted)}
+    .hero .note{
+      width:320px;
+      background:var(--card);
+      padding:18px;border-radius:12px;box-shadow:var(--shadow);
+    }
+    .note h4{margin:0 0 8px;font-size:16px}
+    .note ol{margin:0 0 0 18px;color:var(--muted);font-size:14px;padding:0}
+
+    /* product area */
+    .products{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* left column: grid of cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:14px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      gap:14px;
+    }
+    .card .thumb{
+      width:160px;
+      height:160px;
+      border-radius:12px;
+      overflow:hidden;
+      flex-shrink:0;
+      background:linear-gradient(180deg,#fff,#f3f4f6);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .meta{flex:1;display:flex;flex-direction:column}
+    .title{font-weight:700;margin:0 0 6px}
+    .price{color:var(--accent);font-weight:700;margin-bottom:8px}
+    .desc{color:var(--muted);font-size:13px;line-height:1.4}
+    .actions{margin-top:auto;display:flex;gap:10px;align-items:center}
+
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:12px;text-decoration:none;color:#fff;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      font-weight:700;font-size:14px;box-shadow:0 8px 18px rgba(239,107,102,0.14);
+    }
+    .badge{background:#0ea5a4;color:#fff;padding:6px 10px;border-radius:12px;font-weight:600;font-size:12px}
+
+    /* right column: detail panel */
+    .panel{
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),var(--card));
+      padding:18px;border-radius:14px;box-shadow:var(--shadow);min-height:360px;
+    }
+
+    .panel h3{margin:0 0 8px}
+    .panel .p-price{color:var(--accent);font-weight:800;font-size:18px;margin-bottom:8px}
+    .panel ul{margin:6px 0 0 18px;color:var(--muted)}
+    .panel .wa{display:inline-block;margin-top:12px}
+
+    /* footer */
+    footer{margin-top:32px;color:var(--muted);text-align:center;font-size:13px}
+
+    /* responsiveness */
+    @media (max-width:900px){
+      .products{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr;align-items:stretch}
+      .hero{flex-direction:column}
+      .note{width:100%}
+      .card{flex-direction:row}
+      .card .thumb{width:120px;height:120px}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px;margin:20px auto}
+      .hero h1{font-size:28px}
+      .card .thumb{width:100px;height:100px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">FJ.Store.Official</div>
+      <nav class="top-right">Hubungi: <span id="phone-display">+62 877-xxxx-xxxx</span></nav>
+    </header>
+
+    <section class="hero">
+      <div class="left">
+        <h1>Koleksi Fashion Terbaru</h1>
+        <p class="lead">Ready stock | Fast respon | Pengiriman cepat</p>
+
+        <!-- PRODUCTS AREA -->
+        <div class="products" style="margin-top:20px">
+          <div class="grid" id="product-grid">
+            <!-- product cards inserted here by JS -->
+          </div>
+
+          <!-- right side panel -->
+          <aside class="panel" id="product-panel">
+            <h3>Pilih produk untuk lihat detail</h3>
+            <p style="color:var(--muted)">Klik salah satu produk di kiri untuk melihat informasi lengkap dan tombol pesan.</p>
+            <div id="panel-content" style="margin-top:12px"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="note">
+        <h4>Cara Order</h4>
+        <ol>
+          <li>Pilih produk, tekan "Pesan via WhatsApp"</li>
+          <li>Isi nama, alamat, ukuran di chat</li>
+          <li>Kamu terima nomor resi setelah supplier kirim</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> FJ.Store.Official — Chat via WhatsApp untuk order</footer>
+  </div>
+
+  <script>
+    // ====== CONFIG: ganti nomor WA di sini (format tanpa +) ======
+    const sellerPhone = '6287758412915'; // ganti sesuai nomor kamu, contoh: '6281234567890'
+
+    // ====== PRODUCTS: tambahkan/ubah produk di sini ======
+    // Format:
+    // { id, title, price, image, short, details (array), stock }
+    const products = [
+      {
+        id: 'p1',
+        title: 'Hoodie Hooligans - Premium',
+        price: 'Rp225.920',
+        image: 'Hoodie_HOLIGANS.jpg', // pastikan nama file sesuai di repo
+        short: 'Bahan fleece, reguler fit, kantong kangaroo',
+        details: [
+          'Bahan Fleece warna biru muda',
+          'Rubber patch Velcro di lengan kiri',
+          'Sablon Plastisol High Density (timbul)',
+          'Reguler fit, tali serut',
+          'Kantong kangaroo',
+          'Size: S - M'
+        ],
+        stock: 'Ready stock'
+      },
+
+      // contoh produk tambahan (salin pola ini untuk tambah produk baru)
+      {
+        id: 'p2',
+        title: 'Kaos Premium Basic',
+        price: 'Rp95.000',
+        image: 'kaos_premium.jpg',
+        short: 'Bahan cotton combed, nyaman dipakai',
+        details: [
+          'Bahan: Cotton combed 30s',
+          'Potongan regular',
+          'Tersedia warna hitam, putih, abu',
+          'Size: S - XL'
+        ],
+        stock: 'Ready stock'
+      }
+    ];
+
+    // ====== INIT UI ======
+    const grid = document.getElementById('product-grid');
+    const panel = document.getElementById('product-panel');
+    const panelContent = document.getElementById('panel-content');
+
+    function createCard(p){
+      const wrap = document.createElement('div');
+      wrap.className = 'card';
+      wrap.innerHTML = `
+        <div class="thumb"><img loading="lazy" src="${p.image}" alt="${escapeHtml(p.title)}"></div>
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+            <div>
+              <div class="title">${escapeHtml(p.title)}</div>
+              <div class="price p-price">${p.price}</div>
+            </div>
+            <div class="badge">${escapeHtml(p.stock)}</div>
+          </div>
+          <div class="desc" style="margin-top:8px">${escapeHtml(p.short)}</div>
+          <div class="actions">
+            <a href="#" class="btn" onclick="openWhatsApp('${p.id}')">Pesan via WhatsApp</a>
+            <a href="#" style="color:var(--muted);font-size:13px;margin-left:8px" onclick="showDetail('${p.id}')">Lihat detail</a>
+          </div>
+        </div>
+      `;
+      return wrap;
+    }
+
+    function renderProducts(){
+      grid.innerHTML = '';
+      products.forEach(p=>{
+        grid.appendChild(createCard(p));
+      });
+      // set first product by default
+      if(products.length) showDetail(products[0].id);
+    }
+
+    function showDetail(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      panelContent.innerHTML = `
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:110px;height:110px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#fff">
+            <img src="${p.image}" alt="${escapeHtml(p.title)}" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:18px">${escapeHtml(p.title)}</div>
+            <div class="p-price" style="margin-top:6px">${p.price}</div>
+            <div style="color:var(--muted);margin-top:6px">${escapeHtml(p.short)}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <strong>Detail:</strong>
+          <ul>${p.details.map(d=>`<li>${escapeHtml(d)}</li>`).join('')}</ul>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+          <a class="btn wa" href="#" onclick="openWhatsApp('${p.id}')">Pesan via WhatsApp</a>
+          <div style="color:var(--muted);font-size:13px">${escapeHtml(p.stock)}</div>
+        </div>
+      `;
+      // scroll panel into view on small screens
+      if(window.innerWidth < 900){
+        panel.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+
+    // ====== WhatsApp order ======
+    function openWhatsApp(productId){
+      const p = products.find(x=>x.id===productId);
+      const productName = p ? p.title : 'Produk';
+      const price = p ? p.price : '';
+      const template = `Halo, saya mau pesan%0AProduk: ${encodeURIComponent(productName)}%0AHarga: ${encodeURIComponent(price)}%0AUkuran: %0AWarna: %0ANama: %0ANo HP: %0AAlamat lengkap: `;
+      const waUrl = `https://wa.me/${sellerPhone}?text=${template}`;
+      window.open(waUrl,'_blank');
+    }
+
+    // small helper
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+    }
+
+    // display phone and year
+    document.getElementById('year').innerText = new Date().getFullYear();
+    (function showPhone(){
+      const el = document.getElementById('phone-display');
+      if(!el) return;
+      // pretty format: +62 877-xxxxx
+      if(sellerPhone.startsWith('62')){
+        el.innerText = '+' + sellerPhone.replace(/^62/,'') .replace(/(\d{3})(\d{3})(\d+)/,'62 $1-$2-$3').replace(/^/,'');
+      } else {
+        el.innerText = sellerPhone;
+      }
+    })();
+
+    // init
+    renderProducts();
+  </script>
+</body>
+</html>
+
