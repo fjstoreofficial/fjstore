@@ -3,147 +3,148 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>RJ Official Store</title>
-
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FJ.official.store - Hoodie HOLIGANS</title>
+  <style>
     body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        margin: 0;
-        background: #f0f2f5;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #b3caff, #e8edff);
+      background-size: cover;
+      color: #222;
     }
 
-    /* HEADER */
-    .header {
-        background: #1e88e5;
-        padding: 18px;
-        text-align: center;
-        color: white;
-        font-size: 26px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px 25px;
+      backdrop-filter: blur(3px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    /* CARD PRODUK */
-    .product-card {
-        max-width: 480px;
-        background: #fff;
-        margin: 30px auto;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    header .logo {
+      font-size: 26px;
+      font-weight: bold;
     }
 
-    .product-card img {
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid #eee;
+    header .contact {
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.4;
     }
 
-    .content {
-        padding: 20px 24px;
+    .container {
+      max-width: 1100px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    .title {
-        font-size: 26px;
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: #222;
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .product {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    .info h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .info p {
+      font-size: 16px;
+      margin: 10px 0;
     }
 
     .price {
-        font-size: 23px;
-        font-weight: bold;
-        color: #1e88e5;
-        margin-bottom: 20px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #0077ff;
+      margin: 15px 0;
     }
 
-    .label {
-        font-size: 15px;
-        font-weight: bold;
-        margin-top: 15px;
-        margin-bottom: 5px;
-        text-transform: uppercase;
-        color: #444;
-    }
-
-    .desc {
-        margin-top: 10px;
-        color: #444;
-        line-height: 1.55;
-    }
-
-    /* TOMBOL BELI */
     .buy-btn {
-        width: 100%;
-        padding: 16px;
-        margin-top: 25px;
-        background: #1e88e5;
-        color: #fff;
-        font-size: 19px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        border-radius: 10px;
-        transition: 0.25s;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      display: inline-block;
+      padding: 12px 25px;
+      background: #00a82d;
+      color: white;
+      border-radius: 8px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.25s;
     }
 
     .buy-btn:hover {
-        background: #166cc0;
-        transform: translateY(-2px);
+      background: #008f26;
     }
 
-    /* FOOTER */
     footer {
-        text-align: center;
-        margin-top: 40px;
-        padding: 18px 0;
-        font-size: 14px;
-        color: #666;
+      margin-top: 50px;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(3px);
+      font-size: 14px;
     }
-</style>
-
+  </style>
 </head>
 <body>
 
-<div class="header">RJ OFFICIAL STORE</div>
+<header>
+  <div class="logo">FJ.official.store</div>
+  <div class="contact">
+    Panduan Beli: Chat WA<br>
+    <strong>087758412915</strong>
+  </div>
+</header>
 
-<div class="product-card">
-    <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
+<div class="container">
+  <h2>Produk Unggulan</h2>
 
-    <div class="content">
+  <div class="product">
+    <img src="hoodie.jpg" alt="Hoodie HOLIGANS" />
 
-        <div class="title">Hoodie HOLIGANS</div>
+    <div class="info">
+      <h3>Hoodie HOLIGANS</h3>
+      <p>Warna: Biru Muda</p>
+      <p>Ukuran: S - M</p>
+      <p class="price">Rp 225.920</p>
 
-        <div class="price">Rp 225.920</div>
-
-        <div class="label">Warna</div>
-        Biru Muda
-
-        <div class="label">Ukuran</div>
-        S, M
-
-        <div class="label">Deskripsi Produk</div>
-        <p class="desc">
-            Hoodie HOLIGANS hadir dengan bahan premium — lembut, tebal, adem, dan sangat nyaman dipakai.
-            Cocok untuk outfit harian, nongkrong, kuliah, atau aktivitas santai.
-            Desain simpel modern dengan jahitan rapi berkualitas tinggi.
-        </p>
-
-        <button class="buy-btn" onclick="window.location.href='https://wa.me/6287758412915?text=Saya+ingin+order+Hoodie+HOLIGANS'">
-            Beli Sekarang
-        </button>
+      <a class="buy-btn" href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0AMetode%20Pembayaran:" target="_blank">Beli Sekarang</a>
     </div>
+  </div>
+
 </div>
 
 <footer>
-    © 2025 RJ Official Store — All Rights Reserved
-</footer>
+  © 2025 FJ.official.store</footer>
 
 </body>
 </html>
+
 
 
 
