@@ -5,24 +5,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FJ.official.store - Hoodie HOLIGANS</title>
+  <title>FJ.Store - Hoodie HOLIGANS</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #b3caff, #e8edff);
-      background-size: cover;
+      background: linear-gradient(to bottom, #000000, #ffffff);
       color: #222;
     }
 
     header {
       width: 100%;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 15px 25px;
-      backdrop-filter: blur(3px);
+      background: #000000;
+      padding: 12px 18px;
+      color: white;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -34,18 +34,20 @@
     }
 
     header .contact {
-      text-align: right;
       font-size: 14px;
-      line-height: 1.4;
+      max-width: 300px;
+      white-space: normal;
+      margin-top: 4px;
+      line-height: 1.45;
+      text-align: left;
     }
 
     .container {
       max-width: 1100px;
-      margin: 50px auto;
-      background: rgba(255, 255, 255, 0.9);
+      margin: 40px auto;
+      background: #ffffff;
       padding: 25px;
       border-radius: 12px;
-      backdrop-filter: blur(4px);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
@@ -75,7 +77,7 @@
 
     .info p {
       font-size: 16px;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     .price {
@@ -105,19 +107,26 @@
       margin-top: 50px;
       text-align: center;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(3px);
+      background: #ffffff;
       font-size: 14px;
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">FJ.official.store</div>
+  <div class="logo">FJ.Store</div>
   <div class="contact">
-    Panduan Beli: Chat WA<br>
-    <strong>087758412915</strong>
+    Hubungi: <strong>+62 877-5841-2915</strong><br>
+    1. Pilih produk, tekan "Pesan via WhatsApp"<br>
+    2. Isi nama, alamat, ukuran di chat
   </div>
 </header>
 
@@ -129,21 +138,32 @@
 
     <div class="info">
       <h3>Hoodie HOLIGANS</h3>
-      <p>Warna: Biru Muda</p>
-      <p>Ukuran: S - M</p>
+
+      <p><strong>Deskripsi:</strong></p>
+      <p>- Bahan Fleece warna biru muda<br>
+         - Rubber patch Velcro di lengan kiri<br>
+         - Sablon plastisol High Density (timbul)<br>
+         - Reguler fit, tali serut<br>
+         - Kantong kangaroo<br>
+         - Size S - M
+      </p>
+
+      <p style="color:green; font-weight:bold; font-size:18px;">Ready Stock</p>
       <p class="price">Rp 225.920</p>
 
-      <a class="buy-btn" href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0AMetode%20Pembayaran:" target="_blank">Beli Sekarang</a>
+      <a class="buy-btn" href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0AMetode%20Pembayaran:" target="_blank">Pesan via WhatsApp</a>
     </div>
   </div>
 
 </div>
 
 <footer>
-  © 2025 FJ.official.store</footer>
+  © 2025 FJ.Store
+</footer>
 
 </body>
 </html>
+
 
 
 
