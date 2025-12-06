@@ -3,210 +3,460 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FJ.Store - Hoodie HOLIGANS</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FJ.Store — Hoodie HOLIGANS</title>
+  <meta name="description" content="FJ.Store - Koleksi fashion, ready stock, pesan via WhatsApp" />
+
+  <!-- Styles -->
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #000000, #ffffff);
-      color: #222;
+    /* -------------------------
+       Palet warna (abu profesional)
+       ------------------------- */
+    :root{
+      --bg: #f3f4f6;        /* very light gray background */
+      --card: #ffffff;      /* card background */
+      --muted: #6b6f76;     /* muted text */
+      --accent: #2b6b8f;    /* gentle blue accent */
+      --success: #07a05a;   /* green for buttons */
+      --shadow: rgba(15,23,42,0.06);
+      --radius: 12px;
+      --maxwidth: 980px;
     }
 
-    header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px 15px;
-      backdrop-filter: blur(3px);
+    /* -------------------------
+       Base
+       ------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #eef0f2 0%, var(--bg) 100%);
+      color: #111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    /* -------------------------
+       Page container
+       ------------------------- */
+    .page {
+      width: 94%;
+      max-width: var(--maxwidth);
+      margin: 26px auto;
+      padding: 18px;
+    }
+
+    /* -------------------------
+       Header
+       ------------------------- */
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.9));
+      padding: 12px 18px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px var(--shadow);
       position: sticky;
-      top: 0;
-      z-index: 1000;
+      top: 12px;
+      z-index: 40;
     }
 
-    header .logo {
-      font-size: 26px;
-      font-weight: bold;
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
 
-    header .contact {
-      font-size: 14px;
-      max-width: 300px;
-      line-height: 1.45;
-      text-align: left;
+    .logo {
+      width:48px; height:48px;
+      background: linear-gradient(180deg,#e6e9ec,#dfe4e8);
+      border-radius:10px;
+      display:grid;place-items:center;
+      font-weight:700;
+      color:#0f1724;
+      font-size:18px;
+      box-shadow: 0 3px 8px rgba(15,23,42,0.06) inset;
     }
 
-    .container {
-      width: 90%;
-      max-width: 700px;
-      margin: 40px auto;
-      background: rgba(255,255,255,0.95);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .brand .title {
+      font-size:18px;
+      font-weight:700;
+      color:#0f1724;
+    }
+    .brand .sub {
+      font-size:13px;
+      color:var(--muted);
+      margin-top:2px;
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 32px;
-      font-weight: bold;
+    .header-actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
 
-    .product {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: start;
+    .contact-pill{
+      background:var(--card);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+      box-shadow: 0 4px 12px var(--shadow);
     }
 
-    .product img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    /* -------------------------
+       Main grid
+       ------------------------- */
+    .hero {
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
     }
 
-    .info h3 {
-      font-size: 26px;
-      margin-bottom: 10px;
+    /* Left column (title + description + order steps) */
+    .hero-left{
+      background:var(--card);
+      padding:20px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+    .store-title{
+      font-size:28px;
+      margin:0 0 8px 0;
+      color:#0f1724;
+    }
+    .store-sub{
+      color:var(--muted);
+      margin:6px 0 14px 0;
+      font-size:14px;
     }
 
-    .info p {
-      font-size: 16px;
-      margin: 8px 0;
+    .order-steps{
+      margin-top:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .step-card{
+      background: linear-gradient(180deg,#fafafa,#ffffff);
+      padding:12px;
+      border-radius:10px;
+      box-shadow: 0 4px 12px var(--shadow);
+      font-size:14px;
+      color:var(--muted);
     }
 
-    .price {
-      font-size: 26px;
-      font-weight: bold;
-      color: #0077ff;
-      margin: 15px 0;
+    /* Right column (product preview column) */
+    .side-card{
+      position:relative;
+      background:var(--card);
+      padding:14px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
 
-    .buy-btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #00a82d;
-      color: white;
-      border-radius: 8px;
-      font-size: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.25s;
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      color:white;
+      background:var(--accent);
+      padding:6px 8px;
+      border-radius:8px;
+      font-weight:700;
     }
 
-    .buy-btn:hover {
-      background: #008f26;
+    /* -------------------------
+       Product list area
+       ------------------------- */
+    .catalog {
+      margin-top:20px;
+      display:grid;
+      gap:18px;
     }
 
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      padding: 20px;
-      background: #ffffff;
-      font-size: 14px;
-      color: #000;
+    .product-card{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:20px;
+      align-items:start;
+      background:var(--card);
+      padding:18px;
+      border-radius:14px;
+      box-shadow: 0 10px 28px var(--shadow);
     }
 
-    /* Responsif HP - horizontal compact untuk <600px */
-    @media (max-width: 600px) {
-      header .logo { font-size: 22px; }
-      header .contact { font-size: 12px; max-width: 220px; margin-left: 10px; }
+    .product-media{
+      width:100%;
+      min-height:260px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      border-radius:12px;
+      background: linear-gradient(180deg,#eef2f5,#f9fafb);
+    }
 
-      .container {
-        width: 95%;
-        padding: 10px;
-        margin: 15px auto;
-        border-radius: 12px;
+    .product-media img{
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .product-info h3{
+      margin:0;
+      font-size:20px;
+      color:#0f1724;
+    }
+    .product-info .price{
+      margin-top:10px;
+      font-size:20px;
+      font-weight:800;
+      color:var(--accent);
+    }
+    .product-info .desc{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .labels{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .label-pill{
+      background:#f3f4f6;
+      color: #374151;
+      font-size:13px;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .actions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+      border:0;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:var(--success);
+      color:white;
+      box-shadow: 0 8px 20px rgba(7,160,90,0.15);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid #e6e7ea;
+      color:var(--muted);
+    }
+
+    /* small note text under actions */
+    .note {
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* -------------------------
+       Footer
+       ------------------------- */
+    footer.site-footer{
+      margin-top:26px;
+      padding:16px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* -------------------------
+       Responsive rules
+       ------------------------- */
+    @media (max-width: 980px){
+      .hero { grid-template-columns: 1fr 340px; }
+      .product-card { grid-template-columns: 280px 1fr; }
+    }
+
+    /* Mobile: make layout vertical and "wide" (full width cards) */
+    @media (max-width: 700px){
+      .page{ width:98%; padding:8px; }
+      .hero { grid-template-columns: 1fr; }
+      header.site-header{ flex-direction:row; gap:8px; padding:10px; }
+      .side-card { order:2; } /* keep hero-left first */
+      .hero-left { order:1; }
+      .product-card{
+        grid-template-columns: 1fr;
+        padding:14px;
       }
-
-      .product {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        align-items: flex-start;
-      }
-
-      .product img { width: 30%; }
-      .info { width: 70%; }
-      .info h3 { font-size: 16px; }
-      .info p { font-size: 13px; }
-      .price { font-size: 15px; }
-      .buy-btn { font-size: 14px; padding: 6px 12px; }
+      .product-media{ min-height:320px; }
+      .product-info .price{ font-size:18px; }
+      .store-title{ font-size:22px; }
     }
 
-    /* Ekstra safe untuk HP sangat kecil <360px - layout vertical */
-    @media (max-width: 359px) {
-      .container {
-        width: 98%;
-        padding: 8px;
-        margin: 10px auto;
-      }
-
-      .product {
-        display: flex;
-        flex-direction: column; /* gambar di atas, info di bawah */
-        gap: 8px;
-        align-items: center;
-      }
-
-      .product img { width: 60%; } /* lebih besar dan jelas */
-      .info { width: 100%; text-align: left; }
-      .info h3 { font-size: 15px; }
-      .info p { font-size: 12px; line-height: 1.3; }
-      .price { font-size: 14px; }
-      .buy-btn { font-size: 13px; padding: 5px 10px; }
+    /* Very small phones */
+    @media (max-width: 380px){
+      .logo{ width:44px; height:44px; font-size:16px; }
+      .brand .title{ font-size:16px; }
+      .product-media{ min-height:260px; }
+      .btn{ font-size:14px; padding:9px 12px; }
     }
+
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">FJ.Store</div>
-  <div class="contact">
-    Hubungi: <strong>+62 877-5841-2915</strong><br>
-    1. Pilih produk, tekan "Pesan via WhatsApp"<br>
-    2. Isi nama, alamat, ukuran di chat
+  <div class="page">
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">FJ</div>
+        <div>
+          <div class="title">FJ.Store</div>
+          <div class="sub">Koleksi Fashion Terbaru</div>
+        </div>
+      </div>
+
+      <div class="header-actions" aria-hidden="true">
+        <div class="contact-pill">Hubungi: +62 877-5841-2915</div>
+      </div>
+    </header>
+
+    <!-- Hero: left (info) + right (side card) -->
+    <section class="hero" aria-label="Intro">
+      <div class="hero-left">
+        <h1 class="store-title">Koleksi Fashion Terbaru</h1>
+        <p class="store-sub">Ready stock | Fast respon | Pengiriman cepat</p>
+
+        <div class="order-steps" aria-hidden="false">
+          <div class="step-card">
+            <strong>Cara Order</strong>
+            <ol style="margin:8px 0 0 18px; padding:0; color:var(--muted);">
+              <li>Pilih produk, tekan tombol "Pesan via WhatsApp".</li>
+              <li>Isi nama, alamat, ukuran di chat.</li>
+              <li>Konfirmasi & tunggu nomor resi setelah supplier kirim.</li>
+            </ol>
+          </div>
+
+          <div class="step-card" style="display:flex;gap:12px;align-items:center;">
+            <div style="flex:1">
+              <strong>Jam Kerja</strong>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px;">09:00 - 19:00 WITA (Senin - Sabtu)</div>
+            </div>
+            <div>
+              <span class="badge">Fast Respon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-card" aria-label="Sidebar">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-weight:700;">Highlight</div>
+          <div style="font-size:13px;color:var(--muted)">Ready stock</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:14px;color:var(--muted)">Rekomendasi minggu ini</div>
+          <div style="font-weight:700;font-size:18px;color:#0f1724">Hoodie Holigans - Premium</div>
+        </div>
+
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);">
+          <small>- Bahan Fleece, warna biru muda. - Size S / M.</small>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Product catalog -->
+    <main class="catalog" aria-label="Daftar produk">
+      <!-- Product card 1 -->
+      <article class="product-card" itemscope itemtype="http://schema.org/Product" aria-labelledby="prod1-title">
+        <div class="product-media" role="img" aria-label="Gambar Hoodie Holigans">
+          <!-- Ganti src ke nama file gambarmu -->
+          <img src="hoodie.jpg" alt="Hoodie HOLIGANS - biru muda" />
+        </div>
+
+        <div class="product-info">
+          <h3 id="prod1-title">Hoodie HOLIGANS - Premium</h3>
+
+          <div class="price" itemprop="price">Rp225.920</div>
+
+          <div class="desc">
+            <ul style="margin:8px 0 0 18px; padding:0; color:var(--muted);">
+              <li>Bahan Fleece warna biru muda</li>
+              <li>Rubber patch Velcro di lengan kiri</li>
+              <li>Sablon plastisol High Density (timbul)</li>
+              <li>Reguler fit, tali serut, kantong kangaroo</li>
+              <li>Size: S - M</li>
+            </ul>
+          </div>
+
+          <div class="labels" aria-hidden="true">
+            <span class="label-pill">Ready stock</span>
+            <span class="label-pill">Fast Respon</span>
+            <span class="label-pill">COD tidak tersedia</span>
+          </div>
+
+          <div class="actions">
+            <!-- Tombol WhatsApp: encode pesan jika perlu -->
+            <a class="btn btn-primary"
+               href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0A"
+               target="_blank" rel="noopener noreferrer" aria-label="Pesan via WhatsApp">
+              Pesan via WhatsApp
+            </a>
+
+            <a class="btn btn-ghost" href="#" onclick="window.print();return false;" aria-label="Cetak halaman">
+              Cetak
+            </a>
+          </div>
+
+          <div class="note">Semua harga sudah termasuk PPN jika ada. Stok dapat berubah sewaktu-waktu.</div>
+        </div>
+      </article>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      © <span id="year"></span> FJ.Store — Hubungi: +62 877-5841-2915
+    </footer>
   </div>
-</header>
 
-<div class="container">
-  <h2>Produk Unggulan</h2>
-
-  <div class="product">
-    <!-- Gambar hanya tampilan, tidak bisa diklik -->
-    <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
-
-    <div class="info">
-      <h3>Hoodie HOLIGANS</h3>
-
-      <p><strong>Deskripsi:</strong></p>
-      <p>- Bahan Fleece warna biru muda<br>
-         - Rubber patch Velcro di lengan kiri<br>
-         - Sablon plastisol High Density (timbul)<br>
-         - Reguler fit, tali serut<br>
-         - Kantong kangaroo<br>
-         - Size S - M
-      </p>
-
-      <p style="color:green; font-weight:bold;">Ready Stock</p>
-      <p class="price">Rp 225.920</p>
-
-      <a class="buy-btn" href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0AMetode%20Pembayaran:" target="_blank">Pesan via WhatsApp</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  © 2025 FJ.Store
-</footer>
-
+  <!-- Small script for year -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
 
 
 
