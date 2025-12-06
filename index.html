@@ -35,21 +35,18 @@
     header .contact {
       font-size: 14px;
       max-width: 300px;
-      white-space: normal;
-      margin-top: 4px;
       line-height: 1.45;
       text-align: left;
     }
 
     .container {
       width: 90%;
-      max-width: 700px; /* desktop tetap kecil */
+      max-width: 700px;
       margin: 40px auto;
       background: rgba(255,255,255,0.95);
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: width 0.3s;
     }
 
     h2 {
@@ -114,7 +111,7 @@
       color: #000;
     }
 
-    /* Responsif HP */
+    /* Responsif HP - super compact */
     @media (max-width: 600px) {
       header .logo {
         font-size: 22px;
@@ -122,30 +119,35 @@
       header .contact {
         font-size: 12px;
         max-width: 220px;
-        margin-left: 15px;
+        margin-left: 10px;
       }
 
       .container {
-        width: 95%;       /* container penuh lebar layar */
-        padding: 15px;    /* padding lebih kecil supaya tidak terlalu tinggi */
-        margin: 20px auto;
+        width: 95%;        /* penuh lebar layar HP */
+        padding: 10px;     /* padding lebih kecil agar compact */
+        margin: 15px auto;
         border-radius: 12px;
       }
 
       .product {
         display: flex;
-        flex-direction: row; /* gambar & info tetap horizontal */
-        gap: 10px;
+        flex-direction: row;  /* gambar & info tetap horizontal */
+        gap: 8px;
         align-items: flex-start;
       }
 
       .product img {
-        width: 35%;   /* gambar lebih kecil supaya container tidak panjang */
+        width: 30%;   /* gambar lebih kecil sehingga container tidak tinggi */
       }
 
       .info {
-        width: 65%;   /* info di samping gambar */
+        width: 70%;   /* info di samping gambar */
       }
+
+      .info h3 { font-size: 16px; }
+      .info p { font-size: 13px; }
+      .price { font-size: 15px; }
+      .buy-btn { font-size: 14px; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -164,7 +166,7 @@
   <h2>Produk Unggulan</h2>
 
   <div class="product">
-    <!-- Gambar hanya tampilan -->
+    <!-- Gambar hanya tampilan, tidak bisa diklik -->
     <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
 
     <div class="info">
@@ -179,7 +181,7 @@
          - Size S - M
       </p>
 
-      <p style="color:green; font-weight:bold; font-size:18px;">Ready Stock</p>
+      <p style="color:green; font-weight:bold;">Ready Stock</p>
       <p class="price">Rp 225.920</p>
 
       <a class="buy-btn" href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0AMetode%20Pembayaran:" target="_blank">Pesan via WhatsApp</a>
@@ -194,6 +196,7 @@
 
 </body>
 </html>
+
 
 
 
