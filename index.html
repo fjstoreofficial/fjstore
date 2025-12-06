@@ -1,33 +1,94 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RJOfficial — Hoodie HOLIGANS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>RJOfficial.store.online</h1>
+      <nav>
+        <a href="#product">Produk</a>
+        <a href="#info">Info Pengiriman</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+    </div>
+  </header>
 
+  <main class="container">
+    <section id="product" class="product">
+      <div class="product-gallery">
+        <img id="mainImage" src="assets/hoodie.jpg" alt="Hoodie HOLIGANS" />
+      </div>
 
-{
-  "id": "fj002",
-  "name": "Hoodie Hooligans Premium",
-  "description": "Hoodie Hooligans edisi premium dengan material fleece tebal, lembut, dan sangat nyaman. Cocok dipakai di cuaca dingin, nongkrong, atau aktivitas santai. Model urban streetwear yang modern dan stylish.",
-  "price": 159000,
-  "discountPrice": 139000,
-  "images": [
-    "/products/hoodie-hooligans-1.jpg",
-    "/products/hoodie-hooligans-2.jpg"
-  ],
-  "category": "Hoodie",
-  "colors": ["Hitam", "Abu-Abu"],
-  "sizes": ["M", "L", "XL"],
-  "stock": 18,
-  "features": [
-    "Material fleece premium, lembut dan hangat",
-    "Logo Hooligans bordir",
-    "Jahitan kuat dan rapi",
-    "Tidak mudah berbulu"
-  ],
-  "shippingInfo": {
-    "weight": "600g",
-    "origin": "Bandung",
-    "estimation": "1–4 hari kerja"
-  },
-  "isNew": false,
-  "isRecommended": true,
-  "bonus": []
-}
+      <div class="product-details">
+        <h2>Hoodie <span class="muted">HOLIGANS</span></h2>
+        <p class="price" id="price">Rp 210.000</p>
+        <p class="sku">SKU: HLG-001</p>
+
+        <div class="options">
+          <label for="size">Pilih ukuran</label>
+          <select id="size" aria-label="Pilih ukuran">
+            <option value="S">S</option>
+            <option value="M">M</option>
+          </select>
+        </div>
+
+        <div class="options">
+          <label for="qty">Jumlah</label>
+          <input id="qty" type="number" min="1" value="1" />
+        </div>
+
+        <div class="options">
+          <input id="bonus" type="checkbox" />
+          <label for="bonus">Dapat stiker gratis (bonus)</label>
+        </div>
+
+        <div class="actions">
+          <button id="addToCart">Tambahkan ke Keranjang</button>
+          <button id="buyNow" class="secondary">Beli Sekarang</button>
+        </div>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="info" class="info">
+      <h3>Info Pengiriman</h3>
+      <p>Pengiriman ke seluruh Indonesia. Estimasi 2–7 hari kerja tergantung lokasi. Ongkos kirim dihitung saat checkout (simulasi).</p>
+      <ul>
+        <li>Pembayaran: Transfer bank, e-wallet, COD (jika tersedia).</li>
+        <li>Retur/Refund: hubungi kami lewat email atau WhatsApp dalam 3 hari setelah terima barang.</li>
+      </ul>
+    </section>
+
+    <section id="cart" class="cart">
+      <h3>Keranjang</h3>
+      <div id="cartContents">Keranjang kosong.</div>
+      <div class="cart-actions">
+        <button id="clearCart" class="secondary">Kosongkan Keranjang</button>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h3>Kontak</h3>
+      <p>Instagram: <strong>@RJOfficial.store</strong></p>
+      <p>WhatsApp: <strong>+62-812-xxxx-xxxx</strong></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> RJOfficial.store.online — Semua hak cipta.</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
 
 
