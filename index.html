@@ -1,191 +1,28 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoodie HOLIGANS</title>
-
+    <title>Toko Online</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: #f3f3f3;
-            color: #222;
-        }
-
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #111;
-            color: white;
-        }
-
-        .tagline {
-            margin-top: 8px;
-            opacity: .8;
-        }
-
-        .product-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 35px;
-        }
-
-        .product-images img {
-            width: 100%;
-            border-radius: 12px;
-        }
-
-        .thumbnails {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .thumbnails img {
-            width: 90px;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .thumbnails img:hover {
-            border-color: black;
-        }
-
-        .price {
-            margin: 10px 0;
-        }
-
-        .price .discount {
-            font-size: 26px;
-            font-weight: bold;
-            color: #e63946;
-        }
-
-        .price .normal {
-            text-decoration: line-through;
-            margin-left: 10px;
-            color: #777;
-        }
-
-        .desc {
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .selector {
-            margin: 15px 0;
-        }
-
-        .selector select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #aaa;
-            margin-top: 5px;
-        }
-
-        .buy-btn {
-            width: 100%;
-            padding: 15px;
-            background: #111;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        .buy-btn:hover {
-            background: #333;
-        }
-
-        .wa-btn {
-            background: #25D366;
-            margin-top: 12px;
-        }
-
-        footer {
-            text-align: center;
-            background: #111;
-            color: white;
-            padding: 15px 0;
-            margin-top: 50px;
-        }
+        body { font-family: Arial; margin: 20px; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 8px; }
+        .delete-btn { background: red; color: #fff; border: none; padding: 5px 10px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1>Hoodie HOLIGANS</h1>
-        <p class="tagline">Streetwear premium, nyaman dipakai kapan saja.</p>
-    </header>
+<h2>Daftar Produk</h2>
+<div id="product-list"></div>
 
-    <main class="product-container">
-        <div class="product-images">
-            <img id="mainImage" src="hoodie1.jpg" alt="Hoodie HOLIGANS">
-            <div class="thumbnails">
-                <img src="hoodie1.jpg" onclick="changeImage('hoodie1.jpg')">
-                <img src="hoodie2.jpg" onclick="changeImage('hoodie2.jpg')">
-            </div>
-        </div>
+<h3>Tambah Produk Baru</h3>
+<input id="name" type="text" placeholder="Nama Produk"><br><br>
+<input id="price" type="number" placeholder="Harga Produk"><br><br>
+<button onclick="addProduct()">Tambah</button>
 
-        <div class="product-info">
-            <h2>Hoodie HOLIGANS</h2>
-
-            <p class="price">
-                <span class="discount">Rp 225.920</span>
-            </p>
-
-            <p class="desc">
-                Hoodie HOLIGANS premium berbahan fleece lembut & hangat.  
-                Warna biru muda yang fresh dan modern, cocok dipakai harian.
-            </p>
-
-            <div class="selector">
-                <label>Warna</label>
-                <select>
-                    <option>Biru Muda</option>
-                </select>
-            </div>
-
-            <div class="selector">
-                <label>Ukuran</label>
-                <select>
-                    <option>S</option>
-                    <option>M</option>
-                </select>
-            </div>
-
-            <a href="https://wa.me/6287758412915?text=Halo%20admin,%20saya%20ingin%20pesan%20Hoodie%20HOLIGANS%20warna%20Biru%20Muda.%20Ukuran:%20(S/M)">
-                <button class="buy-btn wa-btn">Chat Admin</button>
-            </a>
-
-        </div>
-    </main>
-
-    <footer>
-        <p>© 2025 HOLIGANS Streetwear</p>
-    </footer>
-
-    <script>
-        function changeImage(filename) {
-            document.getElementById("mainImage").src = filename;
-        }
-    </script>
-
+<script src="app.js"></script>
 </body>
 </html>
+
 
 
 
