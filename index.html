@@ -8,149 +8,115 @@
 
 <style>
     body {
+        margin: 0;
+        padding: 0;
         font-family: Arial, sans-serif;
-        background: #f2f4f7;
-        margin: 0;
-        padding: 20px;
+        background: linear-gradient(135deg, #f0f4ff, #ffffff);
     }
 
-    header {
-        text-align: center;
-        margin-bottom: 35px;
-    }
-
-    header h1 {
-        font-size: 32px;
-        margin: 0;
-        font-weight: bold;
-        color: #111;
-    }
-
-    header p {
-        margin-top: 8px;
-        color: #555;
-        font-size: 16px;
-    }
-
-    .product-box {
-        max-width: 450px;
-        margin: auto;
+    .container {
+        max-width: 430px;
+        margin: 40px auto;
         background: #fff;
-        padding: 22px;
         border-radius: 15px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .header {
+        background: #1a73e8;
+        color: white;
+        padding: 18px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
     }
 
     .product-img {
         width: 100%;
-        border-radius: 12px;
-        margin-bottom: 15px;
+        display: block;
+    }
+
+    .content {
+        padding: 18px 22px;
     }
 
     .title {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: bold;
         margin-bottom: 8px;
     }
 
     .price {
         font-size: 22px;
-        color: #1e88e5;
         font-weight: bold;
-        margin-bottom: 15px;
+        color: #1e88e5;
+        margin-bottom: 18px;
     }
 
-    .section-title {
+    .label {
         font-weight: bold;
-        margin-bottom: 5px;
         margin-top: 12px;
+        margin-bottom: 5px;
     }
 
     .desc {
+        color: #444;
         line-height: 1.5;
-    }
-
-    .contact-box {
-        margin-top: 20px;
-        background: #e0f0ff;
-        padding: 14px;
-        border-radius: 10px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
     }
 
     .buy-btn {
         width: 100%;
-        padding: 16px;
-        margin-top: 18px;
-        background: #1e88e5;
-        color: white;
+        padding: 15px;
+        margin-top: 20px;
+        background: #1a73e8;
         border: none;
+        color: white;
         border-radius: 10px;
-        cursor: pointer;
         font-size: 18px;
         font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
     }
 
     .buy-btn:hover {
-        background: #1565c0;
+        background: #155fc7;
+    }
+
+    footer {
+        text-align: center;
+        padding: 15px 0;
+        font-size: 14px;
+        color: #888;
     }
 </style>
 
 </head>
 <body>
 
-<header>
-    <h1>RJ OFFICIAL STORE</h1>
-    <p>Hoodie Premium · Kualitas Terjamin · Harga Terbaik</p>
-</header>
+<div class="container">
 
-<div class="product-box">
+    <div class="header">RJ OFFICIAL STORE</div>
 
-    <!-- GAMBAR PRODUK -->
     <img src="hoodie.jpg" class="product-img" alt="Hoodie HOLIGANS">
 
-    <!-- NAMA PRODUK -->
-    <div class="title">Hoodie HOLIGANS</div>
+    <div class="content">
 
-    <!-- HARGA PRODUK -->
-    <div class="price">Rp 225.920</div>
+        <div class="title">Hoodie HOLIGANS</div>
 
-    <!-- WARNA -->
-    <div>
-        <div class="section-title">Warna :</div>
+        <div class="price">Rp 225.920</div>
+
+        <div class="label">Warna</div>
         Biru Muda
-    </div>
 
-    <!-- SIZE -->
-    <div>
-        <div class="section-title">Ukuran :</div>
+        <div class="label">Ukuran</div>
         S, M
-    </div>
 
-    <!-- DESKRIPSI -->
-    <div>
-        <div class="section-title">Deskripsi Produk :</div>
+        <div class="label">Deskripsi</div>
         <p class="desc">
             Hoodie HOLIGANS hadir dengan bahan premium yang lembut, adem, dan tebal.  
-            Nyaman dipakai harian, cocok untuk style casual, nongkrong, ataupun aktivitas santai.  
-            Jahitan rapi, dan kualitas sangat terjamin.
-        </p>
-    </div>
+            Nyaman dipakai harian, cocok untuk
 
-    <!-- KONTAK -->
-    <div class="contact-box">
-        Order WhatsApp: 087758412915
-    </div>
-
-    <!-- TOMBOL BELI -->
-    <button class="buy-btn">Beli Sekarang</button>
-
-</div>
-
-</body>
-</html>
 
 
 
