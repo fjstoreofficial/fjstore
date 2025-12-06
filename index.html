@@ -1,94 +1,192 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RJOfficial — Hoodie HOLIGANS</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoodie HOLIGANS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f3f3f3;
+            color: #222;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #111;
+            color: white;
+        }
+
+        .tagline {
+            margin-top: 8px;
+            opacity: .8;
+        }
+
+        .product-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .product-images img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .thumbnails {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnails img {
+            width: 90px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .thumbnails img:hover {
+            border-color: black;
+        }
+
+        .price {
+            margin: 10px 0;
+        }
+
+        .price .discount {
+            font-size: 26px;
+            font-weight: bold;
+            color: #e63946;
+        }
+
+        .price .normal {
+            text-decoration: line-through;
+            margin-left: 10px;
+            color: #777;
+        }
+
+        .desc {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .selector {
+            margin: 15px 0;
+        }
+
+        .selector select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #aaa;
+            margin-top: 5px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 15px;
+            background: #111;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .buy-btn:hover {
+            background: #333;
+        }
+
+        .wa-btn {
+            background: #25D366;
+            margin-top: 12px;
+        }
+
+        footer {
+            text-align: center;
+            background: #111;
+            color: white;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>RJOfficial.store.online</h1>
-      <nav>
-        <a href="#product">Produk</a>
-        <a href="#info">Info Pengiriman</a>
-        <a href="#contact">Kontak</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <section id="product" class="product">
-      <div class="product-gallery">
-        <img id="mainImage" src="assets/hoodie.jpg" alt="Hoodie HOLIGANS" />
-      </div>
+    <header class="header">
+        <h1>Hoodie HOLIGANS</h1>
+        <p class="tagline">Streetwear premium, nyaman dipakai kapan saja.</p>
+    </header>
 
-      <div class="product-details">
-        <h2>Hoodie <span class="muted">HOLIGANS</span></h2>
-        <p class="price" id="price">Rp 210.000</p>
-        <p class="sku">SKU: HLG-001</p>
-
-        <div class="options">
-          <label for="size">Pilih ukuran</label>
-          <select id="size" aria-label="Pilih ukuran">
-            <option value="S">S</option>
-            <option value="M">M</option>
-          </select>
+    <main class="product-container">
+        <div class="product-images">
+            <img id="mainImage" src="hoodie1.jpg" alt="Hoodie HOLIGANS">
+            <div class="thumbnails">
+                <img src="hoodie1.jpg" onclick="changeImage('hoodie1.jpg')">
+                <img src="hoodie2.jpg" onclick="changeImage('hoodie2.jpg')">
+            </div>
         </div>
 
-        <div class="options">
-          <label for="qty">Jumlah</label>
-          <input id="qty" type="number" min="1" value="1" />
+        <div class="product-info">
+            <h2>Hoodie HOLIGANS</h2>
+
+            <p class="price">
+                <span class="discount">Rp 225.920</span>
+            </p>
+
+            <p class="desc">
+                Hoodie HOLIGANS premium berbahan fleece lembut & hangat.  
+                Warna biru muda yang fresh dan modern, cocok dipakai harian.
+            </p>
+
+            <div class="selector">
+                <label>Warna</label>
+                <select>
+                    <option>Biru Muda</option>
+                </select>
+            </div>
+
+            <div class="selector">
+                <label>Ukuran</label>
+                <select>
+                    <option>S</option>
+                    <option>M</option>
+                </select>
+            </div>
+
+            <a href="https://wa.me/6287758412915?text=Halo%20admin,%20saya%20ingin%20pesan%20Hoodie%20HOLIGANS%20warna%20Biru%20Muda.%20Ukuran:%20(S/M)">
+                <button class="buy-btn wa-btn">Chat Admin</button>
+            </a>
+
         </div>
+    </main>
 
-        <div class="options">
-          <input id="bonus" type="checkbox" />
-          <label for="bonus">Dapat stiker gratis (bonus)</label>
-        </div>
+    <footer>
+        <p>© 2025 HOLIGANS Streetwear</p>
+    </footer>
 
-        <div class="actions">
-          <button id="addToCart">Tambahkan ke Keranjang</button>
-          <button id="buyNow" class="secondary">Beli Sekarang</button>
-        </div>
+    <script>
+        function changeImage(filename) {
+            document.getElementById("mainImage").src = filename;
+        }
+    </script>
 
-        <div id="message" class="message" role="status" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section id="info" class="info">
-      <h3>Info Pengiriman</h3>
-      <p>Pengiriman ke seluruh Indonesia. Estimasi 2–7 hari kerja tergantung lokasi. Ongkos kirim dihitung saat checkout (simulasi).</p>
-      <ul>
-        <li>Pembayaran: Transfer bank, e-wallet, COD (jika tersedia).</li>
-        <li>Retur/Refund: hubungi kami lewat email atau WhatsApp dalam 3 hari setelah terima barang.</li>
-      </ul>
-    </section>
-
-    <section id="cart" class="cart">
-      <h3>Keranjang</h3>
-      <div id="cartContents">Keranjang kosong.</div>
-      <div class="cart-actions">
-        <button id="clearCart" class="secondary">Kosongkan Keranjang</button>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <h3>Kontak</h3>
-      <p>Instagram: <strong>@RJOfficial.store</strong></p>
-      <p>WhatsApp: <strong>+62-812-xxxx-xxxx</strong></p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <small>© <span id="year"></span> RJOfficial.store.online — Semua hak cipta.</small>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
