@@ -17,12 +17,11 @@
     header {
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      background: #000000;
-      padding: 12px 18px;
-      color: white;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 15px;
+      backdrop-filter: blur(3px);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -112,7 +111,21 @@
       color: #000;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
+    header {
+      flex-wrap: nowrap;
+    }
+    header .logo {
+      font-size: 22px;
+      white-space: nowrap;
+    }
+    header .contact {
+      font-size: 12px;
+      max-width: 220px;
+      margin-left: 15px;
+      white-space: normal;
+    }
+} (max-width: 768px) {
       .product {
         grid-template-columns: 1fr;
       }
@@ -163,6 +176,7 @@
 
 </body>
 </html>
+
 
 
 
