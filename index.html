@@ -8,97 +8,110 @@
 
 <style>
     body {
+        font-family: 'Segoe UI', Arial, sans-serif;
         margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #f0f4ff, #ffffff);
+        background: #f0f2f5;
     }
 
-    .container {
-        max-width: 430px;
-        margin: 40px auto;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-
+    /* HEADER */
     .header {
-        background: #1a73e8;
-        color: white;
+        background: #1e88e5;
         padding: 18px;
         text-align: center;
-        font-size: 22px;
+        color: white;
+        font-size: 26px;
         font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .product-img {
+    /* CARD PRODUK */
+    .product-card {
+        max-width: 480px;
+        background: #fff;
+        margin: 30px auto;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+
+    .product-card img {
         width: 100%;
         display: block;
+        border-bottom: 1px solid #eee;
     }
 
     .content {
-        padding: 18px 22px;
+        padding: 20px 24px;
     }
 
     .title {
-        font-size: 24px;
+        font-size: 26px;
         font-weight: bold;
         margin-bottom: 8px;
+        color: #222;
     }
 
     .price {
-        font-size: 22px;
+        font-size: 23px;
         font-weight: bold;
         color: #1e88e5;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .label {
+        font-size: 15px;
         font-weight: bold;
-        margin-top: 12px;
+        margin-top: 15px;
         margin-bottom: 5px;
+        text-transform: uppercase;
+        color: #444;
     }
 
     .desc {
+        margin-top: 10px;
         color: #444;
-        line-height: 1.5;
+        line-height: 1.55;
     }
 
+    /* TOMBOL BELI */
     .buy-btn {
         width: 100%;
-        padding: 15px;
-        margin-top: 20px;
-        background: #1a73e8;
-        border: none;
-        color: white;
-        border-radius: 10px;
-        font-size: 18px;
+        padding: 16px;
+        margin-top: 25px;
+        background: #1e88e5;
+        color: #fff;
+        font-size: 19px;
         font-weight: bold;
+        border: none;
         cursor: pointer;
-        transition: 0.2s;
+        border-radius: 10px;
+        transition: 0.25s;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
     .buy-btn:hover {
-        background: #155fc7;
+        background: #166cc0;
+        transform: translateY(-2px);
     }
 
+    /* FOOTER */
     footer {
         text-align: center;
-        padding: 15px 0;
+        margin-top: 40px;
+        padding: 18px 0;
         font-size: 14px;
-        color: #888;
+        color: #666;
     }
 </style>
 
 </head>
 <body>
 
-<div class="container">
+<div class="header">RJ OFFICIAL STORE</div>
 
-    <div class="header">RJ OFFICIAL STORE</div>
-
-    <img src="hoodie.jpg" class="product-img" alt="Hoodie HOLIGANS">
+<div class="product-card">
+    <img src="hoodie.jpg" alt="Hoodie HOLIGANS">
 
     <div class="content">
 
@@ -112,10 +125,26 @@
         <div class="label">Ukuran</div>
         S, M
 
-        <div class="label">Deskripsi</div>
+        <div class="label">Deskripsi Produk</div>
         <p class="desc">
-            Hoodie HOLIGANS hadir dengan bahan premium yang lembut, adem, dan tebal.  
-            Nyaman dipakai harian, cocok untuk
+            Hoodie HOLIGANS hadir dengan bahan premium — lembut, tebal, adem, dan sangat nyaman dipakai.
+            Cocok untuk outfit harian, nongkrong, kuliah, atau aktivitas santai.
+            Desain simpel modern dengan jahitan rapi berkualitas tinggi.
+        </p>
+
+        <button class="buy-btn" onclick="window.location.href='https://wa.me/6287758412915?text=Saya+ingin+order+Hoodie+HOLIGANS'">
+            Beli Sekarang
+        </button>
+    </div>
+</div>
+
+<footer>
+    © 2025 RJ Official Store — All Rights Reserved
+</footer>
+
+</body>
+</html>
+
 
 
 
