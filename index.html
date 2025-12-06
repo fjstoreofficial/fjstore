@@ -14,16 +14,19 @@
        Palet warna (abu profesional)
        ------------------------- */
     :root{
-      --bg: #f3f4f6;
-      --card: #ffffff;
-      --muted: #6b6f76;
-      --accent: #2b6b8f;
-      --success: #07a05a;
+      --bg: #f3f4f6;        /* very light gray background */
+      --card: #ffffff;      /* card background */
+      --muted: #6b6f76;     /* muted text */
+      --accent: #2b6b8f;    /* gentle blue accent */
+      --success: #07a05a;   /* green for buttons */
       --shadow: rgba(15,23,42,0.06);
       --radius: 12px;
       --maxwidth: 980px;
     }
 
+    /* -------------------------
+       Base
+       ------------------------- */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -31,11 +34,16 @@
       font-family: Inter, system-ui, -apple-system, "Helvetica Neue", Arial;
       background: linear-gradient(180deg, #eef0f2 0%, var(--bg) 100%);
       color: #111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       line-height:1.45;
     }
 
     a{color:inherit;text-decoration:none}
 
+    /* -------------------------
+       Page container
+       ------------------------- */
     .page {
       width: 94%;
       max-width: var(--maxwidth);
@@ -43,6 +51,9 @@
       padding: 18px;
     }
 
+    /* -------------------------
+       Header
+       ------------------------- */
     header.site-header{
       display:flex;
       align-items:center;
@@ -74,8 +85,22 @@
       box-shadow: 0 3px 8px rgba(15,23,42,0.06) inset;
     }
 
-    .brand .title { font-size:18px; font-weight:700; }
-    .brand .sub { font-size:13px; color:var(--muted); margin-top:2px; }
+    .brand .title {
+      font-size:18px;
+      font-weight:700;
+      color:#0f1724;
+    }
+    .brand .sub {
+      font-size:13px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .header-actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
 
     .contact-pill{
       background:var(--card);
@@ -86,6 +111,9 @@
       box-shadow: 0 4px 12px var(--shadow);
     }
 
+    /* -------------------------
+       Main grid
+       ------------------------- */
     .hero {
       margin-top:18px;
       display:grid;
@@ -94,15 +122,23 @@
       align-items:start;
     }
 
+    /* Left column (title + description + order steps) */
     .hero-left{
       background:var(--card);
       padding:20px;
       border-radius: var(--radius);
       box-shadow: 0 8px 24px var(--shadow);
     }
-
-    .store-title{ font-size:28px; margin:0 0 8px 0; }
-    .store-sub{ color:var(--muted); margin:6px 0 14px 0; font-size:14px; }
+    .store-title{
+      font-size:28px;
+      margin:0 0 8px 0;
+      color:#0f1724;
+    }
+    .store-sub{
+      color:var(--muted);
+      margin:6px 0 14px 0;
+      font-size:14px;
+    }
 
     .order-steps{
       margin-top:10px;
@@ -110,7 +146,6 @@
       flex-direction:column;
       gap:10px;
     }
-
     .step-card{
       background: linear-gradient(180deg,#fafafa,#ffffff);
       padding:12px;
@@ -120,6 +155,7 @@
       color:var(--muted);
     }
 
+    /* Right column (product preview column) */
     .side-card{
       position:relative;
       background:var(--card);
@@ -141,7 +177,14 @@
       font-weight:700;
     }
 
-    .catalog { margin-top:20px; display:grid; gap:18px; }
+    /* -------------------------
+       Product list area
+       ------------------------- */
+    .catalog {
+      margin-top:20px;
+      display:grid;
+      gap:18px;
+    }
 
     .product-card{
       display:grid;
@@ -172,24 +215,81 @@
       display:block;
     }
 
-    .product-info h3{ margin:0; font-size:20px; }
-    .product-info .price{ margin-top:10px; font-size:20px; font-weight:800; color:var(--accent); }
-    .product-info .desc{ margin-top:10px; color:var(--muted); font-size:14px; }
-
-    .labels{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
-    .label-pill{ background:#f3f4f6; color:#374151; font-size:13px; padding:6px 10px; border-radius:999px; }
-
-    .actions{ margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; }
-    .btn{
-      display:inline-flex; gap:8px; padding:10px 14px; border-radius:10px;
-      font-weight:700; font-size:15px; cursor:pointer; border:0;
+    .product-info h3{
+      margin:0;
+      font-size:20px;
+      color:#0f1724;
+    }
+    .product-info .price{
+      margin-top:10px;
+      font-size:20px;
+      font-weight:800;
+      color:var(--accent);
+    }
+    .product-info .desc{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
     }
 
-    .btn-primary{ background:var(--success); color:white; box-shadow: 0 8px 20px rgba(7,160,90,0.15); }
-    .btn-ghost{ background:transparent; border:1px solid #e6e7ea; color:var(--muted); }
+    .labels{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .label-pill{
+      background:#f3f4f6;
+      color: #374151;
+      font-size:13px;
+      padding:6px 10px;
+      border-radius:999px;
+    }
 
-    .note{ margin-top:6px; font-size:13px; color:var(--muted); }
+    .actions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
 
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+      border:0;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:var(--success);
+      color:white;
+      box-shadow: 0 8px 20px rgba(7,160,90,0.15);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid #e6e7ea;
+      color:var(--muted);
+    }
+
+    /* small note text under actions */
+    .note {
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* -------------------------
+       Footer
+       ------------------------- */
     footer.site-footer{
       margin-top:26px;
       padding:16px;
@@ -198,16 +298,38 @@
       font-size:13px;
     }
 
-    @media(max-width:980px){
-      .hero{ grid-template-columns:1fr 340px; }
-      .product-card{ grid-template-columns:280px 1fr; }
+    /* -------------------------
+       Responsive rules
+       ------------------------- */
+    @media (max-width: 980px){
+      .hero { grid-template-columns: 1fr 340px; }
+      .product-card { grid-template-columns: 280px 1fr; }
     }
 
-    @media(max-width:700px){
+    /* Mobile: make layout vertical and "wide" (full width cards) */
+    @media (max-width: 700px){
       .page{ width:98%; padding:8px; }
-      .hero{ grid-template-columns:1fr; }
-      .product-card{ grid-template-columns:1fr; }
+      .hero { grid-template-columns: 1fr; }
+      header.site-header{ flex-direction:row; gap:8px; padding:10px; }
+      .side-card { order:2; } /* keep hero-left first */
+      .hero-left { order:1; }
+      .product-card{
+        grid-template-columns: 1fr;
+        padding:14px;
+      }
+      .product-media{ min-height:320px; }
+      .product-info .price{ font-size:18px; }
+      .store-title{ font-size:22px; }
     }
+
+    /* Very small phones */
+    @media (max-width: 380px){
+      .logo{ width:44px; height:44px; font-size:16px; }
+      .brand .title{ font-size:16px; }
+      .product-media{ min-height:260px; }
+      .btn{ font-size:14px; padding:9px 12px; }
+    }
+
   </style>
 </head>
 <body>
@@ -215,122 +337,126 @@
   <div class="page">
 
     <!-- Header -->
-    <header class="site-header">
+    <header class="site-header" role="banner">
       <div class="brand">
-        <div class="logo">FJ</div>
+        <div class="logo" aria-hidden="true">FJ</div>
         <div>
           <div class="title">FJ.Store</div>
           <div class="sub">Koleksi Fashion Terbaru</div>
         </div>
       </div>
 
-      <div class="header-actions">
+      <div class="header-actions" aria-hidden="true">
         <div class="contact-pill">Hubungi: +62 877-5841-2915</div>
       </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
+    <!-- Hero: left (info) + right (side card) -->
+    <section class="hero" aria-label="Intro">
       <div class="hero-left">
         <h1 class="store-title">Koleksi Fashion Terbaru</h1>
         <p class="store-sub">Ready stock | Fast respon | Pengiriman cepat</p>
 
-        <div class="order-steps">
+        <div class="order-steps" aria-hidden="false">
           <div class="step-card">
             <strong>Cara Order</strong>
-            <ol style="margin:8px 0 0 18px;">
-              <li>Pilih produk, tekan tombol WhatsApp.</li>
-              <li>Isi nama, alamat, ukuran.</li>
-              <li>Tunggu resi setelah supplier kirim.</li>
+            <ol style="margin:8px 0 0 18px; padding:0; color:var(--muted);">
+              <li>Pilih produk, tekan tombol "Pesan via WhatsApp".</li>
+              <li>Isi nama, alamat, ukuran di chat.</li>
+              <li>Konfirmasi & tunggu nomor resi setelah supplier kirim.</li>
             </ol>
           </div>
 
           <div class="step-card" style="display:flex;gap:12px;align-items:center;">
             <div style="flex:1">
               <strong>Jam Kerja</strong>
-              <!-- ✅ sudah diganti ke WIB -->
-              <div style="color:var(--muted);font-size:13px;margin-top:6px;">
-                09:00 - 19:00 WIB (Senin - Sabtu)
-              </div>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px;">09:00 - 19:00 WITA (Senin - Sabtu)</div>
             </div>
-            <div><span class="badge">Fast Respon</span></div>
+            <div>
+              <span class="badge">Fast Respon</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <aside class="side-card">
-        <div style="display:flex;justify-content:space-between;">
+      <aside class="side-card" aria-label="Sidebar">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
           <div style="font-weight:700;">Highlight</div>
           <div style="font-size:13px;color:var(--muted)">Ready stock</div>
         </div>
 
-        <div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
           <div style="font-size:14px;color:var(--muted)">Rekomendasi minggu ini</div>
-          <div style="font-weight:700;font-size:18px;">Hoodie Holigans - Premium</div>
+          <div style="font-weight:700;font-size:18px;color:#0f1724">Hoodie Holigans - Premium</div>
         </div>
 
-        <small style="font-size:13px;color:var(--muted);">
-          - Bahan Fleece biru muda • Size S / M
-        </small>
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);">
+          <small>- Bahan Fleece, warna biru muda. - Size S / M.</small>
+        </div>
       </aside>
     </section>
 
-    <!-- Product -->
-    <main class="catalog">
-      <article class="product-card">
-        <div class="product-media">
-          <img src="hoodie.jpg" alt="Hoodie HOLIGANS" />
+    <!-- Product catalog -->
+    <main class="catalog" aria-label="Daftar produk">
+      <!-- Product card 1 -->
+      <article class="product-card" itemscope itemtype="http://schema.org/Product" aria-labelledby="prod1-title">
+        <div class="product-media" role="img" aria-label="Gambar Hoodie Holigans">
+          <!-- Ganti src ke nama file gambarmu -->
+          <img src="hoodie.jpg" alt="Hoodie HOLIGANS - biru muda" />
         </div>
 
         <div class="product-info">
-          <h3>Hoodie HOLIGANS - Premium</h3>
+          <h3 id="prod1-title">Hoodie HOLIGANS - Premium</h3>
 
-          <div class="price">Rp225.920</div>
+          <div class="price" itemprop="price">Rp225.920</div>
 
           <div class="desc">
-            <ul style="margin:8px 0 0 18px;">
-              <li>Bahan Fleece biru muda</li>
-              <li>Rubber patch Velcro</li>
-              <li>Sablon High Density</li>
-              <li>Tali serut & kantong kangaroo</li>
-              <li>Size S - M</li>
+            <ul style="margin:8px 0 0 18px; padding:0; color:var(--muted);">
+              <li>Bahan Fleece warna biru muda</li>
+              <li>Rubber patch Velcro di lengan kiri</li>
+              <li>Sablon plastisol High Density (timbul)</li>
+              <li>Reguler fit, tali serut, kantong kangaroo</li>
+              <li>Size: S - M</li>
             </ul>
           </div>
 
-          <div class="labels">
+          <div class="labels" aria-hidden="true">
             <span class="label-pill">Ready stock</span>
             <span class="label-pill">Fast Respon</span>
             <span class="label-pill">COD tidak tersedia</span>
           </div>
 
           <div class="actions">
+            <!-- Tombol WhatsApp: encode pesan jika perlu -->
             <a class="btn btn-primary"
-               href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0A">
+               href="https://wa.me/6287758412915?text=Halo%20kak,%20saya%20ingin%20membeli%20Hoodie%20HOLIGANS.%0A%0ANama:%0AAlamat:%0AUkuran:%20(S%20atau%20M)%0AWarna:%20Biru%20Muda%0A"
+               target="_blank" rel="noopener noreferrer" aria-label="Pesan via WhatsApp">
               Pesan via WhatsApp
             </a>
 
-            <a class="btn btn-ghost" href="#" onclick="window.print();return false;">
+            <a class="btn btn-ghost" href="#" onclick="window.print();return false;" aria-label="Cetak halaman">
               Cetak
             </a>
           </div>
 
-          <div class="note">Harga dapat berubah sewaktu-waktu.</div>
+          <div class="note">Semua harga sudah termasuk PPN jika ada. Stok dapat berubah sewaktu-waktu.</div>
         </div>
       </article>
+
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
       © <span id="year"></span> FJ.Store — Hubungi: +62 877-5841-2915
     </footer>
-
   </div>
 
+  <!-- Small script for year -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
+
 
 
 
