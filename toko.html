@@ -51,23 +51,19 @@
   }
 
   .produk-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0 20px 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 12px;
+    margin: 0 20px 40px 20px;
   }
 
   .produk {
     background-color: rgba(255, 255, 255, 0.85);
-    flex: 1 1 calc(48% - 12px);
-    max-width: calc(48% - 12px);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     text-align: center;
     padding: 5px;
     box-sizing: border-box;
-    max-height: 320px;
   }
 
   .produk img {
@@ -133,29 +129,22 @@
     height: 28px;
   }
 
-  /* Laptop / Desktop */
   @media(min-width: 1025px) {
-    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
+    .produk-container { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Tablet */
   @media(max-width: 1024px) {
-    .top-section { flex-direction: row; }
-    .kotak { max-width: 160px; }
-    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
+    .produk-container { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Mobile */
   @media(max-width: 768px) {
-    .top-section { flex-direction: row; }
+    .produk-container { grid-template-columns: repeat(2, 1fr); }
     .kotak { max-width: 45%; margin-bottom: 8px; }
-    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
   }
 
   @media(max-width: 480px) {
-    .top-section { flex-direction: row; justify-content: space-between; flex-wrap: wrap; }
+    .produk-container { grid-template-columns: repeat(2, 1fr); }
     .kotak { min-width: 38%; max-width: 38%; font-size: 12px; }
-    .produk { flex: 1 1 48%; max-width: 48%; }
   }
 </style>
 </head>
