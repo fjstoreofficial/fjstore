@@ -3,58 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FJstore — Toko Resmi</title>
+<title>FJ Store - Toko</title>
 <style>
-body{margin:0;font-family:Inter, sans-serif;background:#f4f6ff;}
-#landing{min-height:100vh;padding:40px;display:flex;justify-content:center;align-items:center;}
-.box{background:#fff;padding:40px;border-radius:20px;max-width:1100px;width:100%;display:flex;gap:40px;box-shadow:0 20px 60px rgba(0,0,0,0.07);}
-.left{flex:1;}
-.left h1{font-size:48px;margin:0;font-weight:800;}
-.inputwrap{margin-top:25px;display:flex;gap:10px;}
-.fjinput{flex:1;padding:14px;border-radius:10px;border:1px solid #ccc;font-size:16px;}
-.fjbtn{padding:14px 20px;background:#6d4aff;color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:600;}
-.mock{flex:1;display:flex;align-items:center;justify-content:center;background:#eef1ff;border-radius:16px;padding:20px;}
-.mock img{width:90%;border-radius:12px;}
-#shop{display:none;padding:20px;}
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('latarbelakang.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .header {
+    text-align: center;
+    padding: 30px 10px;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .top-section {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 10px;
+  }
+
+  .kotak {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 120px;
+    max-width: 160px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .jam-kerja {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .produk-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 20px 40px 20px;
+    gap: 12px;
+  }
+
+  .produk {
+    background-color: rgba(255, 255, 255, 0.85);
+    flex: 1 1 calc(48% - 12px);
+    max-width: calc(48% - 12px);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+    max-height: 320px;
+  }
+
+  .produk img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 4px;
+  }
+
+  .produk-title {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .produk-desc {
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: left;
+  }
+
+  .produk-desc ul {
+    padding-left: 16px;
+    margin: 0;
+  }
+
+  .produk-wa {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #25D366;
+    padding: 4px 5px;
+    border-radius: 5px;
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 14px;
+  }
+
+  .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  .whatsapp-button img {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Laptop / Desktop */
+  @media(min-width: 1025px) {
+    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
+  }
+
+  /* Tablet */
+  @media(max-width: 1024px) {
+    .top-section { flex-direction: row; }
+    .kotak { max-width: 160px; }
+    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
+  }
+
+  /* Mobile */
+  @media(max-width: 768px) {
+    .top-section { flex-direction: row; }
+    .kotak { max-width: 45%; margin-bottom: 8px; }
+    .produk { flex: 1 1 calc(48% - 12px); max-width: calc(48% - 12px); }
+  }
+
+  @media(max-width: 480px) {
+    .top-section { flex-direction: row; justify-content: space-between; flex-wrap: wrap; }
+    .kotak { min-width: 38%; max-width: 38%; font-size: 12px; }
+    .produk { flex: 1 1 48%; max-width: 48%; }
+  }
 </style>
 </head>
 <body>
 
-<div id="landing">
-  <div class="box">
-    <div class="left">
-      <h1>FJ.STORE</h1>
-      <p>Ayo Belanja Sekarang Juga</p>
+  <div class="header">Welcome to FJ Store</div>
 
-      <div class="inputwrap">
-        <input id="username" class="fjinput" placeholder="Masukan username kamu">
-        <button class="fjbtn" onclick="openShop()">Masuk ke Toko</button>
-      </div>
-      <p style="font-size:13px;color:#666;">Username hanya untuk identifikasi sementara.</p>
-    </div>
-
-    <div class="mock">
-      <img src="Hoodie HOLIGANS.jpg">
+  <div class="top-section">
+    <div class="kotak">
+      <div class="jam-kerja">09:00 - 21:00</div>
     </div>
   </div>
-</div>
 
-<div id="shop">
-  <h2>FJ.Store.Official</h2>
-  <p>Koleksi Fashion Terbaru</p>
-  <img src="Hoodie HOLIGANS.jpg" style="width:260px;border-radius:12px;">
-  <h3>Hoodie Hooligans - Premium</h3>
-  <p style="color:red;font-weight:bold;">Rp225.920</p>
-</div>
+  <div class="produk-container">
+    <div class="produk">
+      <img src="hoodie.jpg" alt="Hoodie">
+      <div class="produk-title">Hoodie.jpg</div>
+      <div class="produk-desc">
+        <ul>
+          <li>Bahan Fleece warna biru muda</li>
+          <li>Rubber patch Velcro di lengan kiri</li>
+          <li>Sablon plastisol High Density (timbul)</li>
+          <li>Reguler fit, tali serut, kantong kangaroo</li>
+          <li>Size: S - M</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama%3A%20%0AAlamat%3A%20%0AUkuran%3A%20%0APembayaran%20melalui%3A%20" target="_blank" class="produk-wa">Pesan via WA</a>
+    </div>
 
-<script>
-function openShop(){
-  const u=document.getElementById("username").value.trim();
-  if(!u){alert("Masukan username!");return;}
-  document.getElementById("landing").style.display="none";
-  document.getElementById("shop").style.display="block";
-}
-</script>
+    <div class="produk">
+      <img src="hoodie.jpg" alt="Hoodie">
+      <div class="produk-title">Hoodie.jpg</div>
+      <div class="produk-desc">
+        <ul>
+          <li>Bahan Fleece warna biru muda</li>
+          <li>Rubber patch Velcro di lengan kiri</li>
+          <li>Sablon plastisol High Density (timbul)</li>
+          <li>Reguler fit, tali serut, kantong kangaroo</li>
+          <li>Size: S - M</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama%3A%20%0AAlamat%3A%20%0AUkuran%3A%20%0APembayaran%20melalui%3A%20" target="_blank" class="produk-wa">Pesan via WA</a>
+    </div>
+
+    <div class="produk">
+      <img src="hoodie.jpg" alt="Hoodie">
+      <div class="produk-title">Hoodie.jpg</div>
+      <div class="produk-desc">
+        <ul>
+          <li>Bahan Fleece warna biru muda</li>
+          <li>Rubber patch Velcro di lengan kiri</li>
+          <li>Sablon plastisol High Density (timbul)</li>
+          <li>Reguler fit, tali serut, kantong kangaroo</li>
+          <li>Size: S - M</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama%3A%20%0AAlamat%3A%20%0AUkuran%3A%20%0APembayaran%20melalui%3A%20" target="_blank" class="produk-wa">Pesan via WA</a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama%3A%20%0AAlamat%3A%20%0AUkuran%3A%20%0APembayaran%20melalui%3A%20" target="_blank" class="whatsapp-button">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+  </a>
+
+  <div class="footer">© R FJSTORE. All rights reserved.</div>
 
 </body>
 </html>
