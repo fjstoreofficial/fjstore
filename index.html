@@ -196,6 +196,37 @@
 
     /* RESPONSIVE HP KECIL <360px */
     @media (max-width: 360px) {
+      /* RAPIHKAN LOGO & TEKS AGAR SEPERTI DESAIN LYNK */
+      .logo-small {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 10px auto 0 auto;
+        display: block;
+      }
+
+      /* TEKS FJ STORE DI SAMPING LOGO → DIBUAT KE BAWAH & CENTER */
+      .logo-small + span {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 8px auto 0 auto;
+        display: block;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      /* HERO CONTENT LEBIH CENTER SEPERTI GAMBAR 2 */
+      .hero {
+        text-align: center;
+        padding-top: 40px;
+      }
+
+      .hero-content {
+        margin: 0 auto;
+        text-align: center;
+        max-width: 90%;
+      }
       .hero h1 { font-size: 34px; }
       .hero p { font-size: 15px; }
       .logo-small { width: 50px; }
