@@ -1,88 +1,128 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FJ Store - Home</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('latarbelakang.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FJ Store</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('latarbelakang.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-  .overlay {
-    width: 100%;
-    height: 100%;
-    backdrop-filter: brightness(0.7);
-  }
+    .overlay {
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-  header {
-    text-align: center;
-    padding: 35px 0;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px black;
-  }
+    .title {
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-  .hero {
-    text-align: center;
-    margin-top: 50px;
-    color: white;
-  }
+    .subtitle {
+      color: #f0f0f0;
+      font-size: 16px;
+      max-width: 320px;
+      margin-bottom: 30px;
+    }
 
-  .hero h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px black;
-  }
+    .button {
+      background-color: white;
+      color: black;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      transition: 0.2s;
+    }
 
-  .hero p {
-    font-size: 18px;
-    text-shadow: 0 0 6px black;
-  }
+    .button:hover {
+      transform: scale(1.05);
+    }
 
-  .btn-container {
-    margin-top: 40px;
-    text-align: center;
-  }
+    .menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 10px;
+      display: flex;
+      gap: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
 
-  .btn-toko {
-    background-color: white;
-    color: black;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
+    .menu a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-  .btn-toko:hover {
-    background-color: #e2e2e2;
-  }
-</style>
+  </style>
 </head>
 <body>
-<div class="overlay">
 
-  <header>FJ STORE</header>
-
-  <div class="hero">
-    <h1>Selamat Datang di FJ Store</h1>
-    <p>Toko fashion premium dengan kualitas terbaik</p>
+  <div class="menu">
+    <a href="index.html">Beranda</a>
+    <a href="toko.html">Toko</a>
+    <a href="admin.html">Admin</a>
   </div>
 
-  <div class="btn-container">
-    <a href="toko.html" class="btn-toko">Masuk ke Toko</a>
+  <div class="overlay">
+    <div class="title">FJ Store</div>
+    <div class="subtitle">Toko fashion premium dengan kualitas terbaik. Belanja mudah & cepat.</div>
+    <a href="toko.html" class="button">Masuk ke Toko</a>
   </div>
 
-</div>
+  <!-- Fitur Keunggulan -->
+  <section style="padding: 40px 20px; text-align: center; background: #fff;">
+    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 600;">Kenapa Belanja di FJ Store?</h2>
+    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+      <div style="max-width: 200px;">
+        <img src="img/secure.png" style="width: 60px; margin-bottom: 10px;">
+        <p style="font-weight: 600;">Pembayaran Aman</p>
+      </div>
+      <div style="max-width: 200px;">
+        <img src="img/fast.png" style="width: 60px; margin-bottom: 10px;">
+        <p style="font-weight: 600;">Pengiriman Cepat</p>
+      </div>
+      <div style="max-width: 200px;">
+        <img src="img/digital.png" style="width: 60px; margin-bottom: 10px;">
+        <p style="font-weight: 600;">Produk Digital</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jelajahi Kategori -->
+  <section style="padding: 40px 20px; background: #f7f7f7; text-align: center;">
+    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 600;">Jelajahi Kategori</h2>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <div style="background: #fff; padding: 15px; border-radius: 12px; width: 140px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-weight: 600;">Akun Digital</div>
+      <div style="background: #fff; padding: 15px; border-radius: 12px; width: 140px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-weight: 600;">Voucher</div>
+      <div style="background: #fff; padding: 15px; border-radius: 12px; width: 140px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-weight: 600;">Jasa Digital</div>
+      <div style="background: #fff; padding: 15px; border-radius: 12px; width: 140px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-weight: 600;">Lainnya</div>
+    </div>
+  </section>
+
 </body>
 </html>
