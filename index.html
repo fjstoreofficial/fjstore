@@ -1,74 +1,88 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>FJ Store - Welcome</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FJ Store - Home</title>
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: url("latarbelakang.jpg") no-repeat center center fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
-        color: black;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('latarbelakang.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-    .welcome-container {
-        text-align: center;
-        margin-top: 120px;
-        background: rgba(255,255,255,0.65);
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 35px;
-        border-radius: 20px;
-    }
+  .overlay {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: brightness(0.7);
+  }
 
-    input {
-        padding: 10px;
-        width: 60%;
-        border: 2px solid black;
-        border-radius: 10px;
-        margin-top: 15px;
-        font-size: 16px;
-    }
+  header {
+    text-align: center;
+    padding: 35px 0;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px black;
+  }
 
-    button {
-        padding: 12px 25px;
-        margin-top: 20px;
-        font-size: 18px;
-        background: black;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+  .hero {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px black;
+  }
+
+  .hero p {
+    font-size: 18px;
+    text-shadow: 0 0 6px black;
+  }
+
+  .btn-container {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .btn-toko {
+    background-color: white;
+    color: black;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .btn-toko:hover {
+    background-color: #e2e2e2;
+  }
 </style>
-
-<script>
-function masukToko() {
-    let user = document.getElementById("username").value.trim();
-    if(user === "") {
-        alert("Masukkan username terlebih dahulu.");
-        return;
-    }
-    localStorage.setItem("fj_username", user);
-    window.location.href = "toko.html";
-}
-</script>
 </head>
-
 <body>
+<div class="overlay">
 
-<div class="welcome-container">
-    <h1><b>FJ STORE OFFICIAL</b></h1>
-    <h2>Selamat Datang di FJ Store</h2>
+  <header>FJ STORE</header>
 
-    <input type="text" id="username" placeholder="Masukkan Username Anda">
+  <div class="hero">
+    <h1>Selamat Datang di FJ Store</h1>
+    <p>Toko fashion premium dengan kualitas terbaik</p>
+  </div>
 
-    <br>
-    <button onclick="masukToko()">MASUK KE TOKO</button>
+  <div class="btn-container">
+    <a href="toko.html" class="btn-toko">Masuk ke Toko</a>
+  </div>
+
 </div>
-
 </body>
 </html>
