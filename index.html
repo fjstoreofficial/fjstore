@@ -43,14 +43,8 @@
       pointer-events: none;
     }
 
-    .logo-small {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 60px;
-      height: auto;
-      z-index: 10;
-      opacity: 0.95;
+    .logo-wrap { position:absolute; top:20px; left:20px; display:flex; align-items:center; gap:10px; z-index:10; }
+    .logo-small { width:60px; height:auto; opacity:0.95; }
     }
 
     .logo-text {
@@ -103,7 +97,7 @@
       opacity: 0.8;
     }
 
-    /* ------------ TOMBOL KECIL (TANPA IKON & RAPI SEJAJAR) ------------ */
+    /* --- TOMBOL KECIL (RAPI, SEJAJAR, ADA IKON) --- */
     .cta-secondary-container {
       display: flex;
       justify-content: center;
@@ -114,15 +108,24 @@
     }
 
     .cta-secondary {
-      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 15px;
       background: rgba(255, 255, 255, 0.13);
       border-radius: 10px;
       backdrop-filter: blur(6px);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13.5px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
       transition: 0.25s ease;
+    }
+
+    .cta-secondary img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
     }
 
     .cta-secondary:hover {
@@ -131,15 +134,22 @@
     }
 
     @media (max-width: 360px) {
+      .logo-wrap { left:50%; transform:translateX(-50%); top:18px; }
+      .logo-text { font-size:18px; }
       .hero h1 { font-size: 34px; }
       .hero p { font-size: 15px; }
       .logo-small { width: 50px; }
 
       .cta-secondary {
         width: 100%;
-        text-align: center;
+        justify-content: center;
         font-size: 12.5px;
         padding: 10px 12px;
+      }
+
+      .cta-secondary img {
+        width: 16px;
+        height: 16px;
       }
     }
 
@@ -151,7 +161,7 @@
 </head>
 <body>
 
-  <img src="logofj" class="logo-small" alt="Logo FJ" />
+  <div class="logo-wrap"><img src="logofj" class="logo-small" alt="Logo FJ" /><div class="logo-text">FJ STORE</div></div>
   <div class="logo-text">FJ STORE</div>
 
   <section class="hero">
@@ -162,13 +172,20 @@
       <a href="toko.html" class="btn btn-primary">Masuk Toko</a>
 
       <div class="cta-secondary-container">
+        <a href="toko.html" class="cta-secondary">
+          <img src="ikon-koleksi.png" alt="Koleksi Baru">
+          <span>Lihat Koleksi Baru</span>
+        </a>
 
-        <a href="toko.html" class="cta-secondary">Lihat Koleksi Baru</a>
+        <a href="toko.html" class="cta-secondary">
+          <img src="ikon-promo.png" alt="Promo Minggu Ini">
+          <span>Promo Minggu Ini</span>
+        </a>
 
-        <a href="toko.html" class="cta-secondary">Promo Minggu Ini</a>
-
-        <a href="toko.html" class="cta-secondary">Best Seller</a>
-
+        <a href="toko.html" class="cta-secondary">
+          <img src="ikon-best.png" alt="Best Seller">
+          <span>Best Seller</span>
+        </a>
       </div>
 
     </div>
