@@ -103,7 +103,7 @@
       opacity: 0.8;
     }
 
-    /* --- TOMBOL KECIL (RAPI, SEJAJAR, ADA IKON) --- */
+    /* ------------ TOMBOL KECIL (TANPA IKON & RAPI SEJAJAR) ------------ */
     .cta-secondary-container {
       display: flex;
       justify-content: center;
@@ -114,24 +114,15 @@
     }
 
     .cta-secondary {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 15px;
+      padding: 10px 18px;
       background: rgba(255, 255, 255, 0.13);
       border-radius: 10px;
       backdrop-filter: blur(6px);
       text-decoration: none;
-      font-size: 13.5px;
+      font-size: 14px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
       transition: 0.25s ease;
-    }
-
-    .cta-secondary img {
-      width: 18px;
-      height: 18px;
-      object-fit: contain;
     }
 
     .cta-secondary:hover {
@@ -146,14 +137,9 @@
 
       .cta-secondary {
         width: 100%;
-        justify-content: center;
+        text-align: center;
         font-size: 12.5px;
         padding: 10px 12px;
-      }
-
-      .cta-secondary img {
-        width: 16px;
-        height: 16px;
       }
     }
 
@@ -176,20 +162,13 @@
       <a href="toko.html" class="btn btn-primary">Masuk Toko</a>
 
       <div class="cta-secondary-container">
-        <a href="toko.html" class="cta-secondary">
-          <img src="ikon-koleksi.png" alt="Koleksi Baru">
-          <span>Lihat Koleksi Baru</span>
-        </a>
 
-        <a href="toko.html" class="cta-secondary">
-          <img src="ikon-promo.png" alt="Promo Minggu Ini">
-          <span>Promo Minggu Ini</span>
-        </a>
+        <a href="toko.html" class="cta-secondary">Lihat Koleksi Baru</a>
 
-        <a href="toko.html" class="cta-secondary">
-          <img src="ikon-best.png" alt="Best Seller">
-          <span>Best Seller</span>
-        </a>
+        <a href="toko.html" class="cta-secondary">Promo Minggu Ini</a>
+
+        <a href="toko.html" class="cta-secondary">Best Seller</a>
+
       </div>
 
     </div>
