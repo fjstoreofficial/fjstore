@@ -1,285 +1,144 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FJ Store - Premium Brand</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FJ STORE</title>
 
-    body {
-      margin: 0;
-      padding: 0;
-      background-image: url('latarbelakang.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<style>
+/* ===================== GLOBAL ===================== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #cfe9ff, #ffffff);
+    color: #222;
+    text-align: center;
+}
 
-    /* PARALLAX BACKGROUND */
-    .hero {
-      background: none; /* gunakan background body agar tidak menutup */
-      height: 100vh;
-      width: 100%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px;
-    }
+/* Warna brand biru */
+:root {
+    --brand-blue: #1e88e5;
+}
 
-    /* GRADIENT OVERLAY BAWAH → TRANSPARAN KE ATAS */
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 60%;
-      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
-      pointer-events: none;
-    }
+/* ===================== HEADER ===================== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    justify-content: center;
+}
 
-    /* LOGO KECIL KIRI ATAS */
-    .logo-small {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 60px;
-      height: auto;
-      z-index: 10;
-      opacity: 0.95;
-    }
+.header img {
+    width: 55px;
+    height: auto;
+}
 
-    /* SOCIAL MEDIA BAR */
-    .social-bar {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      opacity: 0.7;
-    }
+.header-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--brand-blue);
+}
 
-    .social-bar img {
-      width: 26px;
-      filter: brightness(0) invert(1);
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* ===================== HERO SECTION ===================== */
+.hero {
+    padding: 30px 20px;
+}
 
-    .social-bar img:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
+.hero-tagline {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #1c1c1c;
+}
 
-    /* TEXT HERO */
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      max-width: 550px;
-      animation: fadeIn 1.5s ease;
-    }
+/* Deskripsi singkat */
+.hero-desc {
+    font-size: 15px;
+    margin-top: 8px;
+    color: #333;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
+/* Tombol masuk toko */
+.btn-masuk {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 17px;
+    font-weight: bold;
+    background: var(--brand-blue);
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+    transition: 0.2s;
+}
 
-    .hero p {
-      margin-top: 12px;
-      font-size: 18px;
-      opacity: 0.9;
-    }
+.btn-masuk:hover {
+    transform: scale(1.05);
+}
 
-    /* CTA BUTTONS */
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+/* Highlight produk */
+.product-highlight {
+    margin-top: 30px;
+}
 
-    .btn-primary {
-      background: #ffffff;
-      color: #000;
-    }
+.product-highlight img {
+    width: 80%;
+    max-width: 260px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.25);
+}
 
-    .btn-primary:hover {
-      opacity: 0.8;
-    }
+/* Divider halus */
+.divider {
+    width: 70%;
+    height: 1px;
+    background: #ccc;
+    margin: 35px auto;
+}
 
-    .btn-secondary-container {
-      margin-top: 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.3);
-    }
-
-    /* WHY SECTION */
-    .why-section {
-      background: #0a0a0a;
-      padding: 60px 20px;
-      text-align: center;
-      animation: fadeIn 1.5s ease;
-    }
-
-    .why-section h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
-    }
-
-    .why-icons {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .why-item {
-      width: 160px;
-      text-align: center;
-    }
-
-    .why-item img {
-      width: 50px;
-      filter: brightness(0) invert(1);
-      margin-bottom: 10px;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #000;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      opacity: 0.85;
-    }
-
-    footer p {
-      font-size: 14px;
-      opacity: 0.7;
-    }
-
-    /* ANIMASI FADE-IN */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* RESPONSIVE HP KECIL <360px */
-    @media (max-width: 360px) {
-      /* RAPIHKAN LOGO & TEKS AGAR SEPERTI DESAIN LYNK */
-      .logo-small {
-        position: relative;
-        top: 0;
-        left: 0;
-        margin: 10px auto 0 auto;
-        display: block;
-      }
-
-      /* TEKS FJ STORE DI SAMPING LOGO → DIBUAT KE BAWAH & CENTER */
-      .logo-small + span {
-        position: relative !important;
-        top: 0 !important;
-        left: 0 !important;
-        margin: 8px auto 0 auto;
-        display: block;
-        text-align: center;
-        font-size: 18px;
-      }
-
-      /* HERO CONTENT LEBIH CENTER SEPERTI GAMBAR 2 */
-      .hero {
-        text-align: center;
-        padding-top: 40px;
-      }
-
-      .hero-content {
-        margin: 0 auto;
-        text-align: center;
-        max-width: 90%;
-      }
-      .hero h1 { font-size: 34px; }
-      .hero p { font-size: 15px; }
-      .logo-small { width: 50px; }
-    }
-  </style>
+/* Footer */
+.footer {
+    margin-top: 40px;
+    padding: 15px;
+    font-size: 12px;
+    color: #444;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- LOGO KECIL -->
-  <img src="logofj" class="logo-small" alt="Logo FJ" />
-  <span style="position:absolute; top:30px; left:90px; font-size:20px; font-weight:600; letter-spacing:1px;">FJ STORE</span>
-  
+<!-- ===================== HEADER ===================== -->
+<div class="header">
+    <img src="logofj" alt="Logo FJ">
+    <div class="header-text">FJ STORE</div>
+</div>
 
-  <!-- SOCIAL MEDIA BAR -->
-  <div class="social-bar">
-    
-  </div>
+<!-- ===================== HERO ===================== -->
+<div class="hero">
+    <div class="hero-tagline">Belanja Lebih Mudah, Pengalaman Lebih Baik</div>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Belanja Lebih Mudah, Pengalaman Lebih Baik</h1>
-      <p>Premium Brand • Style Kekinian • Harga Bersahabat</p>
-
-      <a href="toko.html" class="btn btn-primary">Masuk Toko</a>
-
-      
+    <div class="hero-desc">
+        Temukan koleksi terbaik dengan kualitas premium dan harga yang ramah di kantong.
     </div>
-  </section>
 
-  <!-- WHY SECTION -->
-  <section class="why-section">
-    <h2>Kenapa Belanja di FJ Store?</h2>
-    <div class="why-icons">
-      <div class="why-item">
-        
-        <p>Pembayaran Aman</p>
-      </div>
-      <div class="why-item">
-        
-        <p>Pengiriman Cepat</p>
-      </div>
-      <div class="why-item">
-        
-        <p>Produk Premium</p>
-      </div>
+    <a href="toko.html" class="btn-masuk">Masuk Toko</a>
+
+    <!-- Highlight Foto Produk -->
+    <div class="product-highlight">
+        <img src="Hoodie Holigans - Premium" alt="Produk Utama">
     </div>
-  </section>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 FJ Store — Premium Streetwear</p>
-  </footer>
+<!-- Divider Halus -->
+<div class="divider"></div>
+
+<!-- ===================== FOOTER MINI ===================== -->
+<div class="footer">
+    © 2025 FJ STORE — Semua Hak Dilindungi
+</div>
 
 </body>
 </html>
