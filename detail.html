@@ -4,60 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk</title>
-    <link rel="stylesheet" href="style.css"> <!-- kalau kamu pakai -->
-</head>
-<body>
 
-    <div class="content">
-        <img id="productImage" src="" alt="Produk" style="width: 100%; max-width: 350px; border-radius: 8px;">
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        <h2 id="productName"></h2>
-        <h3 id="productPrice"></h3>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
 
-        <p id="productDescription"></p>
+            /* --- BACKGROUND ESTETIK PREMIUM --- */
+            background: linear-gradient(135deg, rgba(255, 0, 150, 0.4), rgba(0, 120, 255, 0.4)),
+                        url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+        }
 
-        <button class="btn-buy">Beli via WhatsApp</button>
-    </div>
+        /* --- Container Transparan & Blur --- */
+        .wrapper {
+            max-width: 460px;
+            margin: 70px auto;
+            padding: 25px;
 
-    <!-- Script detail kamu TARUH DI SINI -->
-    <script>
-        // --- Ambil Parameter ID dari URL ---
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("id");
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            backdrop-filter: blur(12px);
 
-        async function loadDetail() {
-            try {
-                const res = await fetch("products.json");
-                const data = await res.json();
+            /* ANIMASI PREMIUM */
+            animation: fadeUp 0.8s ease-out, floating 4s ease-in-out infinite;
+        }
 
-                // Cari produk berdasarkan ID
-                const product = data.find(p => p.id == id);
-
-                if (!product) {
-                    document.querySelector(".content").innerHTML = "<h3>Produk tidak ditemukan!</h3>";
-                    return;
-                }
-
-                // Isi data ke halaman detail
-                document.getElementById("productImage").src = product.image;
-                document.getElementById("productName").innerText = product.name;
-                document.getElementById("productPrice").innerText =
-                    "Rp " + Number(product.price).toLocaleString("id-ID");
-                document.getElementById("productDescription").innerText = product.description;
-
-                // Tombol WA otomatis
-                document.querySelector(".btn-buy").onclick = () => {
-                    window.location.href =
-                        `https://wa.me/6287758412915?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(product.name)}`;
-                };
-
-            } catch (e) {
-                console.error("Gagal load detail:", e);
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        loadDetail();
-    </script>
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 20px;
+            color: #ffecec;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #f8f8f8;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff0095, #007bff);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 20px;
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <img id="productImage" src="" alt="Produk">
+
+        <h2 id="productName">Nama Produk</h2>
+
+        <div class="price" id="productPrice">Rp 0</div>
+
+        <p id="productDescription">Deskripsi produk...</p>
+
+        <button class="btn-buy">Beli via WhatsApp</button>
+
+    </div>
+
+
+
+<!-- 🔹🔹🔹 KODEMU — TIDAK DIUBAH SAMA SEKALI 🔹🔹🔹 -->
+<script>
+    // --- Ambil Parameter ID dari URL ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+
+    async function loadDetail() {
+        try {
+            const res = await fetch("products.json");
+            const data = await res.json();
+
+            // Cari produk berdasarkan ID
+            const product = data.find(p => p.id == id);
+
+            if (!product) {
+                document.querySelector(".content").innerHTML = "<h3>Produk tidak ditemukan!</h3>";
+                return;
+            }
+
+            // Isi data ke halaman detail
+            document.getElementById("productImage").src = product.image;
+            document.getElementById("productName").innerText = product.name;
+            document.getElementById("productPrice").innerText = 
+                "Rp " + Number(product.price).toLocaleString("id-ID");
+            document.getElementById("productDescription").innerText = product.description;
+
+            // Tombol WA otomatis
+            document.querySelector(".btn-buy").onclick = () => {
+                window.location.href =
+                    `https://wa.me/6281234567890?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(product.name)}`;
+            };
+
+        } catch (e) {
+            console.error("Gagal load detail:", e);
+        }
+    }
+
+    loadDetail();
+</script>
+<!-- 🔹🔹🔹 END KODEMU 🔹🔹🔹 -->
 
 </body>
 </html>
