@@ -1,28 +1,23 @@
 [
   {
+    "id": 1,
     "name": "HOOLIGANS T-Shirft Tape Paisley Black",
     "price": 120000,
-    "image": "img/HOOLIGANSTShirftTapePaisleyBlack"
+    "image": "img/HOOLIGANSTShirftTapePaisleyBlack.jpg",
+    "description": "Kaos premium Hooligans dengan motif paisley tape. Bahan cotton lembut dan nyaman."
   },
   {
+    "id": 2,
     "name": "Hoodie Holigans - Premium",
     "price": 225920,
-    "image": "img/HoodieHoligans-Premium"
+    "image": "img/HoodieHoligans-Premium.jpg",
+    "description": "Hoodie premium tebal dan nyaman dipakai sehari-hari."
   },
   {
+    "id": 3,
     "name": "HOOLIGANS Polo Shirt Linea - White",
     "price": 154260,
-    "image": "img/HOOLIGANSPoloShirtLinea-White"
-  },
-  {
-    "name": "HOOLIGANS Polo Shirt Linea - White",
-    "price": 154260,
-    "image": "img/HOOLIGANSPoloShirtLinea-White"
-  },
-  {
-    "name": "HOOLIGANS Polo Shirt Linea - White",
-    "price": 154260,
-    "image": "img/HOOLIGANSPoloShirtLinea-White"
-    
-    
-
+    "image": "img/HOOLIGANSPoloShirtLinea-White.jpg",
+    "description": "Polo shirt elegan warna putih dengan material adem."
+  }
+]
