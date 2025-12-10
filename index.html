@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
@@ -12,6 +12,38 @@
         background: url("latarbelakang.jpg") center/cover no-repeat fixed;
         backdrop-filter: blur(2px);
     }
+
+    /* =========================================================
+       LOADING SCREEN (ADDED)
+    ========================================================= */
+    #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.92);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+    }
+
+    #loader-text {
+        font-size: 34px;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 3px;
+        opacity: 0;
+        animation: fadeLoaderText 0.8s forwards;
+    }
+
+    @keyframes fadeLoaderText {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================= */
 
     /* Hero Section */
     .hero {
@@ -166,11 +198,44 @@
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-8px); }
     }
-
 </style>
 </head>
 
 <body>
+
+    <!-- =========================================================
+         LOADING SCREEN – ADDED
+    ========================================================= -->
+    <div id="loader">
+        <div id="loader-text"></div>
+    </div>
+
+    <script>
+        /* TYPEWRITER EFFECT */
+        const text = "FJ STORE";
+        let idx = 0;
+
+        function typeWriter() {
+            if (idx < text.length) {
+                document.getElementById("loader-text").innerText += text.charAt(idx);
+                idx++;
+                setTimeout(typeWriter, 130);
+            } else {
+                setTimeout(() => {
+                    document.getElementById("loader").style.opacity = "0";
+                    document.getElementById("loader").style.transition = "0.8s";
+                    
+                    setTimeout(() => {
+                        document.getElementById("loader").style.display = "none";
+                    }, 800);
+                }, 350);
+            }
+        }
+
+        window.onload = typeWriter;
+    </script>
+    <!-- ========================================================= -->
+
 
     <div class="hero">
 
