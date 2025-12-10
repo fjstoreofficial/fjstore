@@ -1,263 +1,117 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-
-            background: linear-gradient(135deg, rgba(255, 0, 150, 0.4), rgba(0, 120, 255, 0.4)),
-            url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 60px auto;
-            padding: 20px;
-
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-
-            animation: fadeUp .8s ease-out;
-        }
-
-        @keyframes fadeUp {
-            0% {opacity:0; transform:translateY(40px);}
-            100% {opacity:1; transform:translateY(0);}
-        }
-
-        .image-box img {
-            width: 100%;
-            border-radius: 15px;
-        }
-
-        .info-box h2 {
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .price-big {
-            font-size: 22px;
-            color: #ffecec;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .qty-box {
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qty-box button {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(5px);
-            font-size: 20px;
-            cursor: pointer;
-            color: #fff;
-            transition: .2s;
-        }
-
-        .qty-box button:hover {
-            transform: scale(1.08);
-        }
-
-        .qty-box input {
-            width: 55px;
-            height: 36px;
-            border: none;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .btn-group {
-            margin-top: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .25s;
-            color: #fff;
-        }
-
-        .btn-cart {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .btn-cart:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn-buy {
-            background: linear-gradient(135deg, #ff0095, #007bff);
-        }
-
-        .btn-buy:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detail Produk</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {margin:0;padding:0;font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg, rgba(255,0,150,0.4), rgba(0,120,255,0.4)), url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;background-position:center;backdrop-filter:blur(10px);}
+.container {max-width:480px;margin:60px auto;padding:20px;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);
+border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.25);animation:fadeUp .8s ease-out;}
+@keyframes fadeUp {0% {opacity:0; transform:translateY(40px);}100% {opacity:1; transform:translateY(0);}}
+.image-box img {width:100%; border-radius:15px;}
+.info-box h2 {color:#fff;margin-bottom:6px;}
+.price-big {font-size:22px;color:#ffecec;font-weight:700;margin-bottom:6px;}
+.qty-box {margin:15px 0; display:flex; align-items:center; gap:10px;}
+.qty-box button {width:36px;height:36px;border-radius:8px;border:none;background:rgba(255,255,255,0.3);backdrop-filter:blur(5px);
+font-size:20px;cursor:pointer;color:#fff;transition:.2s;}
+.qty-box button:hover {transform:scale(1.08);}
+.qty-box input {width:55px;height:36px;border:none;text-align:center;border-radius:8px;font-size:16px;font-weight:600;}
+.btn-group {margin-top:18px;display:flex;flex-direction:column;gap:12px;}
+.btn {padding:14px;border-radius:12px;border:none;font-size:16px;font-weight:600;cursor:pointer;transition:.25s;color:#fff;}
+.btn-cart {background: rgba(255,255,255,0.25);}
+.btn-cart:hover {transform: translateY(-3px);}
+.btn-buy {background: linear-gradient(135deg, #ff0095, #007bff);}
+.btn-buy:hover {transform: translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.3);}
+</style>
 </head>
-
 <body>
 
 <div class="container">
-    
-    <div class="product-layout">
+<div class="product-layout">
+<div class="image-box">
+<img id="productImage" src="">
+</div>
+<div class="info-box">
+<h2 id="productName">Nama Produk</h2>
+<div class="price-big" id="productPrice">Rp 0</div>
+<p id="productDescription" style="color:#eee"></p>
 
-        <div class="image-box">
-            <img id="productImage" src="">
-        </div>
-
-        <div class="info-box">
-            <h2 id="productName">Nama Produk</h2>
-
-            <div class="price-big" id="productPrice">Rp 0</div>
-
-            <p id="productDescription" style="color:#eee"></p>
-
-            <!-- QTY -->
-            <div class="qty-box">
-                <button id="minusBtn">-</button>
-                <input type="number" id="qtyInput" value="1" min="1">
-                <button id="plusBtn">+</button>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-cart" id="addCartBtn">+ Tambah ke Keranjang</button>
-                <button class="btn btn-buy" id="buyNowBtn">Beli Sekarang</button>
-            </div>
-
-        </div>
-    </div>
-
+<div class="qty-box">
+<button id="minusBtn">-</button>
+<input type="number" id="qtyInput" value="1" min="1">
+<button id="plusBtn">+</button>
 </div>
 
-<!-- ========================================================= -->
-<!--   KODE ASLI KAMU — UTUH TANPA DIUBAH SEDIKIT PUN          -->
-<!-- ========================================================= -->
+<div class="btn-group">
+<button class="btn btn-cart" id="addCartBtn">+ Tambah ke Keranjang</button>
+<button class="btn btn-buy" id="buyNowBtn">Beli Sekarang</button>
+</div>
+</div>
+</div>
+</div>
+
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+// =================== KODE ASLI ===================
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
 
-    async function loadDetail() {
-        try {
-            const res = await fetch("products.json");
-            const data = await res.json();
+async function loadDetail() {
+    try {
+        const res = await fetch("products.json");
+        const data = await res.json();
 
-            const product = data.find(p => p.id == id);
+        const product = data.find(p => p.id == id);
+        if(!product) { document.querySelector(".container").innerHTML = "<h3>Produk tidak ditemukan!</h3>"; return; }
 
-            if (!product) {
-                document.querySelector(".content").innerHTML = "<h3>Produk tidak ditemukan!</h3>";
-                return;
-            }
+        document.getElementById("productImage").src = product.image;
+        document.getElementById("productName").innerText = product.name;
+        document.getElementById("productPrice").innerText = "Rp " + Number(product.price).toLocaleString("id-ID");
+        document.getElementById("productDescription").innerText = product.description;
 
-            document.getElementById("productImage").src = product.image;
+        // =================== OVERRIDE ONCLICK WA ===================
+        const buyBtn = document.getElementById("buyNowBtn");
+        buyBtn.onclick = () => {
+            const qtyInput = document.getElementById("qtyInput");
+            const qty = Number(qtyInput.value);
+            const name = document.getElementById("productName").innerText;
+            const msg = `Halo, saya ingin membeli *${name}*%0AJumlah: *${qty}*`;
+            window.location.href = `https://wa.me/6287758412915?text=${msg}`;
+        };
 
-            document.getElementById("productName").innerText = product.name;
-            document.getElementById("productPrice").innerText =
-                "Rp " + Number(product.price).toLocaleString("id-ID");
-            document.getElementById("productDescription").innerText = product.description;
-
-            document.querySelector(".btn-buy").onclick = () => {
-                window.location.href =
-                    `https://wa.me/6287758412915?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(product.name)}`;
-            };
-
-        } catch (e) {
-            console.error("Gagal load detail:", e);
-        }
+    } catch(e) {
+        console.error("Gagal load detail:", e);
     }
-
-    loadDetail();
+}
+loadDetail();
 </script>
-<!-- ========================================================= -->
 
-<!-- ========================================================= -->
-<!--  FITUR TAMBAHAN — KERANJANG & BELI SEKARANG SINKRON        -->
-<!--  TANPA MENYENTUH KODE ASLI                                 -->
-<!-- ========================================================= -->
 <script>
-// Fungsi update localStorage untuk produk ini
+// =================== FITUR TAMBAHAN ===================
 function updateLocalCart(productId, qty) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const index = cart.findIndex(item => item.id === productId);
-    if (index > -1) {
-        cart[index].qty = qty; // update jumlah
-    } else {
-        cart.push({id: productId, qty: qty});
-    }
+    if(index>-1) cart[index].qty = qty; else cart.push({id:productId, qty:qty});
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Tombol + dan -
-document.getElementById("plusBtn").onclick = () => {
-    const qty = document.getElementById("qtyInput");
-    qty.value = Number(qty.value) + 1;
-    updateLocalCart(id, Number(qty.value));
-};
+const qtyInput = document.getElementById("qtyInput");
+document.getElementById("plusBtn").onclick = () => { qtyInput.value=Number(qtyInput.value)+1; updateLocalCart(id, Number(qtyInput.value)); }
+document.getElementById("minusBtn").onclick = () => { if(qtyInput.value>1){qtyInput.value=Number(qtyInput.value)-1; updateLocalCart(id, Number(qtyInput.value));} }
 
-document.getElementById("minusBtn").onclick = () => {
-    const qty = document.getElementById("qtyInput");
-    if (qty.value > 1) {
-        qty.value = Number(qty.value) - 1;
-        updateLocalCart(id, Number(qty.value));
-    }
-};
-
-// Load jumlah dari localStorage saat halaman dibuka
 window.addEventListener('load', () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const productInCart = cart.find(item => item.id === id);
-    if (productInCart) {
-        document.getElementById("qtyInput").value = productInCart.qty;
-    }
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const saved = cart.find(item => item.id===id);
+    if(saved) qtyInput.value = saved.qty;
 });
 
-// Tambah ke Keranjang
 document.getElementById("addCartBtn").onclick = () => {
-    const qty = Number(document.getElementById("qtyInput").value);
+    const qty = Number(qtyInput.value);
     updateLocalCart(id, qty);
     alert("Produk berhasil ditambahkan ke keranjang!");
-};
-
-// Beli Sekarang (WhatsApp) selalu ambil jumlah dari localStorage
-document.getElementById("buyNowBtn").onclick = () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const productInCart = cart.find(item => item.id === id);
-    const qty = productInCart ? productInCart.qty : Number(document.getElementById("qtyInput").value);
-    const name = document.getElementById("productName").innerText;
-
-    const msg = `Halo, saya ingin membeli *${name}*%0AJumlah: *${qty}*`;
-
-    window.location.href = `https://wa.me/6287758412915?text=${msg}`;
 };
 </script>
 
