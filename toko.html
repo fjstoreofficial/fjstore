@@ -1,209 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FJ Store - Toko</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('latarbelakang.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FJ.Store – Produk</title>
+  <link rel="stylesheet" href="style.css" />
 
-  .header {
-    text-align: center;
-    padding: 30px 10px;
-    color: white;
-    background-color: rgba(0,0,0,0.5);
-    font-size: 28px;
-    font-weight: bold;
-  }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
 
-  .top-section {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin: 20px;
-    gap: 10px;
-  }
+    header {
+      background: #111;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-  .kotak {
-    background-color: transparent;
-    padding: 8px;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 13px;
-    min-width: 120px;
-    max-width: 160px;
-    flex: 1;
-  }
+    .products-container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-  .jam-kerja {
-    font-weight: bold;
-    font-size: 14px;
-    color: white;
-  }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: 0.2s;
+    }
 
-  .produk-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 20px;
-  }
+    .product-card:hover {
+      transform: scale(1.03);
+    }
 
-  .produk {
-    background-color: transparent;
-    border-radius: 8px;
-    text-align: center;
-    padding: 5px;
-    box-sizing: border-box;
-  }
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
 
-  .produk img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 4px;
-  }
+    .product-name {
+      margin: 12px 0 5px;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-  .produk-title {
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 2px;
-    color: white;
-  }
+    .product-price {
+      color: #ff5c5c;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-  .produk-desc {
-    font-size: 12px;
-    margin-top: 4px;
-    text-align: left;
-    color: white;
-  }
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-  .produk-desc ul {
-    padding-left: 16px;
-    margin: 0;
-  }
+    .buy-btn:hover {
+      background: #444;
+    }
+  </style>
 
-  .produk-wa {
-    display: inline-block;
-    text-decoration: none;
-    color: white;
-    background-color: #25D366;
-    padding: 4px 5px;
-    border-radius: 5px;
-    font-size: 11px;
-    margin-top: 4px;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 15px;
-    color: white;
-    font-size: 14px;
-  }
-
-  .whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-
-  .whatsapp-button img {
-    width: 28px;
-    height: 28px;
-  }
-
-  @media(max-width: 1024px) {
-    .produk-container { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media(max-width: 768px) {
-    .produk-container { grid-template-columns: repeat(2, 1fr); }
-    .kotak { max-width: 45%; margin-bottom: 8px; }
-  }
-
-  @media(max-width: 480px) {
-    .produk-container { grid-template-columns: repeat(1, 1fr); }
-    .kotak { min-width: 90%; max-width: 90%; font-size: 12px; }
-  }
-</style>
 </head>
 <body>
 
-  <div class="header">Welcome to FJ Store</div>
+  <header>Produk FJ.Store</header>
 
-  <div class="top-section">
-    <div class="kotak">
-      <div class="jam-kerja">09:00 - 21:00</div>
-    </div>
-  </div>
+  <div class="products-container" id="products"></div>
 
-  <div class="produk-container">
-    <div class="produk">
-      <img src="Hoodie Holigans - Premium" alt="Hoodie">
-      <div class="produk-title">Hoodie Holigans - Premium</div>
-      <div class="produk-desc">
-        <ul>
-          <li>Bahan Fleece warna biru muda</li>
-          <li>Rubber patch Velcro di lengan kiri</li>
-          <li>Sablon plastisol High Density (timbul)</li>
-          <li>Reguler fit, tali serut, kantong kangaroo</li>
-          <li>Size: S - M</li>
-        </ul>
-      </div>
-      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama:%20%0AAlamat:%20%0AUkuran:%20%0APembayaran%20melalui:%20" target="_blank" class="produk-wa">Pesan via WA</a>
-    </div>
+  <script>
+    async function loadProducts() {
+      try {
+        const res = await fetch("products.json");
+        const data = await res.json();
 
-    <div class="produk">
-      <img src="Hoodie Holigans - Premium" alt="Hoodie">
-      <div class="produk-title">Hoodie Holigans - Premium</div>
-      <div class="produk-desc">
-        <ul>
-          <li>Bahan Fleece warna biru muda</li>
-          <li>Rubber patch Velcro di lengan kiri</li>
-          <li>Sablon plastisol High Density (timbul)</li>
-          <li>Reguler fit, tali serut, kantong kangaroo</li>
-          <li>Size: S - M</li>
-        </ul>
-      </div>
-      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama:%20%0AAlamat:%20%0AUkuran:%20%0APembayaran%20melalui:%20" target="_blank" class="produk-wa">Pesan via WA</a>
-    </div>
+        const container = document.getElementById("products");
+        container.innerHTML = "";
 
-    <div class="produk">
-      <img src="Hoodie Holigans - Premium" alt="Hoodie">
-      <div class="produk-title">Hoodie Holigans - Premium</div>
-      <div class="produk-desc">
-        <ul>
-          <li>Bahan Fleece warna biru muda</li>
-          <li>Rubber patch Velcro di lengan kiri</li>
-          <li>Sablon plastisol High Density (timbul)</li>
-          <li>Reguler fit, tali serut, kantong kangaroo</li>
-          <li>Size: S - M</li>
-        </ul>
-      </div>
-      <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama:%20%0AAlamat:%20%0AUkuran:%20%0APembayaran%20melalui:%20" target="_blank" class="produk-wa">Pesan via WA</a>
-    </div>
-  </div>
+        data.forEach(p => {
+          container.innerHTML += `
+            <div class="product-card">
+              <img src="${p.image}" alt="${p.name}">
+              <div class="product-name">${p.name}</div>
+              <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
+              <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(p.name)}">
+                <button class="buy-btn">Beli Sekarang</button>
+              </a>
+            </div>
+          `;
+        });
 
-  <a href="https://wa.me/6287758412915?text=HALO%20FJ%20STORE%0A%0ANama:%20%0AAlamat:%20%0AUkuran:%20%0APembayaran%20melalui:%20" target="_blank" class="whatsapp-button">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-  </a>
+      } catch (e) {
+        console.error("Gagal load produk:", e);
+      }
+    }
 
-  <div class="footer">© R FJSTORE. All rights reserved.</div>
+    loadProducts();
+  </script>
 
 </body>
 </html>
