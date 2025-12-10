@@ -3,244 +3,209 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FJ STORE — Premium Glossy Edition</title>
+<title>FJ STORE</title>
 
 <style>
-/* ====================================================== */
-/* GLOBAL STYLE */
-/* ====================================================== */
-body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(to bottom right, #dff3ff, #ffffff);
-    color: #222;
-    overflow-x: hidden;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url("latarbelakang.jpg") center/cover no-repeat fixed;
+        backdrop-filter: blur(2px);
+    }
 
-:root {
-    --brand-blue: #1e88e5;
-    --brand-blue-light: #64b5ff;
-    --glass-white: rgba(255, 255, 255, 0.45);
-}
+    /* Hero Section */
+    .hero {
+        text-align: center;
+        padding: 70px 20px 50px;
+        background: rgba(255, 255, 255, 0.6);
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+        animation: fadeIn 1.3s ease;
+    }
 
-/* Floating glossy bubbles */
-.bubble {
-    position: absolute;
-    background: rgba(255,255,255,0.35);
-    backdrop-filter: blur(20px);
-    border-radius: 50%;
-    box-shadow: 0 0 25px rgba(255,255,255,0.4);
-    animation: float 6s ease-in-out infinite;
-    z-index: -5;
-}
-.b1 { width: 120px; height: 120px; top: 40px; left: -30px; animation-delay: 0s; }
-.b2 { width: 180px; height: 180px; bottom: 60px; right: -40px; animation-delay: 1s; }
-.b3 { width: 110px; height: 110px; bottom: 180px; left: -20px; animation-delay: 2s; }
+    /* Logo + Teks */
+    .logo-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-25px); }
-    100% { transform: translateY(0px); }
-}
+    .logo-area img {
+        width: 70px;
+        height: auto;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+    }
 
-/* ====================================================== */
-/* HEADER */
-/* ====================================================== */
-.header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 20px;
-    justify-content: center;
-    position: relative;
-}
+    .logo-area span {
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #004aad;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
 
-.header img {
-    width: 60px;
-    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
-    animation: popIn 1s ease;
-}
+    /* Headline */
+    .headline {
+        font-size: 22px;
+        font-weight: bold;
+        color: #004aad;
+        margin-top: 10px;
+        animation: slide-up 1s ease;
+    }
 
-.header-text {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--brand-blue);
-    background: linear-gradient(90deg, #1e88e5, #64b5ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fadeDown 1.2s ease;
-}
+    /* Deskripsi singkat */
+    .subtext {
+        font-size: 15px;
+        margin-top: 8px;
+        color: #222;
+        opacity: 0.9;
+    }
 
-@keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+    /* Tombol */
+    .btn-store {
+        margin-top: 25px;
+        padding: 15px 28px;
+        background: linear-gradient(135deg, #0062ff, #2ea1ff);
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        transition: 0.25s ease;
+        animation: glow 3s infinite ease-in-out;
+    }
 
-@keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    .btn-store:hover {
+        transform: scale(1.06);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
 
-/* ====================================================== */
-/* HERO */
-/* ====================================================== */
-.hero {
-    padding: 35px 20px;
-    position: relative;
-    text-align: center;
-}
+    /* Divider halus */
+    .divider {
+        width: 70%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #4da3ff, transparent);
+        margin: 35px auto 25px;
+        border-radius: 50px;
+    }
 
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(30,136,229,0.25), transparent 70%);
-    filter: blur(35px);
-    border-radius: 50%;
-    z-index: -3;
-}
+    /* Koleksi Fitur */
+    .feature-box {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 20px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
 
-.hero-tagline {
-    font-size: 30px;
-    font-weight: 700;
-    color: #111;
-    animation: fadeUp 1.1s ease;
-    background: linear-gradient(180deg, #000, #3b3b3b);
-    -webkit-background-clip: text;
-    color: transparent;
-}
+    .feature {
+        background: white;
+        padding: 14px 18px;
+        border-radius: 16px;
+        font-size: 15px;
+        font-weight: bold;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+        border: 1px solid #dbe7ff;
+        transition: 0.3s ease;
+        width: 150px;
+        text-align: center;
+    }
 
-.hero-desc {
-    font-size: 15px;
-    opacity: 0.85;
-    margin-top: 8px;
-    animation: fadeUp 1.4s ease;
-}
+    .feature:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, #ffffff, #eaf3ff);
+    }
 
-/* Glossy 3D Button */
-.btn-masuk {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 13px 28px;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    color: #fff;
-    background: linear-gradient(145deg, #1e88e5, #64b5ff);
-    border-radius: 14px;
-    box-shadow: 0px 6px 14px rgba(0,0,0,0.25), inset 0 0 10px rgba(255,255,255,0.3);
-    transition: 0.25s ease;
-    animation: fadeUp 1.5s ease;
-}
-.btn-masuk:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.3), inset 0 0 15px rgba(255,255,255,0.55);
-}
+    /* Foto produk highlight */
+    .product-highlight {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-/* ====================================================== */
-/* PRODUK HIGHLIGHT (3D Style) */
-/* ====================================================== */
-.product-highlight {
-    margin-top: 35px;
-    position: relative;
-}
+    .product-highlight img {
+        width: 75%;
+        max-width: 320px;
+        border-radius: 18px;
+        box-shadow: 0px 6px 22px rgba(0,0,0,0.22);
+        animation: float 3s infinite ease-in-out;
+    }
 
-.product-highlight img {
-    width: 85%;
-    max-width: 280px;
-    border-radius: 14px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-    transform: perspective(800px) rotateX(8deg) rotateY(-6deg);
-    animation: float3d 6s ease-in-out infinite;
-}
+    /* Footer Mini */
+    .footer {
+        text-align: center;
+        padding: 18px;
+        background: rgba(255,255,255,0.85);
+        margin-top: 40px;
+        font-size: 14px;
+        color: #000;
+        border-top: 2px solid #eee;
+    }
 
-@keyframes float3d {
-    0% { transform: perspective(900px) rotateX(8deg) rotateY(-6deg) translateY(0); }
-    50% { transform: perspective(900px) rotateX(8deg) rotateY(-6deg) translateY(-18px); }
-    100% { transform: perspective(900px) rotateX(8deg) rotateY(-6deg) translateY(0); }
-}
+    /* Animations */
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
 
-/* ====================================================== */
-/* BOX ALASAN (Glassmorphism Glossy) */
-/* ====================================================== */
-.section-title {
-    font-size: 22px;
-    margin-top: 45px;
-    font-weight: 700;
-    color: #0f0f0f;
-    animation: fadeUp 1.1s ease;
-}
+    @keyframes slide-up {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
 
-.reason-box {
-    width: 85%;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 16px;
-    background: var(--glass-white);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.6);
-    box-shadow: 0 6px 22px rgba(0,0,0,0.12);
-    animation: fadeUp 1.2s ease;
-}
+    @keyframes glow {
+        0%, 100% { box-shadow: 0 0 10px #59a8ff; }
+        50% { box-shadow: 0 0 20px #0077ff; }
+    }
 
-.reason-title {
-    font-size: 17px;
-    font-weight: bold;
-    color: var(--brand-blue);
-}
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
 
-.reason-text {
-    font-size: 14px;
-    margin-top: 6px;
-}
-
-/* FadeUp animation */
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ====================================================== */
-/* FOOTER */
-/* ====================================================== */
-.footer {
-    margin-top: 55px;
-    padding: 18px;
-    background: linear-gradient(to right, #e2f1ff, #f7fbff);
-    text-align: center;
-    font-size: 13px;
-    color: #444;
-    border-top: 1px solid #d0e8ff;
-    animation: fadeUp 1.4s ease;
-}
-
-/* ====================================================== */
-/* RESPONSIVE HP */
-/* ====================================================== */
-@media (max-width: 360px) {
-    .hero-tagline { font-size: 24px; }
-    .header-text { font-size: 20px; }
-    .btn-masuk { font-size: 15px; padding: 11px 22px; }
-}
 </style>
 </head>
+
 <body>
 
-<!-- Decorative glossy bubbles -->
-<div class="bubble b1"></div>
-<div class="bubble b2"></div>
-<div class="bubble b3"></div>
+    <div class="hero">
 
-<!-- ===================== HEADER ===================== -->
-<div class="header">
-    <img src="logofj" alt="Logo FJ">
-    <div class="header-text">FJ STORE</div>
-</div>
+        <div class="logo-area">
+            <img src="logofj" alt="Logo FJ" />
+            <span>FJ STORE</span>
+        </div>
 
-<!-- ===================== HERO ===================== -->
-<div class="
+        <div class="headline">Belanja Lebih Mudah, Pengalaman Lebih Baik</div>
+
+        <div class="subtext">
+            Pilihan produk terbaik dengan kualitas premium dan harga bersahabat.
+        </div>
+
+        <button class="btn-store" onclick="window.location.href='toko.html'">
+            Masuk ke Toko
+        </button>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="feature-box">
+        <div class="feature">Lihat Koleksi Baru</div>
+        <div class="feature">Promo Minggu Ini</div>
+        <div class="feature">Best Seller</div>
+    </div>
+
+    <div class="product-highlight">
+        <img src="Hoodie Holigans - Premium" alt="Produk Utama" />
+    </div>
+
+    <div class="footer">
+        © 2025 FJ STORE – Semua Hak Dilindungi
+    </div>
+
+</body>
+</html>
