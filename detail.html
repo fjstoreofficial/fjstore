@@ -201,36 +201,58 @@
 <!-- ========================================================= -->
 
 <!-- ========================================================= -->
-<!--  FITUR TAMBAHAN — TIDAK MENYENTUH KODEMU                  -->
+<!--  FITUR TAMBAHAN — KERANJANG & BELI SEKARANG SINKRON        -->
+<!--  TANPA MENYENTUH KODE ASLI                                 -->
 <!-- ========================================================= -->
 <script>
+// Fungsi update localStorage untuk produk ini
+function updateLocalCart(productId, qty) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(item => item.id === productId);
+    if (index > -1) {
+        cart[index].qty = qty; // update jumlah
+    } else {
+        cart.push({id: productId, qty: qty});
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
 // Tombol + dan -
 document.getElementById("plusBtn").onclick = () => {
     const qty = document.getElementById("qtyInput");
     qty.value = Number(qty.value) + 1;
+    updateLocalCart(id, Number(qty.value));
 };
 
 document.getElementById("minusBtn").onclick = () => {
     const qty = document.getElementById("qtyInput");
-    if (qty.value > 1) qty.value = Number(qty.value) - 1;
+    if (qty.value > 1) {
+        qty.value = Number(qty.value) - 1;
+        updateLocalCart(id, Number(qty.value));
+    }
 };
 
-// Tambah ke Keranjang (localStorage)
-document.getElementById("addCartBtn").onclick = () => {
+// Load jumlah dari localStorage saat halaman dibuka
+window.addEventListener('load', () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const productInCart = cart.find(item => item.id === id);
+    if (productInCart) {
+        document.getElementById("qtyInput").value = productInCart.qty;
+    }
+});
 
-    cart.push({
-        id: id,
-        qty: Number(document.getElementById("qtyInput").value)
-    });
-
-    localStorage.setItem("cart", JSON.stringify(cart));
+// Tambah ke Keranjang
+document.getElementById("addCartBtn").onclick = () => {
+    const qty = Number(document.getElementById("qtyInput").value);
+    updateLocalCart(id, qty);
     alert("Produk berhasil ditambahkan ke keranjang!");
 };
 
-// Beli sekarang kirim qty → WhatsApp
+// Beli Sekarang (WhatsApp) selalu ambil jumlah dari localStorage
 document.getElementById("buyNowBtn").onclick = () => {
-    const qty = document.getElementById("qtyInput").value;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const productInCart = cart.find(item => item.id === id);
+    const qty = productInCart ? productInCart.qty : Number(document.getElementById("qtyInput").value);
     const name = document.getElementById("productName").innerText;
 
     const msg = `Halo, saya ingin membeli *${name}*%0AJumlah: *${qty}*`;
