@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FJstore — Toko Resmi</title>
+<style>
+body{margin:0;font-family:Inter, sans-serif;background:#f4f6ff;}
+#landing{min-height:100vh;padding:40px;display:flex;justify-content:center;align-items:center;}
+.box{background:#fff;padding:40px;border-radius:20px;max-width:1100px;width:100%;display:flex;gap:40px;box-shadow:0 20px 60px rgba(0,0,0,0.07);}
+.left{flex:1;}
+.left h1{font-size:48px;margin:0;font-weight:800;}
+.inputwrap{margin-top:25px;display:flex;gap:10px;}
+.fjinput{flex:1;padding:14px;border-radius:10px;border:1px solid #ccc;font-size:16px;}
+.fjbtn{padding:14px 20px;background:#6d4aff;color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:600;}
+.mock{flex:1;display:flex;align-items:center;justify-content:center;background:#eef1ff;border-radius:16px;padding:20px;}
+.mock img{width:90%;border-radius:12px;}
+#shop{display:none;padding:20px;}
+</style>
+</head>
+<body>
+
+<div id="landing">
+  <div class="box">
+    <div class="left">
+      <h1>FJ.STORE</h1>
+      <p>Ayo Belanja Sekarang Juga</p>
+
+      <div class="inputwrap">
+        <input id="username" class="fjinput" placeholder="Masukan username kamu">
+        <button class="fjbtn" onclick="openShop()">Masuk ke Toko</button>
+      </div>
+      <p style="font-size:13px;color:#666;">Username hanya untuk identifikasi sementara.</p>
+    </div>
+
+    <div class="mock">
+      <img src="Hoodie HOLIGANS.jpg">
+    </div>
+  </div>
+</div>
+
+<div id="shop">
+  <h2>FJ.Store.Official</h2>
+  <p>Koleksi Fashion Terbaru</p>
+  <img src="Hoodie HOLIGANS.jpg" style="width:260px;border-radius:12px;">
+  <h3>Hoodie Hooligans - Premium</h3>
+  <p style="color:red;font-weight:bold;">Rp225.920</p>
+</div>
+
+<script>
+function openShop(){
+  const u=document.getElementById("username").value.trim();
+  if(!u){alert("Masukan username!");return;}
+  document.getElementById("landing").style.display="none";
+  document.getElementById("shop").style.display="block";
+}
+</script>
+
+</body>
+</html>
