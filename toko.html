@@ -39,6 +39,9 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
       transition: 0.2s;
+      text-decoration: none;
+      color: black;
+      display: block;
     }
 
     .product-card:hover {
@@ -99,14 +102,11 @@
 
         data.forEach(p => {
           container.innerHTML += `
-            <div class="product-card">
+            <a href="detail.html?id=${p.id}" class="product-card">
               <img src="${p.image}" alt="${p.name}">
               <div class="product-name">${p.name}</div>
               <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
-              <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(p.name)}">
-                <button class="buy-btn">Beli Sekarang</button>
-              </a>
-            </div>
+            </a>
           `;
         });
 
