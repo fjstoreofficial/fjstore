@@ -91,6 +91,8 @@ loadDetail();
 
 <!-- ================= FITUR TAMBAHAN ================= -->
 <script>
+// =================== KERANJANG & MINI CART INTERAKTIF ===================
+
 // Update localStorage untuk produk ini
 function updateLocalCart(productId, qty) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -101,8 +103,8 @@ function updateLocalCart(productId, qty) {
 
 // Tombol + / -
 const qtyInput = document.getElementById("qtyInput");
-document.getElementById("plusBtn").onclick = () => { qtyInput.value=Number(qtyInput.value)+1; updateLocalCart(id, Number(qtyInput.value)); }
-document.getElementById("minusBtn").onclick = () => { if(qtyInput.value>1){qtyInput.value=Number(qtyInput.value)-1; updateLocalCart(id, Number(qtyInput.value));} }
+document.getElementById("plusBtn").onclick = () => { qtyInput.value=Number(qtyInput.value)+1; updateLocalCart(id, Number(qtyInput.value)); updateMiniCart(); }
+document.getElementById("minusBtn").onclick = () => { if(qtyInput.value>1){qtyInput.value=Number(qtyInput.value)-1; updateLocalCart(id, Number(qtyInput.value)); updateMiniCart();} }
 
 // Load jumlah dari localStorage saat halaman load
 window.addEventListener('load', () => {
@@ -119,38 +121,59 @@ document.getElementById("addCartBtn").onclick = () => {
     updateMiniCart(); // update mini cart realtime
 };
 
-// ================= FITUR MINI CART =================
+// ================= FITUR MINI CART INTERAKTIF =================
 const miniCart = document.createElement('div');
 miniCart.id = 'miniCart';
 miniCart.style.position = 'fixed';
 miniCart.style.bottom = '20px';
 miniCart.style.right = '20px';
-miniCart.style.background = 'rgba(0,0,0,0.7)';
+miniCart.style.background = 'linear-gradient(135deg, #ff0095, #007bff)';
 miniCart.style.color = '#fff';
 miniCart.style.padding = '10px 15px';
-miniCart.style.borderRadius = '12px';
+miniCart.style.borderRadius = '50px';
 miniCart.style.fontWeight = '600';
 miniCart.style.fontSize = '14px';
 miniCart.style.zIndex = '999';
 miniCart.style.cursor = 'pointer';
-miniCart.innerText = 'Keranjang: 0 barang';
+miniCart.style.display = 'flex';
+miniCart.style.alignItems = 'center';
+miniCart.style.gap = '8px';
+miniCart.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+miniCart.style.transition = 'transform 0.2s, box-shadow 0.2s';
+
+// Tambahkan ikon keranjang
+const cartIcon = document.createElement('span');
+cartIcon.innerText = '🛒';
+cartIcon.style.fontSize = '18px';
+miniCart.appendChild(cartIcon);
+
+// Tambahkan jumlah
+const cartText = document.createElement('span');
+cartText.innerText = '0';
+miniCart.appendChild(cartText);
+
+// Masukkan ke body
 document.body.appendChild(miniCart);
 
-// Update mini cart
+// Fungsi update mini cart
 function updateMiniCart() {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    miniCart.innerText = `Keranjang: ${totalQty} barang`;
+    cartText.innerText = totalQty;
+
+    // Animasi bounce
+    miniCart.style.transform = 'scale(1.2)';
+    miniCart.style.boxShadow = '0 8px 25px rgba(0,0,0,0.4)';
+    setTimeout(() => {
+        miniCart.style.transform = 'scale(1)';
+        miniCart.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+    }, 200);
 }
 
 // Update saat load
 window.addEventListener('load', updateMiniCart);
 
-// Update saat + / - diklik
-document.getElementById("plusBtn").addEventListener('click', updateMiniCart);
-document.getElementById("minusBtn").addEventListener('click', updateMiniCart);
-
-// Klik mini cart (opsional)
+// Klik mini cart (opsional redirect)
 miniCart.addEventListener('click', () => {
     alert('Redirect ke halaman keranjang (opsional)');
     // window.location.href = 'cart.html';
