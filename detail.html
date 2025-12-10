@@ -4,126 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Produk</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0; padding: 0;
-        }
-
-        .container {
-            background: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            background: #ddd;
-        }
-
-        .content {
-            padding: 16px;
-        }
-
-        .product-name {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .product-price {
-            font-size: 22px;
-            color: #ff5f00;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .product-description {
-            font-size: 15px;
-            line-height: 1.4;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        .bottom-bar {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100%;
-            background: #fff;
-            border-top: 1px solid #ccc;
-            display: flex;
-            padding: 10px;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-buy {
-            background: #ff5f00;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- kalau kamu pakai -->
 </head>
 <body>
 
-<div class="container">
-    <img id="productImage" class="product-image">
-
     <div class="content">
-        <div id="productName" class="product-name">Nama Produk</div>
-        <div id="productPrice" class="product-price">Rp -</div>
-        <div id="productDescription" class="product-description"></div>
+        <img id="productImage" src="" alt="Produk" style="width: 100%; max-width: 350px; border-radius: 8px;">
+
+        <h2 id="productName"></h2>
+        <h3 id="productPrice"></h3>
+
+        <p id="productDescription"></p>
+
+        <button class="btn-buy">Beli via WhatsApp</button>
     </div>
-</div>
 
-<div class="bottom-bar">
-    <button class="btn-buy">Beli Sekarang</button>
-</div>
+    <!-- Script detail kamu TARUH DI SINI -->
+    <script>
+        // --- Ambil Parameter ID dari URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
 
-<script>
-    // --- Ambil Parameter ID dari URL ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+        async function loadDetail() {
+            try {
+                const res = await fetch("products.json");
+                const data = await res.json();
 
-    // --- Data Dummy Sementara (bisa diganti JSON asli nanti) ---
-    const productData = [
-        {
-            id: "1",
-            name: "Kaos Oversize Premium",
-            price: 75000,
-            desc: "Bahan cotton combed 30s, nyaman dan adem.",
-            image: "https://via.placeholder.com/600x400"
-        },
-        {
-            id: "2",
-            name: "Hoodie Tebal Premium",
-            price: 150000,
-            desc: "Hoodie tebal cocok untuk dingin dan streetwear.",
-            image: "https://via.placeholder.com/600x400"
+                // Cari produk berdasarkan ID
+                const product = data.find(p => p.id == id);
+
+                if (!product) {
+                    document.querySelector(".content").innerHTML = "<h3>Produk tidak ditemukan!</h3>";
+                    return;
+                }
+
+                // Isi data ke halaman detail
+                document.getElementById("productImage").src = product.image;
+                document.getElementById("productName").innerText = product.name;
+                document.getElementById("productPrice").innerText =
+                    "Rp " + Number(product.price).toLocaleString("id-ID");
+                document.getElementById("productDescription").innerText = product.description;
+
+                // Tombol WA otomatis
+                document.querySelector(".btn-buy").onclick = () => {
+                    window.location.href =
+                        `https://wa.me/6281234567890?text=Halo%20saya%20ingin%20beli%20${encodeURIComponent(product.name)}`;
+                };
+
+            } catch (e) {
+                console.error("Gagal load detail:", e);
+            }
         }
-    ];
 
-    // --- Cari produk berdasarkan ID ---
-    const product = productData.find(p => p.id === id);
-
-    if (product) {
-        document.getElementById("productImage").src = product.image;
-        document.getElementById("productName").innerText = product.name;
-        document.getElementById("productPrice").innerText = "Rp " + product.price.toLocaleString();
-        document.getElementById("productDescription").innerText = product.desc;
-    } else {
-        document.querySelector(".content").innerHTML = "<h3>Produk tidak ditemukan!</h3>";
-    }
-</script>
+        loadDetail();
+    </script>
 
 </body>
 </html>
