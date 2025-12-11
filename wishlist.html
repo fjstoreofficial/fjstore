@@ -85,7 +85,25 @@
         font-weight: 600;
     }
 
-    /* Delete button */
+    /* BUTTON: Lihat Detail */
+    .detail-btn {
+        margin-top: 8px;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #00d4ff, #008cff);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+    .detail-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,170,255,0.5);
+    }
+
+    /* DELETE BUTTON */
     .remove-btn {
         margin-top: 10px;
         padding: 10px;
@@ -97,19 +115,51 @@
         font-weight: 600;
         cursor: pointer;
         transition: 0.25s;
+        position: relative;
+        overflow: hidden;
     }
+
     .remove-btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(255,0,80,0.5);
     }
 
+    /* HEART BREAK ANIMATION */
+    .heart-break {
+        position: absolute;
+        top: -20px;
+        right: 20px;
+        font-size: 32px;
+        animation: breakHeart 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes breakHeart {
+        0% { opacity: 1; transform: scale(1); }
+        50% { transform: scale(1.4) rotate(20deg); }
+        100% { opacity: 0; transform: scale(0.2) rotate(-40deg) translateY(40px); }
+    }
+
+    /* EMPTY STATE */
     .empty {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 40px;
         font-size: 22px;
         font-weight: 600;
         color: #fff;
         animation: fadeIn 0.8s ease-out;
+    }
+
+    .empty img {
+        width: 180px;
+        margin-bottom: 15px;
+        animation: floating 2.5s infinite ease-in-out;
+    }
+
+    @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-12px); }
+        100% { transform: translateY(0px); }
     }
 
     /* Animations */
@@ -125,7 +175,6 @@
         0% { opacity: 0; transform: scale(0.85); }
         100% { opacity: 1; transform: scale(1); }
     }
-
 </style>
 </head>
 
@@ -136,29 +185,40 @@
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-    Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+    <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png">
+    Wishlist kamu masih kosong 😢<br>
+    Tambahkan produk dari halaman toko!
 </div>
 
 <script>
-// Ambil wishlist dari localStorage
+// === WISHLIST STORAGE ===
 function getWishlist() {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
 }
 
-// Simpan wishlist
 function saveWishlist(list) {
     localStorage.setItem("wishlist", JSON.stringify(list));
 }
 
-// Hapus item
+// === REMOVE WITH HEART BREAK ANIMATION ===
 function removeWishlist(id) {
-    let wishlist = getWishlist();
-    wishlist = wishlist.filter(item => item.id !== id);
-    saveWishlist(wishlist);
-    loadWishlist();
+    const btn = event.target;
+
+    // animasi hati pecah
+    const heart = document.createElement("div");
+    heart.className = "heart-break";
+    heart.innerHTML = "💔";
+    btn.appendChild(heart);
+
+    setTimeout(() => {
+        let wishlist = getWishlist();
+        wishlist = wishlist.filter(item => item.id !== id);
+        saveWishlist(wishlist);
+        loadWishlist();
+    }, 600);
 }
 
-// Tampilkan wishlist
+// === LOAD WISHLIST ===
 async function loadWishlist() {
     const container = document.getElementById("wishlistContainer");
     const emptyMsg = document.getElementById("emptyMessage");
@@ -185,6 +245,10 @@ async function loadWishlist() {
                 <img src="${product.image}">
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+
+                <button class="detail-btn" onclick="location.href='detail.html?id=${product.id}'">
+                    Lihat Detail
+                </button>
 
                 <button class="remove-btn" onclick="removeWishlist(${product.id})">
                     Hapus dari Wishlist
