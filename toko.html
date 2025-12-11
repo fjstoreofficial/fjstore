@@ -12,7 +12,6 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-
       background: url("latarbelakang.jpg") center/cover no-repeat fixed;
       position: relative;
     }
@@ -248,8 +247,8 @@
     @keyframes fadeUp { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:none;} }
     @keyframes popIn { 0%{opacity:0;transform:scale(0.85);} 100%{opacity:1;transform:scale(1);} }
   </style>
-
 </head>
+
 <body>
 
   <header>
@@ -272,8 +271,7 @@
     <div id="searchResults"></div>
   </div>
 
-
-  <!-- ========== KODE ASLI PRODUK KAMU (TIDAK DIUBAH) ========== -->
+  <!-- ========== LOAD PRODUK ========== -->
   <script>
     async function loadProducts() {
       try {
@@ -301,8 +299,7 @@
     loadProducts();
   </script>
 
-
-  <!-- ========== SEARCH (TIDAK DIUBAH) ========== -->
+  <!-- ========== SEARCH ========== -->
   <script>
     const overlay = document.getElementById("searchOverlay");
     const searchIcon = document.getElementById("searchIcon");
@@ -372,8 +369,7 @@
     });
   </script>
 
-
-  <!-- ========== TAMBAHAN WISHLIST (TIDAK MENYENTUH KODE KAMU) ========== -->
+  <!-- ========== WISHLIST SYSTEM ========== -->
   <script>
     let wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 
@@ -387,7 +383,7 @@
 
     updateWishlistCounter();
 
-    /* ===== Tambahkan hati ke setiap kartu produk ===== */
+    /* MENAMBAHKAN HATI KE CARD */
     const observer = new MutationObserver(() => {
       document.querySelectorAll(".product-card").forEach(card => {
         if (card.querySelector(".wishlist-heart")) return;
@@ -422,7 +418,7 @@
 
     observer.observe(document.body, { subtree: true, childList: true });
 
-    /* ===== Klik ikon wishlist ke halaman wishlist.html ===== */
+    /* BUKA HALAMAN WISHLIST */
     document.getElementById("wishlistIcon").onclick = () => {
       window.location.href = "wishlist.html";
     };
