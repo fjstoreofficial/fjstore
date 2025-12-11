@@ -1,216 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Wishlist – FJ.Store</title>
-
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Poppins, sans-serif;
-        background: url("latarbelakang.jpg") center/cover no-repeat fixed;
-    }
+/* ========== STYLE (sama seperti milikmu, + sedikit animasi) ========== */
+body{
+  margin:0;padding:0;font-family:Poppins, sans-serif;
+  background:url("latarbelakang.jpg") center/cover no-repeat fixed;
+}
+body::before{
+  content:"";position:fixed;inset:0;backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.45);z-index:-1;
+}
+header{
+  background:rgba(0,0,0,0.6);padding:20px;text-align:center;font-size:24px;
+  font-weight:700;color:#fff;border-bottom:1px solid rgba(255,255,255,0.3);
+}
+.wishlist-container{
+  max-width:900px;margin:40px auto;padding:20px;
+  display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+}
+.wishlist-card{
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px);border-radius:16px;padding:15px;text-align:center;color:#fff;
+  box-shadow:0 4px 25px rgba(0,0,0,0.25);transition:0.3s;position:relative;overflow:hidden;
+}
+.wishlist-card:hover{ transform:scale(1.03); background:rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35); }
+.wishlist-card img{ width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:10px; }
+.product-name{ font-size:18px;font-weight:600;margin:5px 0;text-shadow:1px 1px 3px #000; }
+.product-price{ color:#ffe066;font-size:16px;margin-bottom:10px;font-weight:600; }
 
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        backdrop-filter: blur(10px);
-        background: rgba(0, 0, 0, 0.45);
-        z-index: -1;
-    }
+/* tombol */
+.detail-btn{ padding:10px;width:100%;border-radius:10px;background:linear-gradient(135deg,#0099ff,#006aff);
+  border:none;color:#fff;margin-bottom:10px;cursor:pointer;font-weight:600;transition:.25s; }
+.detail-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,110,255,0.5); }
 
-    header {
-        background: rgba(0,0,0,0.6);
-        padding: 20px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        color: #fff;
-        border-bottom: 1px solid rgba(255,255,255,0.3);
-    }
+.remove-btn{ margin-top:10px;padding:10px;width:100%;border:none;border-radius:10px;
+  background:linear-gradient(135deg,#ff2d55,#ff005e);color:#fff;font-weight:600;cursor:pointer;transition:.25s;}
+.remove-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,0,80,0.5); }
 
-    .wishlist-container {
-        max-width: 900px;
-        margin: 40px auto;
-        padding: 20px;
-        display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    }
+/* heart-break (skala & fade) */
+@keyframes heartBreakKey { 0%{ transform: scale(1); opacity:1 } 50%{ transform: scale(1.15) } 100%{ transform: scale(0); opacity:0 } }
+.heart-break { animation: heartBreakKey 0.45s ease-out forwards }
 
-    .wishlist-card {
-        background: rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.25);
-        backdrop-filter: blur(8px);
-        border-radius: 16px;
-        padding: 15px;
-        text-align: center;
-        color: white;
-        box-shadow: 0 4px 25px rgba(0,0,0,0.25);
-        transition: 0.3s;
-        position: relative;
-    }
+/* Empty */
+.empty{ text-align:center; margin-top:50px; font-size:22px; font-weight:600; color:#fff; }
+.empty img{ width:160px; opacity:.9; margin-bottom:10px; animation:float 2s infinite ease-in-out; }
+@keyframes float{ 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
 
-    .wishlist-card:hover {
-        transform: scale(1.05);
-        background: rgba(255,255,255,0.25);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    }
+/* Popup notif */
+#popupNotif{ position:fixed; top:20px; right:20px; padding:12px 20px; background:rgba(255,255,255,0.92);
+ color:#000; border-radius:12px; font-weight:600; display:none; backdrop-filter:blur(6px); z-index:99999; }
 
-    .wishlist-card img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 12px;
-        margin-bottom: 10px;
-    }
+/* ---- Animasi tambahan: fly-heart, particles, glow ---- */
+.fly-heart{ position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:99999; }
+@keyframes flyToWishlist{ 0%{ transform:scale(1) translate(0,0); opacity:1 } 50%{ transform:scale(1.4) translate(40px,-40px) } 100%{ transform:scale(0.35) translate(120px,-80px); opacity:0 } }
+.particle{ position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:99999; }
+@keyframes particleMove{ from{ transform:translate(0,0) scale(1); opacity:1 } to{ transform:translate(var(--tx),var(--ty)) scale(0); opacity:0 } }
+#wishlist-icon.glow{ animation:wishlistGlow .6s ease-out }
+@keyframes wishlistGlow{ 0%{ filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1) } 50%{ filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25) } 100%{ filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1) } }
 
-    .product-name {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 5px 0;
-        text-shadow: 1px 1px 3px #000;
-    }
-
-    .product-price {
-        color: #ffe066;
-        font-size: 16px;
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
-
-    .detail-btn {
-        padding: 10px;
-        width: 100%;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #0099ff, #006aff);
-        border: none;
-        color: #fff;
-        margin-bottom: 10px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: 0.25s;
-    }
-
-    .detail-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,110,255,0.5);
-    }
-
-    .remove-btn {
-        margin-top: 10px;
-        padding: 10px;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #ff2d55, #ff005e);
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-
-    .remove-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(255,0,80,0.5);
-    }
-
-    @keyframes heartBreak {
-        0% { transform: scale(1); opacity: 1; }
-        30% { transform: scale(1.3); }
-        100% { transform: scale(0); opacity: 0; }
-    }
-
-    .heart-break {
-        animation: heartBreak 0.45s ease-out forwards;
-    }
-
-    .empty {
-        text-align: center;
-        margin-top: 50px;
-        font-size: 22px;
-        font-weight: 600;
-        color: #fff;
-    }
-
-    .empty img {
-        width: 160px;
-        opacity: 0.9;
-        margin-bottom: 10px;
-        animation: float 2s infinite ease-in-out;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0);}
-        50% { transform: translateY(-8px);}
-        100% { transform: translateY(0);}
-    }
-
-    #popupNotif {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 12px 20px;
-        background: rgba(255,255,255,0.8);
-        color: #000;
-        border-radius: 12px;
-        font-weight: 600;
-        display: none;
-        backdrop-filter: blur(6px);
-    }
 </style>
-
-<!-- ===================================== -->
-<!-- =========== ANIMASI TAMBAHAN ========= -->
-<!-- ===================================== -->
-
-<style>
-/* 💗 Hati memantul + terbang */
-.fly-heart {
-    position: fixed;
-    font-size: 28px;
-    pointer-events: none;
-    animation: flyToWishlist 0.9s ease-out forwards;
-    z-index: 99999;
-}
-
-@keyframes flyToWishlist {
-    0%   { transform: scale(1) translate(0,0); opacity: 1; }
-    50%  { transform: scale(1.4) translate(40px,-40px); }
-    100% { transform: scale(0.4) translate(120px,-80px); opacity: 0; }
-}
-
-/* ✨ Glow icon wishlist */
-#wishlist-icon.glow {
-    animation: wishlistGlow 0.6s ease-out;
-}
-
-@keyframes wishlistGlow {
-    0%   { filter: drop-shadow(0 0 0px #ff4d79); transform: scale(1); }
-    50%  { filter: drop-shadow(0 0 14px #ff4d79); transform: scale(1.3); }
-    100% { filter: drop-shadow(0 0 0px #ff4d79); transform: scale(1); }
-}
-
-/* 🌟 Partikel */
-.particle {
-    position: fixed;
-    font-size: 10px;
-    opacity: 1;
-    animation: particleMove 0.7s ease-out forwards;
-    z-index: 99999;
-}
-
-@keyframes particleMove {
-    from { transform: translate(0,0) scale(1); opacity: 1; }
-    to   { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-}
-</style>
-
 </head>
-
 <body>
 
 <header>Wishlist Saya ❤️</header>
@@ -220,148 +73,152 @@
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-    <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png">
-    <br>
-    Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+  <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot">
+  <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
 </div>
 
 <script>
-// Ambil wishlist dari localStorage (ARRAY ID)
-function getWishlist() {
-    return JSON.parse(localStorage.getItem("wishlist")) || [];
+/* ===== Utilities ===== */
+function getWishlist(){ return JSON.parse(localStorage.getItem("wishlist")) || []; }
+function saveWishlist(list){ localStorage.setItem("wishlist", JSON.stringify(list)); }
+function showNotif(txt){
+  const n = document.getElementById("popupNotif");
+  n.innerText = txt; n.style.display = "block";
+  clearTimeout(n._t); n._t = setTimeout(()=> n.style.display = "none", 1500);
+}
+function dispatchWishlistUpdated(){
+  try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){}
+  // also update local header counter if present
+  const hc = document.getElementById("wishlistCount");
+  if(hc) hc.innerText = `(${ getWishlist().length })`;
 }
 
-function saveWishlist(list) {
-    localStorage.setItem("wishlist", JSON.stringify(list));
+/* ===== Effects ===== */
+function animateHeart(x,y){
+  const el = document.createElement("div"); el.className="fly-heart"; el.innerText="❤️";
+  el.style.left = x + "px"; el.style.top = y + "px"; document.body.appendChild(el);
+  setTimeout(()=> el.remove(), 900);
+}
+function spawnParticles(x,y){
+  for(let i=0;i<6;i++){
+    const p = document.createElement("div"); p.className="particle"; p.innerText="✦";
+    p.style.left = x + "px"; p.style.top = y + "px";
+    const angle = Math.random()*Math.PI*2;
+    const dist = 30 + Math.random()*30;
+    p.style.setProperty("--tx", (Math.cos(angle)*dist)+"px");
+    p.style.setProperty("--ty", (Math.sin(angle)*dist)+"px");
+    document.body.appendChild(p);
+    setTimeout(()=> p.remove(), 700);
+  }
+}
+function glowWishlistIcon(){
+  const icon = document.getElementById("wishlist-icon") || document.getElementById("wishlistIcon");
+  if(!icon) return;
+  icon.classList.add("glow");
+  setTimeout(()=> icon.classList.remove("glow"), 600);
 }
 
-function showNotif(text) {
-    const popup = document.getElementById("popupNotif");
-    popup.innerText = text;
-    popup.style.display = "block";
+/* ===== Remove flow (with animation + safe update) ===== */
+async function removeWishlist(id, cardEl, triggerX, triggerY){
+  // start visual effects
+  if(typeof triggerX === "number"){ animateHeart(triggerX, triggerY); spawnParticles(triggerX, triggerY); }
+  // play card-heart-break
+  cardEl.classList.add("heart-break");
 
-    setTimeout(() => {
-        popup.style.display = "none";
-    }, 1500);
+  // wait for animation
+  await new Promise(r => setTimeout(r, 450));
+
+  // update storage (compare as Number to be safe)
+  const raw = getWishlist();
+  const filtered = raw.filter(item => Number(item) !== Number(id));
+  saveWishlist(filtered);
+
+  // remove card from DOM
+  if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
+
+  // notify user + header counter + cross-page event
+  showNotif("❤️ Dihapus dari wishlist");
+  glowWishlistIcon();
+  dispatchWishlistUpdated();
+
+  // if empty now, re-render to show empty state
+  if(filtered.length === 0) loadWishlist();
 }
 
-// Hapus wishlist (pakai ID langsung)
-function removeWishlist(id, cardElement) {
-    cardElement.classList.add("heart-break");
+/* ===== Render ===== */
+async function loadWishlist(){
+  const container = document.getElementById("wishlistContainer");
+  const emptyMsg = document.getElementById("emptyMessage");
+  container.innerHTML = "";
 
-    setTimeout(() => {
-        let wishlist = getWishlist();
-        wishlist = wishlist.filter(item => item !== id); 
-        saveWishlist(wishlist);
-        loadWishlist();
-        showNotif("❤️ Dihapus dari wishlist");
-    }, 450);
-}
-
-// Load wishlist
-async function loadWishlist() {
-    const container = document.getElementById("wishlistContainer");
-    const emptyMsg = document.getElementById("emptyMessage");
-
+  let products = [];
+  try{
     const res = await fetch("products.json");
-    const products = await res.json();
+    products = await res.json();
+  }catch(e){
+    console.error("Gagal muat products.json", e);
+  }
 
-    const wishlist = getWishlist();
+  const wish = getWishlist(); // array of ids (strings or numbers)
+  if(!wish || wish.length === 0){
+    emptyMsg.style.display = "block";
+    return;
+  }
+  emptyMsg.style.display = "none";
 
-    container.innerHTML = "";
+  // render each wishlist id in order
+  wish.forEach(id => {
+    const product = products.find(p => String(p.id) === String(id));
+    if(!product) return; // skip if product missing
 
-    if (wishlist.length === 0) {
-        emptyMsg.style.display = "block";
-        return;
-    }
+    const card = document.createElement("div");
+    card.className = "wishlist-card";
 
-    emptyMsg.style.display = "none";
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <div class="product-name">${product.name}</div>
+      <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+      <button class="detail-btn" type="button">Lihat Detail</button>
+      <button class="remove-btn" type="button">Hapus dari Wishlist ❤️‍🩹</button>
+    `;
 
-    wishlist.forEach(id => {
-        const product = products.find(p => p.id == id);
-        if (!product) return;
-
-        const card = document.createElement("div");
-        card.className = "wishlist-card";
-
-        card.innerHTML = `
-            <img src="${product.image}">
-            <div class="product-name">${product.name}</div>
-            <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
-
-            <button class="detail-btn" onclick="window.location.href='detail.html?id=${product.id}'">
-                Lihat Detail
-            </button>
-
-            <button class="remove-btn">Hapus dari Wishlist ❤️‍🩹</button>
-        `;
-
-        card.querySelector(".remove-btn").onclick = () => removeWishlist(product.id, card);
-
-        container.appendChild(card);
+    // detail button -> go to detail
+    card.querySelector(".detail-btn").addEventListener("click", () => {
+      window.location.href = `detail.html?id=${product.id}`;
     });
+
+    // remove button -> capture click coordinates for effects
+    const removeBtn = card.querySelector(".remove-btn");
+    removeBtn.addEventListener("click", (ev) => {
+      // prevent double actions
+      ev.stopPropagation();
+
+      // compute center coords for effects
+      const r = ev.target.getBoundingClientRect();
+      const cx = Math.round(r.left + r.width/2);
+      const cy = Math.round(r.top + r.height/2);
+
+      removeWishlist(product.id, card, cx, cy);
+    }, { once: true });
+
+    container.appendChild(card);
+  });
+  // update header counter if present
+  const hc = document.getElementById("wishlistCount");
+  if(hc) hc.innerText = `(${ getWishlist().length })`;
 }
 
+/* initial render */
 loadWishlist();
-</script>
 
-<!-- ===================================== -->
-<!-- =========== ANIMASI SCRIPT ========== -->
-<!-- ===================================== -->
-
-<script>
-// 💗 Hati terbang
-function animateHeart(x, y) {
-    const h = document.createElement("div");
-    h.classList.add("fly-heart");
-    h.innerHTML = "❤️";
-    h.style.left = x + "px";
-    h.style.top = y + "px";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 900);
-}
-
-// 🌟 Partikel letup
-function spawnParticles(x, y) {
-    for (let i = 0; i < 6; i++) {
-        const p = document.createElement("div");
-        p.classList.add("particle");
-        p.innerHTML = "✦";
-
-        p.style.left = x + "px";
-        p.style.top = y + "px";
-
-        const angle = Math.random() * 360;
-        const distance = 40 + Math.random() * 25;
-        p.style.setProperty("--tx", `${Math.cos(angle) * distance}px`);
-        p.style.setProperty("--ty", `${Math.sin(angle) * distance}px`);
-
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 700);
-    }
-}
-
-// ✨ Glow pada ikon wishlist (kalau ada)
-function glowWishlistIcon() {
-    const icon = document.getElementById("wishlist-icon");
-    if (!icon) return;
-    icon.classList.add("glow");
-    setTimeout(() => icon.classList.remove("glow"), 600);
-}
-
-// 🌐 Deteksi tombol wishlist di halaman toko
-document.addEventListener("click", function(e) {
-    if (e.target.classList.contains("wishlist-btn")) {
-        const r = e.target.getBoundingClientRect();
-        const x = r.left + r.width / 2;
-        const y = r.top + r.height / 2;
-
-        animateHeart(x, y);
-        spawnParticles(x, y);
-        glowWishlistIcon();
-    }
+/* keep in sync if other tab/page updates localStorage */
+window.addEventListener("storage", (e)=>{
+  if(e.key === "wishlist") loadWishlist();
 });
-</script>
 
+/* allow external pages to trigger update via event */
+window.addEventListener("wishlistUpdated", () => loadWishlist());
+
+</script>
 </body>
 </html>
