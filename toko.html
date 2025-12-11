@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FJ.Store – Produk</title>
 <style>
+/* --- copy style toko kamu, tetap sama --- */
 body { font-family: Arial, sans-serif; margin:0; padding:0; background:url('latarbelakang.jpg') center/cover no-repeat fixed; position:relative; }
 body::before { content:""; position:fixed; inset:0; backdrop-filter:blur(9px); background:rgba(0,0,0,0.45); z-index:-1; }
 header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.2); position:relative; }
@@ -66,8 +67,7 @@ async function loadProducts(){
   const container = document.getElementById("products");
   container.innerHTML = "";
   data.forEach(p=>{
-    const card = document.createElement("a");
-    card.href = `detail.html?id=${p.id}`;
+    const card = document.createElement("div");
     card.className = "product-card";
     card.innerHTML = `<img src="${p.image}" alt="${p.name}">
       <div class="product-name">${p.name}</div>
@@ -79,10 +79,17 @@ async function loadProducts(){
     if(wishlist.includes(p.id)) heart.classList.add("active");
 
     heart.onclick = e=>{
-      e.preventDefault(); e.stopPropagation();
-      if(wishlist.includes(p.id)){ wishlist = wishlist.filter(x=>x!==p.id); heart.classList.remove("active"); }
-      else { wishlist.push(p.id); heart.classList.add("active"); createParticles(heart); }
+      e.stopPropagation();
+      if(wishlist.includes(p.id)){
+        wishlist = wishlist.filter(x=>x!==p.id);
+        heart.classList.remove("active");
+      } else {
+        wishlist.push(p.id);
+        heart.classList.add("active");
+        createParticles(heart);
+      }
       saveWishlist(); updateWishlistCounter();
+      window.dispatchEvent(new Event("wishlistUpdated"));
     };
 
     card.appendChild(heart);
@@ -134,6 +141,10 @@ searchBox.addEventListener("input",()=>{
 /* INIT */
 document.getElementById("wishlistIcon").onclick=()=>{ window.location.href="wishlist.html"; };
 loadProducts();
+
+/* SYNC WISHLIST */
+window.addEventListener("storage",()=>{ wishlist=JSON.parse(localStorage.getItem("wishlist")||"[]"); updateWishlistCounter(); loadProducts(); });
+window.addEventListener("wishlistUpdated",()=>{ wishlist=JSON.parse(localStorage.getItem("wishlist")||"[]"); updateWishlistCounter(); loadProducts(); });
 </script>
 
 </body>
