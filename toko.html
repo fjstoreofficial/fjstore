@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FJ.Store – Produk</title>
 <style>
-/* --- copy style toko kamu, tetap sama --- */
 body { font-family: Arial, sans-serif; margin:0; padding:0; background:url('latarbelakang.jpg') center/cover no-repeat fixed; position:relative; }
 body::before { content:""; position:fixed; inset:0; backdrop-filter:blur(9px); background:rgba(0,0,0,0.45); z-index:-1; }
-header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.2); position:relative; }
+header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.2); position:relative; display:flex; justify-content:center; align-items:center; }
 #searchIcon, #wishlistIcon { position:absolute; top:50%; transform:translateY(-50%); cursor:pointer; transition:.3s; }
-#wishlistIcon { right:60px; font-size:22px; color:white; opacity:.9; }
+#wishlistIcon { right:60px; font-size:22px; color:white; opacity:.9; display:flex; align-items:center; gap:5px; }
 #wishlistIcon:hover { transform:translateY(-50%) scale(1.15); opacity:1; text-shadow:0 0 15px #ff4d6d; }
 #searchIcon { right:20px; font-size:20px; color:white; opacity:.8; }
 #searchIcon:hover { opacity:1; transform:translateY(-50%) scale(1.15); }
@@ -37,6 +36,13 @@ header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:whi
 .search-text { display:flex; flex-direction:column; gap:4px; }
 .search-title { font-size:17px; font-weight:600; }
 .search-price { font-size:14px; color:#ffeb3b; }
+
+/* ===== RESPONSIVE HEADER ===== */
+@media (max-width:500px){
+  header { font-size:20px; padding:15px; }
+  #wishlistIcon { right:50px; font-size:20px; }
+  #searchIcon { right:15px; font-size:18px; }
+}
 </style>
 </head>
 <body>
@@ -72,7 +78,7 @@ async function loadProducts(){
     card.innerHTML = `<img src="${p.image}" alt="${p.name}">
       <div class="product-name">${p.name}</div>
       <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>`;
-    
+
     const heart = document.createElement("div");
     heart.className = "wishlist-heart";
     heart.innerText = "❤";
@@ -96,6 +102,7 @@ async function loadProducts(){
     container.appendChild(card);
   });
 }
+
 function createParticles(heart){
   for(let i=0;i<8;i++){
     const p=document.createElement("div"); p.className="particle";
