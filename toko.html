@@ -137,6 +137,8 @@
       transition: .25s;
       text-shadow: 1px 1px 4px black;
       opacity: .85;
+      pointer-events: auto !important; /* FIX CLICK */
+      z-index: 99;
     }
     .wishlist-heart:hover {
       transform: scale(1.15);
@@ -240,6 +242,19 @@
     .search-price {
       color: #ffeb3b;
       font-size: 14px;
+    }
+
+    /* ===== FIX HEADER TABRAKAN HP ===== */
+    @media (max-width: 480px) {
+      header {
+        font-size: 18px !important;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #wishlistIcon { right: 50px !important; }
+      #searchIcon { right: 10px !important; }
     }
 
     /* ANIMASI */
@@ -399,6 +414,7 @@
 
         heart.onclick = (e) => {
           e.preventDefault();
+          e.stopPropagation();  // FIX penting, tidak membuka detail
 
           if (wishlist.includes(id)) {
             wishlist = wishlist.filter(x => x !== id);
