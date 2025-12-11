@@ -41,7 +41,6 @@
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     }
 
-    /* CARD */
     .wishlist-card {
         background: rgba(255,255,255,0.15);
         border: 1px solid rgba(255,255,255,0.25);
@@ -83,7 +82,6 @@
         font-weight: 600;
     }
 
-    /* Lihat Detail */
     .detail-btn {
         padding: 10px;
         width: 100%;
@@ -96,12 +94,12 @@
         font-weight: 600;
         transition: 0.25s;
     }
+
     .detail-btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(0,110,255,0.5);
     }
 
-    /* Delete button (hati pecah) */
     .remove-btn {
         margin-top: 10px;
         padding: 10px;
@@ -114,12 +112,12 @@
         cursor: pointer;
         transition: 0.25s;
     }
+
     .remove-btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(255,0,80,0.5);
     }
 
-    /* Hati pecah */
     @keyframes heartBreak {
         0% { transform: scale(1); opacity: 1; }
         30% { transform: scale(1.3); }
@@ -130,7 +128,6 @@
         animation: heartBreak 0.45s ease-out forwards;
     }
 
-    /* Empty State */
     .empty {
         text-align: center;
         margin-top: 50px;
@@ -152,7 +149,6 @@
         100% { transform: translateY(0);}
     }
 
-    /* Popup notif */
     #popupNotif {
         position: fixed;
         top: 20px;
@@ -183,7 +179,7 @@
 </div>
 
 <script>
-// Ambil wishlist dari localStorage
+// Ambil wishlist dari localStorage (ARRAY ID)
 function getWishlist() {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
 }
@@ -202,27 +198,28 @@ function showNotif(text) {
     }, 1500);
 }
 
-// Hapus dengan animasi hati pecah
+// Hapus wishlist (pakai ID langsung)
 function removeWishlist(id, cardElement) {
     cardElement.classList.add("heart-break");
 
     setTimeout(() => {
         let wishlist = getWishlist();
-        wishlist = wishlist.filter(item => item.id !== id);
+        wishlist = wishlist.filter(item => item !== id); // <-- FIX
         saveWishlist(wishlist);
         loadWishlist();
         showNotif("❤️ Dihapus dari wishlist");
     }, 450);
 }
 
-// Tampilkan wishlist
+// Load wishlist
 async function loadWishlist() {
     const container = document.getElementById("wishlistContainer");
     const emptyMsg = document.getElementById("emptyMessage");
 
     const res = await fetch("products.json");
     const products = await res.json();
-    const wishlist = getWishlist();
+
+    const wishlist = getWishlist(); // ["1","4","6"]
 
     container.innerHTML = "";
 
@@ -233,8 +230,8 @@ async function loadWishlist() {
 
     emptyMsg.style.display = "none";
 
-    wishlist.forEach(item => {
-        const product = products.find(p => p.id == item.id);
+    wishlist.forEach(id => {
+        const product = products.find(p => p.id == id);
         if (!product) return;
 
         const card = document.createElement("div");
@@ -249,9 +246,7 @@ async function loadWishlist() {
                 Lihat Detail
             </button>
 
-            <button class="remove-btn">
-                Hapus dari Wishlist ❤️‍🩹
-            </button>
+            <button class="remove-btn">Hapus dari Wishlist ❤️‍🩹</button>
         `;
 
         card.querySelector(".remove-btn").onclick = () => removeWishlist(product.id, card);
