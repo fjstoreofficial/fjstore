@@ -5,189 +5,41 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Wishlist – FJ.Store</title>
 <style>
-/* ===== RESET & BACKGROUND ===== */
-body {
-  margin:0; padding:0; font-family:Poppins, sans-serif;
-  background:url("latarbelakang.jpg") center/cover no-repeat fixed;
-  position: relative;
-}
-body::before {
-  content:""; position: fixed; inset:0; backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.45); z-index:-1;
-}
-
-/* ===== HEADER ===== */
-header {
-  background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:24px;
-  font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,0.3);
-}
-
-/* ===== WISHLIST GRID ===== */
-.wishlist-container {
-  max-width:900px; margin:40px auto; padding:20px;
-  display:grid; gap:20px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-}
-.wishlist-card {
-  position: relative; background: rgba(255,255,255,0.15); border-radius:16px;
-  padding:15px; text-align:center; color:#fff; border:1px solid rgba(255,255,255,0.25);
-  box-shadow:0 4px 25px rgba(0,0,0,0.25); backdrop-filter: blur(8px); transition:0.3s; overflow:hidden;
-}
-.wishlist-card:hover {
-  transform: scale(1.03); background: rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35);
-}
-.wishlist-card img { width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
-.product-name { font-size:18px; font-weight:600; margin:5px 0; text-shadow:1px 1px 3px #000; }
-.product-price { font-size:16px; color:#ffe066; margin-bottom:10px; font-weight:600; }
-
-/* ===== BUTTONS ===== */
-.detail-btn {
-  padding:10px; width:100%; border:none; border-radius:10px;
-  background: linear-gradient(135deg,#0099ff,#006aff); color:#fff; font-weight:600; margin-bottom:10px; cursor:pointer;
-  transition:.25s;
-}
-.detail-btn:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,110,255,0.5); }
-
-.remove-btn {
-  padding:10px; width:100%; border:none; border-radius:10px;
-  background: linear-gradient(135deg,#ff2d55,#ff005e); color:#fff; font-weight:600; cursor:pointer; transition:.25s;
-}
-.remove-btn:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,0,80,0.5); }
-
-/* ===== HEART ANIMATION ===== */
-@keyframes heartBreakKey { 0%{transform:scale(1);opacity:1} 50%{transform:scale(1.15)} 100%{transform:scale(0);opacity:0} }
-.heart-break { animation: heartBreakKey 0.45s ease-out forwards; }
-
-/* ===== EMPTY MESSAGE ===== */
-.empty {
-  text-align:center; margin-top:50px; font-size:22px; font-weight:600; color:#fff;
-}
-.empty img {
-  width:160px; opacity:.9; margin-bottom:10px; animation: float 2s infinite ease-in-out;
-}
-@keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
-
-/* ===== POPUP NOTIF ===== */
-#popupNotif {
-  position:fixed; top:20px; right:20px; padding:12px 20px;
-  background:rgba(255,255,255,0.92); color:#000; border-radius:12px; font-weight:600;
-  display:none; backdrop-filter:blur(6px); z-index:9999;
-}
-
-/* ===== EFFECTS: FLY HEART & PARTICLES ===== */
-.fly-heart { position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:9999; }
-@keyframes flyToWishlist { 0%{transform:scale(1) translate(0,0);opacity:1} 50%{transform:scale(1.4) translate(40px,-40px)} 100%{transform:scale(0.35) translate(120px,-80px);opacity:0} }
-.particle { position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:9999; }
-@keyframes particleMove { from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0} }
-#wishlist-icon.glow { animation:wishlistGlow .6s ease-out }
-@keyframes wishlistGlow { 0%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)} 50%{filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25)} 100%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)} }
+body{margin:0;padding:0;font-family:Poppins,sans-serif;background:url("latarbelakang.jpg") center/cover no-repeat fixed;position:relative;}
+body::before{content:"";position:fixed;inset:0;backdrop-filter:blur(10px);background:rgba(0,0,0,0.45);z-index:-1;}
+header{background:rgba(0,0,0,0.6);padding:20px;text-align:center;font-size:24px;font-weight:700;color:#fff;border-bottom:1px solid rgba(255,255,255,0.3);}
+.wishlist-container{max-width:900px;margin:40px auto;padding:20px;display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));}
+.wishlist-card{position:relative;background:rgba(255,255,255,0.15);border-radius:16px;padding:15px;text-align:center;color:#fff;border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 25px rgba(0,0,0,0.25);backdrop-filter:blur(8px);transition:.3s;overflow:hidden;}
+.wishlist-card:hover{transform:scale(1.03);background:rgba(255,255,255,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.35);}
+.wishlist-card img{width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
+.product-name{font-size:18px;font-weight:600;margin:5px 0;text-shadow:1px 1px 3px #000;}
+.product-price{font-size:16px;color:#ffe066;margin-bottom:10px;font-weight:600;}
+.detail-btn{padding:10px;width:100%;border:none;border-radius:10px;background:linear-gradient(135deg,#0099ff,#006aff);color:#fff;font-weight:600;margin-bottom:10px;cursor:pointer;transition:.25s;}
+.detail-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,110,255,0.5);}
+.remove-btn{padding:10px;width:100%;border:none;border-radius:10px;background:linear-gradient(135deg,#ff2d55,#ff005e);color:#fff;font-weight:600;cursor:pointer;transition:.25s;}
+.remove-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(255,0,80,0.5);}
+.empty{text-align:center;margin-top:50px;font-size:22px;font-weight:600;color:#fff;}
+.empty img{width:160px;opacity:.9;margin-bottom:10px;animation:float 2s infinite ease-in-out;}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+#popupNotif{position:fixed;top:20px;right:20px;padding:12px 20px;background:rgba(255,255,255,0.92);color:#000;border-radius:12px;font-weight:600;display:none;backdrop-filter:blur(6px);z-index:9999;}
+.fly-heart{position:fixed;font-size:28px;pointer-events:none;animation:flyToWishlist 0.9s ease-out forwards;z-index:9999;}
+@keyframes flyToWishlist{0%{transform:scale(1) translate(0,0);opacity:1}50%{transform:scale(1.4) translate(40px,-40px)}100%{transform:scale(0.35) translate(120px,-80px);opacity:0}}
+.particle{position:fixed;font-size:10px;opacity:1;animation:particleMove 0.7s ease-out forwards;z-index:9999;}
+@keyframes particleMove{from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+#wishlist-icon.glow{animation:wishlistGlow .6s ease-out;}
+@keyframes wishlistGlow{0%{filter:drop-shadow(0 0 0 #ff4d79);transform:scale(1)}50%{filter:drop-shadow(0 0 14px #ff4d79);transform:scale(1.25)}100%{filter:drop-shadow(0 0 0 #ff4d79);transform:scale(1)}}
 </style>
 </head>
 <body>
-
 <header>Wishlist Saya ❤️</header>
-
 <div id="popupNotif"></div>
 <div id="wishlistContainer" class="wishlist-container"></div>
-
 <div id="emptyMessage" class="empty" style="display:none;">
-  <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot">
-  <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+<img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot"><br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
 </div>
 
 <script>
-/* ===== UTILITIES ===== */
-function getWishlist(){ return JSON.parse(localStorage.getItem("wishlist"))||[]; }
-function saveWishlist(list){ localStorage.setItem("wishlist", JSON.stringify(list)); }
-function showNotif(txt){
-  const n=document.getElementById("popupNotif");
-  n.innerText=txt; n.style.display="block";
-  clearTimeout(n._t); n._t=setTimeout(()=>n.style.display="none",1500);
-}
-function dispatchWishlistUpdated(){
-  try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){}
-  const hc = document.getElementById("wishlistCount");
-  if(hc) hc.innerText=`(${getWishlist().length})`;
-}
-
-/* ===== EFFECTS ===== */
-function animateHeart(x,y){
-  const el=document.createElement("div"); el.className="fly-heart"; el.innerText="❤️";
-  el.style.left=x+"px"; el.style.top=y+"px"; document.body.appendChild(el);
-  setTimeout(()=>el.remove(),900);
-}
-function spawnParticles(x,y){
-  for(let i=0;i<6;i++){
-    const p=document.createElement("div"); p.className="particle"; p.innerText="✦";
-    p.style.left=x+"px"; p.style.top=y+"px";
-    const angle=Math.random()*Math.PI*2;
-    const dist=30+Math.random()*30;
-    p.style.setProperty("--tx",(Math.cos(angle)*dist)+"px");
-    p.style.setProperty("--ty",(Math.sin(angle)*dist)+"px");
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),700);
-  }
-}
-function glowWishlistIcon(){
-  const icon=document.getElementById("wishlist-icon")||document.getElementById("wishlistIcon");
-  if(!icon) return;
-  icon.classList.add("glow");
-  setTimeout(()=>icon.classList.remove("glow"),600);
-}
-
-/* ===== REMOVE FLOW ===== */
-async function removeWishlist(id, cardEl, triggerX, triggerY){
-  if(typeof triggerX==="number"){ animateHeart(triggerX,triggerY); spawnParticles(triggerX,triggerY); }
-  cardEl.classList.add("heart-break");
-  await new Promise(r=>setTimeout(r,450));
-  let raw=getWishlist();
-  const filtered=raw.filter(item=>Number(item)!==Number(id));
-  saveWishlist(filtered);
-  if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
-  showNotif("❤️ Dihapus dari wishlist");
-  glowWishlistIcon();
-  dispatchWishlistUpdated();
-  if(filtered.length===0) loadWishlist();
-}
-
-/* ===== RENDER WISHLIST ===== */
-async function loadWishlist(){
-  const container=document.getElementById("wishlistContainer");
-  const emptyMsg=document.getElementById("emptyMessage");
-  container.innerHTML="";
-  let products=[];
-  try{
-    const res=await fetch("products.json");
-    products=await res.json();
-  }catch(e){ console.error("Gagal muat products.json",e); }
-  const wish=getWishlist();
-  if(!wish || wish.length===0){ emptyMsg.style.display="block"; return; }
-  emptyMsg.style.display="none";
-  wish.forEach(id=>{
-    const product=products.find(p=>Number(p.id)===Number(id));
-    if(!product) return;
-    const card=document.createElement("div"); card.className="wishlist-card";
-    card.innerHTML=`
-      <img src="${product.image}" alt="${product.name}">
-      <div class="product-name">${product.name}</div>
-      <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
-      <button class="detail-btn" type="button">Lihat Detail</button>
-      <button class="remove-btn" type="button">Hapus dari Wishlist ❤️‍🩹</button>
-    `;
-    card.querySelector(".detail-btn").addEventListener("click",()=>{ window.location.href=`detail.html?id=${product.id}`; });
-    const removeBtn=card.querySelector(".remove-btn");
-    removeBtn.addEventListener("click", (ev)=>{
-      ev.stopPropagation();
-      const r=ev.target.getBoundingClientRect();
-      const cx=Math.round(r.left+r.width/2);
-      const cy=Math.round(r.top+r.height/2);
-      removeWishlist(product.id,card,cx,cy);
-    },{ once:true });
-    container.appendChild(card);
-  });
-  dispatchWishlistUpdated();
-}
-
-/* ===== PATCH & SYNC ===== */
+/* ===== PATCH OTOMATIS SUPAYA ID SESUAI ===== */
 (function patchWishlistSync(){
   const raw = JSON.parse(localStorage.getItem("wishlist")||"[]");
   const fixed = raw.map(id=>Number(id)).filter(id=>id>0);
@@ -195,11 +47,53 @@ async function loadWishlist(){
   window.dispatchEvent(new Event("wishlistUpdated"));
 })();
 
+/* ===== UTILITIES ===== */
+function getWishlist(){return JSON.parse(localStorage.getItem("wishlist")||"[]");}
+function saveWishlist(list){localStorage.setItem("wishlist",JSON.stringify(list));}
+function showNotif(txt){const n=document.getElementById("popupNotif");n.innerText=txt;n.style.display="block";clearTimeout(n._t);n._t=setTimeout(()=>n.style.display="none",1500);}
+function dispatchWishlistUpdated(){try{window.dispatchEvent(new Event("wishlistUpdated"));}catch(e){}}
+
+/* ===== EFFECTS ===== */
+function animateHeart(x,y){const el=document.createElement("div");el.className="fly-heart";el.innerText="❤️";el.style.left=x+"px";el.style.top=y+"px";document.body.appendChild(el);setTimeout(()=>el.remove(),900);}
+function spawnParticles(x,y){for(let i=0;i<6;i++){const p=document.createElement("div");p.className="particle";p.innerText="✦";p.style.left=x+"px";p.style.top=y+"px";const angle=Math.random()*Math.PI*2;const dist=30+Math.random()*30;p.style.setProperty("--tx",(Math.cos(angle)*dist)+"px");p.style.setProperty("--ty",(Math.sin(angle)*dist)+"px");document.body.appendChild(p);setTimeout(()=>p.remove(),700);}}
+function glowWishlistIcon(){const icon=document.getElementById("wishlist-icon")||document.getElementById("wishlistIcon");if(!icon)return;icon.classList.add("glow");setTimeout(()=>icon.classList.remove("glow"),600);}
+
+/* ===== REMOVE FLOW ===== */
+async function removeWishlist(id, cardEl, triggerX, triggerY){if(typeof triggerX==="number"){animateHeart(triggerX,triggerY);spawnParticles(triggerX,triggerY);}cardEl.classList.add("heart-break");await new Promise(r=>setTimeout(r,450));let raw=getWishlist();const filtered=raw.filter(item=>Number(item)!==Number(id));saveWishlist(filtered);if(cardEl&&cardEl.parentNode)cardEl.parentNode.removeChild(cardEl);showNotif("❤️ Dihapus dari wishlist");glowWishlistIcon();dispatchWishlistUpdated();if(filtered.length===0)loadWishlist();}
+
+/* ===== RENDER WISHLIST ===== */
+async function loadWishlist(){
+  const container=document.getElementById("wishlistContainer");
+  const emptyMsg=document.getElementById("emptyMessage");
+  container.innerHTML="";
+  let products=[];
+  try{ const res=await fetch("products.json"); products=await res.json(); }catch(e){console.error("Gagal muat products.json",e);}
+  const wish=getWishlist();
+  if(!wish || wish.length===0){ emptyMsg.style.display="block"; return; }
+  emptyMsg.style.display="none";
+  wish.forEach(id=>{
+    const product=products.find(p=>Number(p.id)===Number(id));
+    if(!product)return;
+    const card=document.createElement("div");card.className="wishlist-card";
+    card.innerHTML=`
+      <img src="${product.image}" alt="${product.name}">
+      <div class="product-name">${product.name}</div>
+      <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+      <button class="detail-btn" type="button">Lihat Detail</button>
+      <button class="remove-btn" type="button">Hapus dari Wishlist ❤️‍🩹</button>
+    `;
+    card.querySelector(".detail-btn").addEventListener("click",()=>{window.location.href=`detail.html?id=${product.id}`;});
+    const removeBtn=card.querySelector(".remove-btn");
+    removeBtn.addEventListener("click",(ev)=>{ev.stopPropagation();const r=ev.target.getBoundingClientRect();const cx=Math.round(r.left+r.width/2);const cy=Math.round(r.top+r.height/2);removeWishlist(product.id,card,cx,cy);},{once:true});
+    container.appendChild(card);
+  });
+  dispatchWishlistUpdated();
+}
+
 /* ===== EVENT LISTENERS ===== */
 loadWishlist();
-window.addEventListener("storage", e=>{ if(e.key==="wishlist") loadWishlist(); });
-window.addEventListener("wishlistUpdated", ()=>loadWishlist());
+window.addEventListener("storage",e=>{if(e.key==="wishlist")loadWishlist();});
+window.addEventListener("wishlistUpdated",()=>loadWishlist());
 </script>
-
 </body>
 </html>
