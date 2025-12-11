@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Wishlist – FJ.Store</title>
 <style>
 /* ===== RESET & BACKGROUND ===== */
-body{
+body {
   margin:0; padding:0; font-family:Poppins, sans-serif;
   background:url("latarbelakang.jpg") center/cover no-repeat fixed;
   position: relative;
 }
-body::before{
+body::before {
   content:""; position: fixed; inset:0; backdrop-filter: blur(10px);
   background: rgba(0,0,0,0.45); z-index:-1;
 }
 
 /* ===== HEADER ===== */
-header{
+header {
   background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:24px;
   font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,0.3);
 }
 
 /* ===== WISHLIST GRID ===== */
-.wishlist-container{
+.wishlist-container {
   max-width:900px; margin:40px auto; padding:20px;
   display:grid; gap:20px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
 }
-.wishlist-card{
+.wishlist-card {
   position: relative; background: rgba(255,255,255,0.15); border-radius:16px;
   padding:15px; text-align:center; color:#fff; border:1px solid rgba(255,255,255,0.25);
   box-shadow:0 4px 25px rgba(0,0,0,0.25); backdrop-filter: blur(8px); transition:0.3s; overflow:hidden;
 }
-.wishlist-card:hover{
+.wishlist-card:hover {
   transform: scale(1.03); background: rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35);
 }
-.wishlist-card img{ width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
-.product-name{ font-size:18px; font-weight:600; margin:5px 0; text-shadow:1px 1px 3px #000; }
-.product-price{ font-size:16px; color:#ffe066; margin-bottom:10px; font-weight:600; }
+.wishlist-card img { width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
+.product-name { font-size:18px; font-weight:600; margin:5px 0; text-shadow:1px 1px 3px #000; }
+.product-price { font-size:16px; color:#ffe066; margin-bottom:10px; font-weight:600; }
 
 /* ===== BUTTONS ===== */
-.detail-btn{
+.detail-btn {
   padding:10px; width:100%; border:none; border-radius:10px;
   background: linear-gradient(135deg,#0099ff,#006aff); color:#fff; font-weight:600; margin-bottom:10px; cursor:pointer;
   transition:.25s;
 }
-.detail-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,110,255,0.5); }
+.detail-btn:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,110,255,0.5); }
 
-.remove-btn{
+.remove-btn {
   padding:10px; width:100%; border:none; border-radius:10px;
   background: linear-gradient(135deg,#ff2d55,#ff005e); color:#fff; font-weight:600; cursor:pointer; transition:.25s;
 }
-.remove-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,0,80,0.5); }
+.remove-btn:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,0,80,0.5); }
 
 /* ===== HEART ANIMATION ===== */
-@keyframes heartBreakKey{ 0%{transform:scale(1);opacity:1} 50%{transform:scale(1.15)} 100%{transform:scale(0);opacity:0} }
-.heart-break{ animation: heartBreakKey 0.45s ease-out forwards; }
+@keyframes heartBreakKey { 0%{transform:scale(1);opacity:1} 50%{transform:scale(1.15)} 100%{transform:scale(0);opacity:0} }
+.heart-break { animation: heartBreakKey 0.45s ease-out forwards; }
 
 /* ===== EMPTY MESSAGE ===== */
-.empty{
+.empty {
   text-align:center; margin-top:50px; font-size:22px; font-weight:600; color:#fff;
 }
-.empty img{
+.empty img {
   width:160px; opacity:.9; margin-bottom:10px; animation: float 2s infinite ease-in-out;
 }
-@keyframes float{ 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
+@keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
 
 /* ===== POPUP NOTIF ===== */
-#popupNotif{
+#popupNotif {
   position:fixed; top:20px; right:20px; padding:12px 20px;
   background:rgba(255,255,255,0.92); color:#000; border-radius:12px; font-weight:600;
   display:none; backdrop-filter:blur(6px); z-index:9999;
 }
 
 /* ===== EFFECTS: FLY HEART & PARTICLES ===== */
-.fly-heart{ position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:9999; }
-@keyframes flyToWishlist{0%{transform:scale(1) translate(0,0);opacity:1}50%{transform:scale(1.4) translate(40px,-40px)}100%{transform:scale(0.35) translate(120px,-80px);opacity:0}}
-.particle{ position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:9999; }
-@keyframes particleMove{from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
-#wishlist-icon.glow{ animation:wishlistGlow .6s ease-out }
-@keyframes wishlistGlow{0%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}50%{filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25)}100%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}}
+.fly-heart { position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:9999; }
+@keyframes flyToWishlist { 0%{transform:scale(1) translate(0,0);opacity:1} 50%{transform:scale(1.4) translate(40px,-40px)} 100%{transform:scale(0.35) translate(120px,-80px);opacity:0} }
+.particle { position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:9999; }
+@keyframes particleMove { from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0} }
+#wishlist-icon.glow { animation:wishlistGlow .6s ease-out }
+@keyframes wishlistGlow { 0%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)} 50%{filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25)} 100%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)} }
 </style>
 </head>
 <body>
@@ -98,13 +98,13 @@ header{
 /* ===== UTILITIES ===== */
 function getWishlist(){ return JSON.parse(localStorage.getItem("wishlist"))||[]; }
 function saveWishlist(list){ localStorage.setItem("wishlist", JSON.stringify(list)); }
-function showNotif(txt){ 
-  const n=document.getElementById("popupNotif"); 
-  n.innerText=txt; n.style.display="block"; 
+function showNotif(txt){
+  const n=document.getElementById("popupNotif");
+  n.innerText=txt; n.style.display="block";
   clearTimeout(n._t); n._t=setTimeout(()=>n.style.display="none",1500);
 }
-function dispatchWishlistUpdated(){ 
-  try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){} 
+function dispatchWishlistUpdated(){
+  try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){}
   const hc = document.getElementById("wishlistCount");
   if(hc) hc.innerText=`(${getWishlist().length})`;
 }
