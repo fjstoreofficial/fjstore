@@ -13,12 +13,10 @@
       margin: 0;
       padding: 0;
 
-      /* Background dari file kamu */
       background: url("latarbelakang.jpg") center/cover no-repeat fixed;
       position: relative;
     }
 
-    /* efek blur + gelap tipis */
     body::before {
       content: "";
       position: fixed;
@@ -38,6 +36,24 @@
       font-weight: bold;
       border-bottom: 1px solid rgba(255,255,255,0.2);
       animation: fadeIn 1s ease-out;
+      position: relative;
+    }
+
+    /* ===== SEARCH ICON ===== */
+    #searchIcon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    #searchIcon:hover {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.15);
     }
 
     /* ===== GRID PRODUK ===== */
@@ -51,7 +67,6 @@
       animation: fadeUp 1s ease-out;
     }
 
-    /* ===== CARD PRODUK ===== */
     .product-card {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(7px);
@@ -95,30 +110,126 @@
       text-shadow: 1px 1px 3px #000;
     }
 
-    /* ===== ANIMASI ===== */
-    @keyframes fadeIn {
+    /* ===== OVERLAY SEARCH ===== */
+    #searchOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(10px);
+      display: none;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 120px;
+      z-index: 99999;
+      flex-direction: column;
+      animation: fadeOverlay .25s ease;
+    }
+
+    @keyframes fadeOverlay {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    #searchBox {
+      width: 80%;
+      max-width: 600px;
+      margin: auto;
+      padding: 15px 20px;
+      border-radius: 12px;
+      border: none;
+      font-size: 20px;
+      outline: none;
     }
 
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
+    #closeSearch {
+      position: absolute;
+      top: 30px;
+      right: 35px;
+      font-size: 26px;
+      color: white;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.3s;
     }
+    #closeSearch:hover {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+
+    /* ===== HASIL SEARCH DENGAN THUMBNAIL ===== */
+    #searchResults {
+      width: 80%;
+      max-width: 650px;
+      margin: 25px auto;
+    }
+
+    .search-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255,255,255,0.15);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.25s;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .search-item:hover {
+      background: rgba(255,255,255,0.28);
+      transform: scale(1.02);
+    }
+
+    .search-thumb {
+      width: 65px;
+      height: 65px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .search-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .search-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .search-price {
+      color: #ffeb3b;
+      font-size: 14px;
+    }
+
+    /* ANIMASI */
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:none;} }
+    @keyframes popIn { 0%{opacity:0;transform:scale(0.85);} 100%{opacity:1;transform:scale(1);} }
   </style>
 
 </head>
 <body>
 
-  <header>Produk FJ.Store</header>
+  <header>
+    Produk FJ.Store
+    <span id="searchIcon">🔍</span>
+  </header>
 
   <div class="products-container" id="products"></div>
 
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div id="searchOverlay">
+    <div id="closeSearch">✖</div>
+    <input id="searchBox" type="text" placeholder="Cari produk..." autocomplete="off" />
+    <div id="searchResults"></div>
+  </div>
+
+
+  <!-- ===================== KODE ASLI PRODUK (TIDAK DIUBAH) ===================== -->
   <script>
     async function loadProducts() {
       try {
@@ -144,6 +255,80 @@
     }
 
     loadProducts();
+  </script>
+
+  <!-- ===================== SEARCH LOGIC (TAMBAHAN) ===================== -->
+  <script>
+    const overlay = document.getElementById("searchOverlay");
+    const searchIcon = document.getElementById("searchIcon");
+    const closeSearch = document.getElementById("closeSearch");
+    const searchBox = document.getElementById("searchBox");
+    const searchResults = document.getElementById("searchResults");
+
+    let allProducts = [];
+
+    // Load produk untuk search
+    fetch("products.json")
+      .then(r => r.json())
+      .then(d => allProducts = d);
+
+    // Buka overlay
+    searchIcon.onclick = () => {
+      overlay.style.display = "flex";
+      searchBox.focus();
+    };
+
+    // Tutup overlay
+    function closeOverlay() {
+      overlay.style.display = "none";
+      searchBox.value = "";
+      searchResults.innerHTML = "";
+    }
+
+    closeSearch.onclick = closeOverlay;
+
+    overlay.addEventListener("click", e => {
+      if (e.target === overlay) closeOverlay();
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeOverlay();
+    });
+
+    // Realtime search dengan thumbnail
+    searchBox.addEventListener("input", () => {
+      const key = searchBox.value.toLowerCase();
+      searchResults.innerHTML = "";
+
+      if (key.length === 0) return;
+
+      const filtered = allProducts.filter(p =>
+        p.name.toLowerCase().includes(key)
+      );
+
+      if (filtered.length === 0) {
+        searchResults.innerHTML = "<div style='color:white'>Tidak ada produk ditemukan</div>";
+        return;
+      }
+
+      filtered.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "search-item";
+        div.innerHTML = `
+          <img src="${p.image}" class="search-thumb">
+          <div class="search-text">
+            <div class="search-title">${p.name}</div>
+            <div class="search-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
+          </div>
+        `;
+
+        div.onclick = () => {
+          window.location.href = `detail.html?id=${p.id}`;
+        };
+
+        searchResults.appendChild(div);
+      });
+    });
   </script>
 
 </body>
