@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Wishlist – FJ.Store</title>
 <style>
-/* ========== STYLE (sama seperti milikmu, + sedikit animasi) ========== */
+/* ===== STYLE & ANIMASI ===== */
 body{
   margin:0;padding:0;font-family:Poppins, sans-serif;
   background:url("latarbelakang.jpg") center/cover no-repeat fixed;
@@ -54,14 +54,13 @@ header{
 #popupNotif{ position:fixed; top:20px; right:20px; padding:12px 20px; background:rgba(255,255,255,0.92);
  color:#000; border-radius:12px; font-weight:600; display:none; backdrop-filter:blur(6px); z-index:99999; }
 
-/* ---- Animasi tambahan: fly-heart, particles, glow ---- */
+/* Animasi tambahan: fly-heart, particles, glow */
 .fly-heart{ position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:99999; }
 @keyframes flyToWishlist{ 0%{ transform:scale(1) translate(0,0); opacity:1 } 50%{ transform:scale(1.4) translate(40px,-40px) } 100%{ transform:scale(0.35) translate(120px,-80px); opacity:0 } }
 .particle{ position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:99999; }
 @keyframes particleMove{ from{ transform:translate(0,0) scale(1); opacity:1 } to{ transform:translate(var(--tx),var(--ty)) scale(0); opacity:0 } }
 #wishlist-icon.glow{ animation:wishlistGlow .6s ease-out }
 @keyframes wishlistGlow{ 0%{ filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1) } 50%{ filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25) } 100%{ filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1) } }
-
 </style>
 </head>
 <body>
@@ -69,7 +68,6 @@ header{
 <header>Wishlist Saya ❤️</header>
 
 <div id="popupNotif"></div>
-
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
@@ -124,7 +122,7 @@ async function removeWishlist(id, cardEl, triggerX, triggerY){
   cardEl.classList.add("heart-break");
   await new Promise(r => setTimeout(r, 450));
 
-  const raw = getWishlist();
+  let raw = getWishlist();
   const filtered = raw.filter(item => Number(item) !== Number(id));
   saveWishlist(filtered);
 
@@ -147,19 +145,14 @@ async function loadWishlist(){
   try{
     const res = await fetch("products.json");
     products = await res.json();
-  }catch(e){
-    console.error("Gagal muat products.json", e);
-  }
+  }catch(e){ console.error("Gagal muat products.json", e); }
 
   const wish = getWishlist();
-  if(!wish || wish.length === 0){
-    emptyMsg.style.display = "block";
-    return;
-  }
-  emptyMsg.style.display = "none";
+  if(!wish || wish.length===0){ emptyMsg.style.display="block"; return; }
+  emptyMsg.style.display="none";
 
-  wish.forEach(id => {
-    const product = products.find(p => String(p.id) === String(id));
+  wish.forEach(id=>{
+    const product = products.find(p=>String(p.id)===String(id));
     if(!product) return;
 
     const card = document.createElement("div");
@@ -173,68 +166,35 @@ async function loadWishlist(){
       <button class="remove-btn" type="button">Hapus dari Wishlist ❤️‍🩹</button>
     `;
 
-    card.querySelector(".detail-btn").addEventListener("click", () => {
-      window.location.href = `detail.html?id=${product.id}`;
-    });
+    card.querySelector(".detail-btn").addEventListener("click", ()=>{ window.location.href=`detail.html?id=${product.id}`; });
 
     const removeBtn = card.querySelector(".remove-btn");
-    removeBtn.addEventListener("click", (ev) => {
+    removeBtn.addEventListener("click",(ev)=>{
       ev.stopPropagation();
       const r = ev.target.getBoundingClientRect();
       const cx = Math.round(r.left + r.width/2);
       const cy = Math.round(r.top + r.height/2);
       removeWishlist(product.id, card, cx, cy);
-    }, { once: true });
+    },{ once:true });
 
     container.appendChild(card);
   });
 
-  const hc = document.getElementById("wishlistCount");
-  if(hc) hc.innerText = `(${ getWishlist().length })`;
+  dispatchWishlistUpdated();
 }
 
 loadWishlist();
 
-window.addEventListener("storage", (e)=>{
-  if(e.key === "wishlist") loadWishlist();
-});
-window.addEventListener("wishlistUpdated", () => loadWishlist());
-</script>
+/* ===== Sync & storage events ===== */
+window.addEventListener("storage", e=>{ if(e.key==="wishlist") loadWishlist(); });
+window.addEventListener("wishlistUpdated", ()=>loadWishlist());
 
-<!-- ========================================================= -->
-<!-- 🔥 PATCH FIX TANPA MENYENTUH 1 BARIS KODE ASLI KAMU 🔥 -->
-<!-- ========================================================= -->
-<script>
-// 1. Pastikan ID wishlist konsisten (number semua)
+/* ===== Patch fixes tanpa menyentuh kode asli ===== */
 (function fixWishlistIdFormat(){
-  const list = JSON.parse(localStorage.getItem("wishlist") || "[]");
-  const fixed = list.map(id => Number(id));
+  const list = JSON.parse(localStorage.getItem("wishlist")||"[]");
+  const fixed = list.map(id=>Number(id));
   localStorage.setItem("wishlist", JSON.stringify(fixed));
 })();
-
-// 2. Override global click → membuat tombol hapus 100% selalu berfungsi
-document.addEventListener("click", function(ev){
-  const btn = ev.target.closest(".remove-btn");
-  if(!btn) return;
-
-  const card = btn.closest(".wishlist-card");
-  const name = card?.querySelector(".product-name")?.innerText || "";
-
-  fetch("products.json")
-    .then(r=>r.json())
-    .then(data=>{
-      const product = data.find(p => p.name === name);
-      if(!product) return;
-
-      const id = Number(product.id);
-
-      const rect = btn.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const cy = rect.top + rect.height/2;
-
-      removeWishlist(id, card, cx, cy);
-    });
-});
 </script>
 
 </body>
