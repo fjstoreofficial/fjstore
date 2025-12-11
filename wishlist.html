@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wishlist – FJ.Store</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Poppins, sans-serif;
+        background: url("latarbelakang.jpg") center/cover no-repeat fixed;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.45);
+        z-index: -1;
+    }
+
+    header {
+        background: rgba(0,0,0,0.6);
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .wishlist-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        animation: fadeUp 0.7s ease-out;
+    }
+
+    /* CARD */
+    .wishlist-card {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        backdrop-filter: blur(8px);
+        border-radius: 16px;
+        padding: 15px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 25px rgba(0,0,0,0.25);
+        transition: 0.3s;
+        position: relative;
+        animation: popIn 0.5s ease-out;
+    }
+    .wishlist-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        background: rgba(255,255,255,0.25);
+    }
+
+    .wishlist-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 5px 0;
+        text-shadow: 1px 1px 3px #000;
+    }
+
+    .product-price {
+        color: #ffe066;
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    /* Delete button */
+    .remove-btn {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ff2d55, #ff005e);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+    .remove-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(255,0,80,0.5);
+    }
+
+    .empty {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.85); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+</style>
+</head>
+
+<body>
+
+<header>Wishlist Saya ❤️</header>
+
+<div id="wishlistContainer" class="wishlist-container"></div>
+
+<div id="emptyMessage" class="empty" style="display:none;">
+    Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+</div>
+
+<script>
+// Ambil wishlist dari localStorage
+function getWishlist() {
+    return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+
+// Simpan wishlist
+function saveWishlist(list) {
+    localStorage.setItem("wishlist", JSON.stringify(list));
+}
+
+// Hapus item
+function removeWishlist(id) {
+    let wishlist = getWishlist();
+    wishlist = wishlist.filter(item => item.id !== id);
+    saveWishlist(wishlist);
+    loadWishlist();
+}
+
+// Tampilkan wishlist
+async function loadWishlist() {
+    const container = document.getElementById("wishlistContainer");
+    const emptyMsg = document.getElementById("emptyMessage");
+
+    const res = await fetch("products.json");
+    const products = await res.json();
+    const wishlist = getWishlist();
+
+    container.innerHTML = "";
+
+    if (wishlist.length === 0) {
+        emptyMsg.style.display = "block";
+        return;
+    }
+
+    emptyMsg.style.display = "none";
+
+    wishlist.forEach(item => {
+        const product = products.find(p => p.id == item.id);
+        if (!product) return;
+
+        container.innerHTML += `
+            <div class="wishlist-card">
+                <img src="${product.image}">
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+
+                <button class="remove-btn" onclick="removeWishlist(${product.id})">
+                    Hapus dari Wishlist
+                </button>
+            </div>
+        `;
+    });
+}
+
+loadWishlist();
+</script>
+
+</body>
+</html>
