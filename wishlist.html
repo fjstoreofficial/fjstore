@@ -31,6 +31,21 @@
         color: #fff;
         border-bottom: 1px solid rgba(255,255,255,0.3);
         animation: fadeIn 0.6s ease-out;
+        position: relative;
+    }
+
+    /* WISHLIST COUNTER REALTIME (AKTIF SETELAH TOKO.HTML DISAMBUNGKAN) */
+    #wishlistCounter {
+        position: absolute;
+        right: 25px;
+        top: 18px;
+        background: #ff2d55;
+        padding: 6px 10px;
+        border-radius: 50px;
+        font-size: 14px;
+        color: white;
+        box-shadow: 0 0 12px rgba(255,0,80,0.7);
+        animation: fadeIn 0.5s ease-out;
     }
 
     .wishlist-container {
@@ -85,25 +100,7 @@
         font-weight: 600;
     }
 
-    /* BUTTON: Lihat Detail */
-    .detail-btn {
-        margin-top: 8px;
-        padding: 10px;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #00d4ff, #008cff);
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-    .detail-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,170,255,0.5);
-    }
-
-    /* DELETE BUTTON */
+    /* DELETE BUTTON + HEART BREAK ANIMATION */
     .remove-btn {
         margin-top: 10px;
         padding: 10px;
@@ -115,110 +112,134 @@
         font-weight: 600;
         cursor: pointer;
         transition: 0.25s;
-        position: relative;
-        overflow: hidden;
     }
-
     .remove-btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(255,0,80,0.5);
     }
 
-    /* HEART BREAK ANIMATION */
     .heart-break {
         position: absolute;
-        top: -20px;
-        right: 20px;
-        font-size: 32px;
-        animation: breakHeart 0.6s ease-out forwards;
-        opacity: 0;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        animation: breakHeart 0.7s ease forwards;
     }
 
     @keyframes breakHeart {
-        0% { opacity: 1; transform: scale(1); }
-        50% { transform: scale(1.4) rotate(20deg); }
-        100% { opacity: 0; transform: scale(0.2) rotate(-40deg) translateY(40px); }
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.4); opacity: 1; }
+        100% { transform: scale(0); opacity: 0; }
     }
 
-    /* EMPTY STATE */
+    /* TOMBOL LIHAT DETAIL */
+    .detail-btn {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0099ff, #0064ff);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+    .detail-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,120,255,0.5);
+    }
+
+    /* EMPTY STATE MASKOT LUCU */
     .empty {
         text-align: center;
-        margin-top: 40px;
+        margin-top: 50px;
         font-size: 22px;
         font-weight: 600;
         color: #fff;
-        animation: fadeIn 0.8s ease-out;
+        animation: fadeUp 0.8s ease-out;
     }
-
     .empty img {
         width: 180px;
-        margin-bottom: 15px;
-        animation: floating 2.5s infinite ease-in-out;
+        animation: floatMaskot 2.6s infinite ease-in-out;
     }
-
-    @keyframes floating {
+    @keyframes floatMaskot {
         0% { transform: translateY(0px); }
-        50% { transform: translateY(-12px); }
+        50% { transform: translateY(-15px); }
         100% { transform: translateY(0px); }
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    /* POPUP NOTIFIKASI */
+    #notif {
+        position: fixed;
+        top: 20px;
+        right: -300px;
+        background: rgba(255,255,255,0.2);
+        padding: 14px 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        transition: 0.4s;
+        z-index: 9999;
     }
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    #notif.show {
+        right: 20px;
     }
-    @keyframes popIn {
-        0% { opacity: 0; transform: scale(0.85); }
-        100% { opacity: 1; transform: scale(1); }
-    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:none;} }
+    @keyframes popIn { 0%{opacity:0;transform:scale(0.85);} 100%{opacity:1;transform:scale(1);} }
+
 </style>
 </head>
 
 <body>
 
-<header>Wishlist Saya ❤️</header>
+<header>
+    Wishlist Saya ❤️
+    <span id="wishlistCounter">0</span>
+</header>
 
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-    <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png">
-    Wishlist kamu masih kosong 😢<br>
-    Tambahkan produk dari halaman toko!
+    <img src="maskot.png" alt="Maskot Lucu">
+    <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
 </div>
 
+<!-- NOTIFIKASI -->
+<div id="notif"></div>
+
 <script>
-// === WISHLIST STORAGE ===
+/* ---------------- WISHLIST BASE FUNCTION (PUNYA KAMU) ---------------- */
 function getWishlist() {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
 }
-
 function saveWishlist(list) {
     localStorage.setItem("wishlist", JSON.stringify(list));
 }
-
-// === REMOVE WITH HEART BREAK ANIMATION ===
 function removeWishlist(id) {
-    const btn = event.target;
-
-    // animasi hati pecah
-    const heart = document.createElement("div");
-    heart.className = "heart-break";
-    heart.innerHTML = "💔";
-    btn.appendChild(heart);
-
-    setTimeout(() => {
-        let wishlist = getWishlist();
-        wishlist = wishlist.filter(item => item.id !== id);
-        saveWishlist(wishlist);
-        loadWishlist();
-    }, 600);
+    let wishlist = getWishlist();
+    wishlist = wishlist.filter(item => item.id !== id);
+    saveWishlist(wishlist);
+    showNotif("Dihapus dari wishlist 💔");
+    heartBreakAnimation(id);
+    setTimeout(loadWishlist, 500);
+}
+function heartBreakAnimation(id) {
+    const card = document.querySelector(`.card-${id}`);
+    if (card) {
+        const heart = document.createElement("div");
+        heart.className = "heart-break";
+        heart.innerHTML = "💔";
+        card.appendChild(heart);
+    }
 }
 
-// === LOAD WISHLIST ===
+/* ---------------- LOAD WISHLIST ---------------- */
 async function loadWishlist() {
     const container = document.getElementById("wishlistContainer");
     const emptyMsg = document.getElementById("emptyMessage");
@@ -226,6 +247,8 @@ async function loadWishlist() {
     const res = await fetch("products.json");
     const products = await res.json();
     const wishlist = getWishlist();
+
+    document.getElementById("wishlistCounter").innerText = wishlist.length;
 
     container.innerHTML = "";
 
@@ -241,13 +264,13 @@ async function loadWishlist() {
         if (!product) return;
 
         container.innerHTML += `
-            <div class="wishlist-card">
+            <div class="wishlist-card card-${product.id}">
                 <img src="${product.image}">
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
 
-                <button class="detail-btn" onclick="location.href='detail.html?id=${product.id}'">
-                    Lihat Detail
+                <button class="detail-btn" onclick="window.location.href='detail.html?id=${product.id}'">
+                    Lihat Detail 🔍
                 </button>
 
                 <button class="remove-btn" onclick="removeWishlist(${product.id})">
@@ -256,6 +279,14 @@ async function loadWishlist() {
             </div>
         `;
     });
+}
+
+/* ---------------- POPUP NOTIFIKASI ---------------- */
+function showNotif(text) {
+    const notif = document.getElementById("notif");
+    notif.innerText = text;
+    notif.classList.add("show");
+    setTimeout(() => notif.classList.remove("show"), 2000);
 }
 
 loadWishlist();
