@@ -30,22 +30,6 @@
         font-weight: 700;
         color: #fff;
         border-bottom: 1px solid rgba(255,255,255,0.3);
-        animation: fadeIn 0.6s ease-out;
-        position: relative;
-    }
-
-    /* WISHLIST COUNTER REALTIME (AKTIF SETELAH TOKO.HTML DISAMBUNGKAN) */
-    #wishlistCounter {
-        position: absolute;
-        right: 25px;
-        top: 18px;
-        background: #ff2d55;
-        padding: 6px 10px;
-        border-radius: 50px;
-        font-size: 14px;
-        color: white;
-        box-shadow: 0 0 12px rgba(255,0,80,0.7);
-        animation: fadeIn 0.5s ease-out;
     }
 
     .wishlist-container {
@@ -55,7 +39,6 @@
         display: grid;
         gap: 20px;
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        animation: fadeUp 0.7s ease-out;
     }
 
     /* CARD */
@@ -70,12 +53,12 @@
         box-shadow: 0 4px 25px rgba(0,0,0,0.25);
         transition: 0.3s;
         position: relative;
-        animation: popIn 0.5s ease-out;
     }
+
     .wishlist-card:hover {
         transform: scale(1.05);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.35);
         background: rgba(255,255,255,0.25);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35);
     }
 
     .wishlist-card img {
@@ -100,7 +83,25 @@
         font-weight: 600;
     }
 
-    /* DELETE BUTTON + HEART BREAK ANIMATION */
+    /* Lihat Detail */
+    .detail-btn {
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0099ff, #006aff);
+        border: none;
+        color: #fff;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.25s;
+    }
+    .detail-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,110,255,0.5);
+    }
+
+    /* Delete button (hati pecah) */
     .remove-btn {
         margin-top: 10px;
         padding: 10px;
@@ -118,128 +119,103 @@
         box-shadow: 0 6px 20px rgba(255,0,80,0.5);
     }
 
-    .heart-break {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 28px;
-        animation: breakHeart 0.7s ease forwards;
-    }
-
-    @keyframes breakHeart {
+    /* Hati pecah */
+    @keyframes heartBreak {
         0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.4); opacity: 1; }
+        30% { transform: scale(1.3); }
         100% { transform: scale(0); opacity: 0; }
     }
 
-    /* TOMBOL LIHAT DETAIL */
-    .detail-btn {
-        margin-top: 10px;
-        padding: 10px;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #0099ff, #0064ff);
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-    .detail-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,120,255,0.5);
+    .heart-break {
+        animation: heartBreak 0.45s ease-out forwards;
     }
 
-    /* EMPTY STATE MASKOT LUCU */
+    /* Empty State */
     .empty {
         text-align: center;
         margin-top: 50px;
         font-size: 22px;
         font-weight: 600;
         color: #fff;
-        animation: fadeUp 0.8s ease-out;
-    }
-    .empty img {
-        width: 180px;
-        animation: floatMaskot 2.6s infinite ease-in-out;
-    }
-    @keyframes floatMaskot {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-15px); }
-        100% { transform: translateY(0px); }
     }
 
-    /* POPUP NOTIFIKASI */
-    #notif {
+    .empty img {
+        width: 160px;
+        opacity: 0.9;
+        margin-bottom: 10px;
+        animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0);}
+        50% { transform: translateY(-8px);}
+        100% { transform: translateY(0);}
+    }
+
+    /* Popup notif */
+    #popupNotif {
         position: fixed;
         top: 20px;
-        right: -300px;
-        background: rgba(255,255,255,0.2);
-        padding: 14px 20px;
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        color: white;
-        font-weight: 600;
-        box-shadow: 0 0 15px rgba(0,0,0,0.4);
-        transition: 0.4s;
-        z-index: 9999;
-    }
-    #notif.show {
         right: 20px;
+        padding: 12px 20px;
+        background: rgba(255,255,255,0.8);
+        color: #000;
+        border-radius: 12px;
+        font-weight: 600;
+        display: none;
+        backdrop-filter: blur(6px);
     }
-
-    /* ANIMATIONS */
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:none;} }
-    @keyframes popIn { 0%{opacity:0;transform:scale(0.85);} 100%{opacity:1;transform:scale(1);} }
-
 </style>
 </head>
 
 <body>
 
-<header>
-    Wishlist Saya ❤️
-    <span id="wishlistCounter">0</span>
-</header>
+<header>Wishlist Saya ❤️</header>
+
+<div id="popupNotif"></div>
 
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-    <img src="maskot.png" alt="Maskot Lucu">
-    <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+    <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png">
+    <br>
+    Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
 </div>
 
-<!-- NOTIFIKASI -->
-<div id="notif"></div>
-
 <script>
-/* ---------------- WISHLIST BASE FUNCTION (PUNYA KAMU) ---------------- */
+// Ambil wishlist dari localStorage
 function getWishlist() {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
 }
+
 function saveWishlist(list) {
     localStorage.setItem("wishlist", JSON.stringify(list));
 }
-function removeWishlist(id) {
-    let wishlist = getWishlist();
-    wishlist = wishlist.filter(item => item.id !== id);
-    saveWishlist(wishlist);
-    showNotif("Dihapus dari wishlist 💔");
-    heartBreakAnimation(id);
-    setTimeout(loadWishlist, 500);
-}
-function heartBreakAnimation(id) {
-    const card = document.querySelector(`.card-${id}`);
-    if (card) {
-        const heart = document.createElement("div");
-        heart.className = "heart-break";
-        heart.innerHTML = "💔";
-        card.appendChild(heart);
-    }
+
+function showNotif(text) {
+    const popup = document.getElementById("popupNotif");
+    popup.innerText = text;
+    popup.style.display = "block";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 1500);
 }
 
-/* ---------------- LOAD WISHLIST ---------------- */
+// Hapus dengan animasi hati pecah
+function removeWishlist(id, cardElement) {
+    cardElement.classList.add("heart-break");
+
+    setTimeout(() => {
+        let wishlist = getWishlist();
+        wishlist = wishlist.filter(item => item.id !== id);
+        saveWishlist(wishlist);
+        loadWishlist();
+        showNotif("❤️ Dihapus dari wishlist");
+    }, 450);
+}
+
+// Tampilkan wishlist
 async function loadWishlist() {
     const container = document.getElementById("wishlistContainer");
     const emptyMsg = document.getElementById("emptyMessage");
@@ -247,8 +223,6 @@ async function loadWishlist() {
     const res = await fetch("products.json");
     const products = await res.json();
     const wishlist = getWishlist();
-
-    document.getElementById("wishlistCounter").innerText = wishlist.length;
 
     container.innerHTML = "";
 
@@ -263,30 +237,27 @@ async function loadWishlist() {
         const product = products.find(p => p.id == item.id);
         if (!product) return;
 
-        container.innerHTML += `
-            <div class="wishlist-card card-${product.id}">
-                <img src="${product.image}">
-                <div class="product-name">${product.name}</div>
-                <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+        const card = document.createElement("div");
+        card.className = "wishlist-card";
 
-                <button class="detail-btn" onclick="window.location.href='detail.html?id=${product.id}'">
-                    Lihat Detail 🔍
-                </button>
+        card.innerHTML = `
+            <img src="${product.image}">
+            <div class="product-name">${product.name}</div>
+            <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
 
-                <button class="remove-btn" onclick="removeWishlist(${product.id})">
-                    Hapus dari Wishlist
-                </button>
-            </div>
+            <button class="detail-btn" onclick="window.location.href='detail.html?id=${product.id}'">
+                Lihat Detail
+            </button>
+
+            <button class="remove-btn">
+                Hapus dari Wishlist ❤️‍🩹
+            </button>
         `;
-    });
-}
 
-/* ---------------- POPUP NOTIFIKASI ---------------- */
-function showNotif(text) {
-    const notif = document.getElementById("notif");
-    notif.innerText = text;
-    notif.classList.add("show");
-    setTimeout(() => notif.classList.remove("show"), 2000);
+        card.querySelector(".remove-btn").onclick = () => removeWishlist(product.id, card);
+
+        container.appendChild(card);
+    });
 }
 
 loadWishlist();
