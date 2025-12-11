@@ -152,7 +152,7 @@ async function loadWishlist(){
   emptyMsg.style.display="none";
 
   wish.forEach(id=>{
-    const product = products.find(p=>String(p.id)===String(id));
+    const product = products.find(p=>Number(p.id)===Number(id));
     if(!product) return;
 
     const card = document.createElement("div");
@@ -183,18 +183,19 @@ async function loadWishlist(){
   dispatchWishlistUpdated();
 }
 
-loadWishlist();
+/* ===== Patch otomatis untuk sinkronisasi wishlist ===== */
+(function patchWishlistSync(){
+  const raw = JSON.parse(localStorage.getItem("wishlist")||"[]");
+  const fixed = raw.map(id => Number(id)).filter(id => id>0);
+  localStorage.setItem("wishlist", JSON.stringify(fixed));
+  window.dispatchEvent(new Event("wishlistUpdated"));
+})();
 
-/* ===== Sync & storage events ===== */
+/* ===== Event listeners ===== */
+loadWishlist();
 window.addEventListener("storage", e=>{ if(e.key==="wishlist") loadWishlist(); });
 window.addEventListener("wishlistUpdated", ()=>loadWishlist());
 
-/* ===== Patch fixes tanpa menyentuh kode asli ===== */
-(function fixWishlistIdFormat(){
-  const list = JSON.parse(localStorage.getItem("wishlist")||"[]");
-  const fixed = list.map(id=>Number(id));
-  localStorage.setItem("wishlist", JSON.stringify(fixed));
-})();
 </script>
 
 </body>
