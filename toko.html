@@ -14,7 +14,7 @@ header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:whi
 #searchIcon { right:20px; font-size:20px; color:white; opacity:.8; }
 #searchIcon:hover { opacity:1; transform:translateY(-50%) scale(1.15); }
 .products-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; max-width:1200px; margin:20px auto; }
-.product-card { background: rgba(255,255,255,0.15); backdrop-filter:blur(7px); border-radius:14px; padding:15px; text-align:center; color:white; box-shadow:0 4px 20px rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.25); position:relative; overflow:hidden; transition:.3s; }
+.product-card { background: rgba(255,255,255,0.15); backdrop-filter:blur(7px); border-radius:14px; padding:15px; text-align:center; color:white; box-shadow:0 4px 20px rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.25); position:relative; overflow:hidden; transition:.3s; cursor:pointer; }
 .product-card:hover { transform:scale(1.05); background: rgba(255,255,255,0.26); box-shadow:0 6px 30px rgba(0,0,0,0.35); }
 .product-card img { width:100%; height:220px; object-fit:cover; border-radius:10px; margin-bottom:12px; }
 .product-name { font-size:18px; font-weight:bold; color:#fff; text-shadow:1px 1px 3px #000; }
@@ -79,6 +79,9 @@ async function loadProducts(){
       <div class="product-name">${p.name}</div>
       <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>`;
 
+    /* ⭐ TAMBAHAN SATU BARIS — AMAN ⭐ */
+    card.onclick = () => window.location.href = `detail.html?id=${p.id}`;
+
     const heart = document.createElement("div");
     heart.className = "wishlist-heart";
     heart.innerText = "❤";
@@ -117,7 +120,6 @@ function createParticles(heart){
   }
 }
 
-/* SEARCH */
 const overlay=document.getElementById("searchOverlay");
 const searchBox=document.getElementById("searchBox");
 const searchResults=document.getElementById("searchResults");
@@ -145,11 +147,9 @@ searchBox.addEventListener("input",()=>{
   });
 });
 
-/* INIT */
 document.getElementById("wishlistIcon").onclick=()=>{ window.location.href="wishlist.html"; };
 loadProducts();
 
-/* SYNC WISHLIST */
 window.addEventListener("storage",()=>{ wishlist=JSON.parse(localStorage.getItem("wishlist")||"[]"); updateWishlistCounter(); loadProducts(); });
 window.addEventListener("wishlistUpdated",()=>{ wishlist=JSON.parse(localStorage.getItem("wishlist")||"[]"); updateWishlistCounter(); loadProducts(); });
 </script>
