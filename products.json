@@ -46,9 +46,20 @@
     "name": "Sling Bag Basten - Black",
     "price": 126525,
     "image": "img/SlingBagBasten-Black.jpg",
-    "Description": "Sling Bag ini menggunakan bahan 1000 D Polyester dengan satu kompartemen dan bisa bantu kebutuhan simple kamu."
+    "description": "Sling Bag ini menggunakan bahan 1000 D Polyester dengan satu kompartemen dan bisa bantu kebutuhan simple kamu."
   },
   {
     "id": 8,
+    "name": "Bag Gullit Tape Paisley Black",
+    "price": 148400,
+    "image": "img/BagGullitTapePaisleyBlack.jpg",
+    "description": "Berbeda dengan yang sebelumnya. Dengan detail Tape bermotif paisley yang dijahit menggunakan pitterban. Masih bahan Condura Nylon yang awet dan kompartemen yang luas."
+  },
+  {
+    "id": 9,
     "name": "
+    "price": 
+    "image":
+    "description": "
+  }
 ]
