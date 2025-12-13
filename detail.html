@@ -54,7 +54,7 @@ font-size:20px;cursor:pointer;color:#fff;transition:.2s;}
 </div>
 </div>
 
-<!-- ================= KODE ASLI ================= -->
+<!-- ================= KODE ASLI (TIDAK DISENTUH) ================= -->
 <script>
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
@@ -74,8 +74,7 @@ async function loadDetail() {
 
         const buyBtn = document.getElementById("buyNowBtn");
         buyBtn.onclick = () => {
-            const qtyInput = document.getElementById("qtyInput");
-            const qty = Number(qtyInput.value);
+            const qty = Number(document.getElementById("qtyInput").value);
             const name = document.getElementById("productName").innerText;
             const msg = `Halo, saya ingin membeli *${name}*%0AJumlah: *${qty}*`;
             window.location.href = `https://wa.me/6287758412915?text=${msg}`;
@@ -88,99 +87,34 @@ async function loadDetail() {
 loadDetail();
 </script>
 
-<!-- ================= FITUR TAMBAHAN ================= -->
-<script>
-function updateLocalCart(productId, qty) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const index = cart.findIndex(item => item.id === productId);
-    if(index>-1) cart[index].qty = qty; else cart.push({id:productId, qty:qty});
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-const qtyInput = document.getElementById("qtyInput");
-document.getElementById("plusBtn").onclick = () => { qtyInput.value=Number(qtyInput.value)+1; updateLocalCart(id, Number(qtyInput.value)); updateMiniCart(); }
-document.getElementById("minusBtn").onclick = () => { if(qtyInput.value>1){qtyInput.value=Number(qtyInput.value)-1; updateLocalCart(id, Number(qtyInput.value)); updateMiniCart();} }
-
-window.addEventListener('load', () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const saved = cart.find(item => item.id===id);
-    if(saved) qtyInput.value = saved.qty;
-});
-
-document.getElementById("addCartBtn").onclick = () => {
-    const qty = Number(qtyInput.value);
-    updateLocalCart(id, qty);
-    alert("Produk berhasil ditambahkan ke keranjang!");
-    updateMiniCart();
-};
-
-const miniCart = document.createElement('div');
-miniCart.id = 'miniCart';
-miniCart.style.position = 'fixed';
-miniCart.style.bottom = '20px';
-miniCart.style.right = '20px';
-miniCart.style.background = 'linear-gradient(135deg, #ff0095, #007bff)';
-miniCart.style.color = '#fff';
-miniCart.style.padding = '10px 15px';
-miniCart.style.borderRadius = '50px';
-miniCart.style.fontWeight = '600';
-miniCart.style.fontSize = '14px';
-miniCart.style.zIndex = '999';
-miniCart.style.cursor = 'pointer';
-miniCart.style.display = 'flex';
-miniCart.style.alignItems = 'center';
-miniCart.style.gap = '8px';
-miniCart.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
-miniCart.style.transition = 'transform 0.2s, box-shadow 0.2s';
-
-const cartIcon = document.createElement('span');
-cartIcon.innerText = '🛒';
-miniCart.appendChild(cartIcon);
-
-const cartText = document.createElement('span');
-cartText.innerText = '0';
-miniCart.appendChild(cartText);
-
-document.body.appendChild(miniCart);
-
-function updateMiniCart() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    cartText.innerText = totalQty;
-}
-
-window.addEventListener('load', updateMiniCart);
-</script>
-
-<!-- ================= WA AUTO ORDER (SCRIPT BARU – TANPA UBAH KODE ASLI) ================= -->
+<!-- ================= TAMBAHAN FINAL (WA AUTO ORDER) ================= -->
 <script>
 (function(){
     const ADMIN_WA = "6287758412915";
 
-    function getNumber(text){
-        return Number(text.replace(/[^\d]/g,""));
+    function rupiah(n){
+        return "Rp " + n.toLocaleString("id-ID");
+    }
+    function angka(teks){
+        return Number(teks.replace(/[^\d]/g,""));
     }
 
-    function rupiah(num){
-        return "Rp " + num.toLocaleString("id-ID");
-    }
+    function overrideWA(){
+        const btn = document.getElementById("buyNowBtn");
+        if(!btn) return;
 
-    document.addEventListener("DOMContentLoaded",()=>{
-        const buyBtn = document.getElementById("buyNowBtn");
-        if(!buyBtn) return;
-
-        buyBtn.onclick = ()=>{
-            const namaProduk = document.getElementById("productName").innerText;
+        btn.onclick = function(){
+            const produk = document.getElementById("productName").innerText;
             const qty = Number(document.getElementById("qtyInput").value);
-            const harga = getNumber(document.getElementById("productPrice").innerText);
+            const harga = angka(document.getElementById("productPrice").innerText);
             const total = harga * qty;
 
-            const pesan = 
+            const pesan =
 `Halo Admin FJ Store 👋
 
 Saya sudah melakukan pemesanan dengan detail:
 Nama :
-Produk : ${namaProduk}
+Produk : ${produk}
 Jumlah : ${qty}
 Total : ${rupiah(total)}
 Alamat :
@@ -194,7 +128,9 @@ Terima kasih.`;
                 "_blank"
             );
         };
-    });
+    }
+
+    setTimeout(overrideWA, 800);
 })();
 </script>
 
