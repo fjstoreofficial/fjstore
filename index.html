@@ -13,9 +13,6 @@
         backdrop-filter: blur(2px);
     }
 
-    /* =========================================================
-       LOADING SCREEN (ADDED)
-    ========================================================= */
     #loader {
         position: fixed;
         top: 0;
@@ -43,9 +40,6 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ========================================================= */
-
-    /* Hero Section */
     .hero {
         text-align: center;
         padding: 70px 20px 50px;
@@ -56,7 +50,6 @@
         animation: fadeIn 1.3s ease;
     }
 
-    /* Logo + Teks */
     .logo-area {
         display: flex;
         justify-content: center;
@@ -79,7 +72,6 @@
         text-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    /* Headline */
     .headline {
         font-size: 22px;
         font-weight: bold;
@@ -88,7 +80,6 @@
         animation: slide-up 1s ease;
     }
 
-    /* Deskripsi singkat */
     .subtext {
         font-size: 15px;
         margin-top: 8px;
@@ -96,7 +87,6 @@
         opacity: 0.9;
     }
 
-    /* Tombol */
     .btn-store {
         margin-top: 25px;
         padding: 15px 28px;
@@ -111,12 +101,6 @@
         animation: glow 3s infinite ease-in-out;
     }
 
-    .btn-store:hover {
-        transform: scale(1.06);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-    }
-
-    /* Divider halus */
     .divider {
         width: 70%;
         height: 2px;
@@ -125,7 +109,6 @@
         border-radius: 50px;
     }
 
-    /* Koleksi Fitur */
     .feature-box {
         display: flex;
         justify-content: center;
@@ -146,14 +129,9 @@
         transition: 0.3s ease;
         width: 150px;
         text-align: center;
+        cursor: pointer;
     }
 
-    .feature:hover {
-        transform: translateY(-5px);
-        background: linear-gradient(135deg, #ffffff, #eaf3ff);
-    }
-
-    /* Foto produk highlight */
     .product-highlight {
         text-align: center;
         margin-top: 20px;
@@ -167,7 +145,6 @@
         animation: float 3s infinite ease-in-out;
     }
 
-    /* Footer Mini */
     .footer {
         text-align: center;
         padding: 18px;
@@ -175,10 +152,8 @@
         margin-top: 40px;
         font-size: 14px;
         color: #000;
-        border-top: 2px solid #eee;
     }
 
-    /* Animations */
     @keyframes fadeIn {
         from {opacity: 0; transform: translateY(-20px);}
         to {opacity: 1; transform: translateY(0);}
@@ -203,74 +178,70 @@
 
 <body>
 
-    <!-- =========================================================
-         LOADING SCREEN – ADDED
-    ========================================================= -->
-    <div id="loader">
-        <div id="loader-text"></div>
+<div id="loader">
+    <div id="loader-text"></div>
+</div>
+
+<script>
+const text = "FJ STORE";
+let idx = 0;
+function typeWriter() {
+    if (idx < text.length) {
+        document.getElementById("loader-text").innerText += text.charAt(idx);
+        idx++;
+        setTimeout(typeWriter, 130);
+    } else {
+        setTimeout(() => {
+            document.getElementById("loader").style.opacity = "0";
+            document.getElementById("loader").style.transition = "0.8s";
+            setTimeout(() => {
+                document.getElementById("loader").style.display = "none";
+            }, 800);
+        }, 350);
+    }
+}
+window.onload = typeWriter;
+</script>
+
+<div class="hero">
+    <div class="logo-area">
+        <img src="logofj" alt="Logo FJ" />
+        <span>FJ STORE</span>
     </div>
 
-    <script>
-        /* TYPEWRITER EFFECT */
-        const text = "FJ STORE";
-        let idx = 0;
+    <div class="headline">Belanja Lebih Mudah, Pengalaman Lebih Baik</div>
+    <div class="subtext">Pilihan produk terbaik dengan kualitas premium dan harga bersahabat.</div>
 
-        function typeWriter() {
-            if (idx < text.length) {
-                document.getElementById("loader-text").innerText += text.charAt(idx);
-                idx++;
-                setTimeout(typeWriter, 130);
-            } else {
-                setTimeout(() => {
-                    document.getElementById("loader").style.opacity = "0";
-                    document.getElementById("loader").style.transition = "0.8s";
-                    
-                    setTimeout(() => {
-                        document.getElementById("loader").style.display = "none";
-                    }, 800);
-                }, 350);
-            }
-        }
+    <button class="btn-store" onclick="window.location.href='toko.html'">
+        Masuk ke Toko
+    </button>
+</div>
 
-        window.onload = typeWriter;
-    </script>
-    <!-- ========================================================= -->
+<div class="divider"></div>
 
+<div class="feature-box">
+    <div class="feature" data-link="toko.html?filter=new">Lihat Koleksi Baru</div>
+    <div class="feature" data-link="toko.html?filter=promo">Promo Minggu Ini</div>
+    <div class="feature" data-link="toko.html?filter=best">Best Seller</div>
+</div>
 
-    <div class="hero">
+<div class="product-highlight">
+    <img src="HoodieHoligans-Premium.jpg" alt="Produk Utama" />
+</div>
 
-        <div class="logo-area">
-            <img src="logofj" alt="Logo FJ" />
-            <span>FJ STORE</span>
-        </div>
+<div class="footer">
+    © 2025 FJ STORE – Semua Hak Dilindungi
+</div>
 
-        <div class="headline">Belanja Lebih Mudah, Pengalaman Lebih Baik</div>
-
-        <div class="subtext">
-            Pilihan produk terbaik dengan kualitas premium dan harga bersahabat.
-        </div>
-
-        <button class="btn-store" onclick="window.location.href='toko.html'">
-            Masuk ke Toko
-        </button>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="feature-box">
-        <div class="feature">Lihat Koleksi Baru</div>
-        <div class="feature">Promo Minggu Ini</div>
-        <div class="feature">Best Seller</div>
-    </div>
-
-    <div class="product-highlight">
-        <img src="HoodieHoligans-Premium.jpg" alt="Produk Utama" />
-    </div>
-
-    <div class="footer">
-        © 2025 FJ STORE – Semua Hak Dilindungi
-    </div>
+<!-- ===== TAMBAHAN SCRIPT (TANPA SENTUH KODE ASLI) ===== -->
+<script>
+document.querySelectorAll(".feature").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        const link = btn.getAttribute("data-link");
+        window.location.href = link;
+    });
+});
+</script>
 
 </body>
 </html>
