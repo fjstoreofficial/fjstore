@@ -54,84 +54,94 @@ font-size:20px;cursor:pointer;color:#fff;transition:.2s;}
 </div>
 </div>
 
-<!-- ================= KODE ASLI (TIDAK DISENTUH) ================= -->
+<!-- ================= KODE ASLI (UTUH) ================= -->
 <script>
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 
 async function loadDetail() {
-    try {
-        const res = await fetch("products.json");
-        const data = await res.json();
+    const res = await fetch("products.json");
+    const data = await res.json();
+    const product = data.find(p => p.id == id);
 
-        const product = data.find(p => p.id == id);
-        if(!product) { document.querySelector(".container").innerHTML = "<h3>Produk tidak ditemukan!</h3>"; return; }
-
-        document.getElementById("productImage").src = product.image;
-        document.getElementById("productName").innerText = product.name;
-        document.getElementById("productPrice").innerText = "Rp " + Number(product.price).toLocaleString("id-ID");
-        document.getElementById("productDescription").innerText = product.description;
-
-        const buyBtn = document.getElementById("buyNowBtn");
-        buyBtn.onclick = () => {
-            const qty = Number(document.getElementById("qtyInput").value);
-            const name = document.getElementById("productName").innerText;
-            const msg = `Halo, saya ingin membeli *${name}*%0AJumlah: *${qty}*`;
-            window.location.href = `https://wa.me/6287758412915?text=${msg}`;
-        };
-
-    } catch(e) {
-        console.error("Gagal load detail:", e);
-    }
+    document.getElementById("productImage").src = product.image;
+    document.getElementById("productName").innerText = product.name;
+    document.getElementById("productPrice").innerText = "Rp " + product.price.toLocaleString("id-ID");
+    document.getElementById("productDescription").innerText = product.description;
 }
 loadDetail();
 </script>
 
-<!-- ================= TAMBAHAN FINAL (WA AUTO ORDER) ================= -->
 <script>
-(function(){
-    const ADMIN_WA = "6287758412915";
+// =================== KERANJANG & MINI CART (ASLI) ===================
+function updateLocalCart(productId, qty) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(item => item.id === productId);
+    if(index>-1) cart[index].qty = qty;
+    else cart.push({id:productId, qty});
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-    function rupiah(n){
-        return "Rp " + n.toLocaleString("id-ID");
+const qtyInput = document.getElementById("qtyInput");
+document.getElementById("plusBtn").onclick = () => {
+    qtyInput.value = Number(qtyInput.value) + 1;
+    updateLocalCart(id, Number(qtyInput.value));
+    updateMiniCart();
+}
+document.getElementById("minusBtn").onclick = () => {
+    if(qtyInput.value > 1){
+        qtyInput.value = Number(qtyInput.value) - 1;
+        updateLocalCart(id, Number(qtyInput.value));
+        updateMiniCart();
     }
-    function angka(teks){
-        return Number(teks.replace(/[^\d]/g,""));
-    }
+}
 
-    function overrideWA(){
-        const btn = document.getElementById("buyNowBtn");
-        if(!btn) return;
+document.getElementById("addCartBtn").onclick = () => {
+    updateLocalCart(id, Number(qtyInput.value));
+    alert("Produk berhasil ditambahkan ke keranjang!");
+    updateMiniCart();
+};
 
-        btn.onclick = function(){
-            const produk = document.getElementById("productName").innerText;
-            const qty = Number(document.getElementById("qtyInput").value);
-            const harga = angka(document.getElementById("productPrice").innerText);
-            const total = harga * qty;
+// ===== MINI CART =====
+const miniCart=document.createElement("div");
+miniCart.innerHTML="🛒 <span id='cartCount'>0</span>";
+miniCart.style.cssText="position:fixed;bottom:20px;right:20px;background:#ff0095;color:#fff;padding:10px 15px;border-radius:50px;z-index:999;cursor:pointer";
+document.body.appendChild(miniCart);
 
-            const pesan =
+function updateMiniCart(){
+    let cart=JSON.parse(localStorage.getItem("cart"))||[];
+    document.getElementById("cartCount").innerText=cart.reduce((a,b)=>a+b.qty,0);
+}
+updateMiniCart();
+</script>
+
+<!-- ================= WA AUTO ORDER (AMAN) ================= -->
+<script>
+window.addEventListener("load",()=>{
+    const ADMIN="6287758412915";
+    document.getElementById("buyNowBtn").addEventListener("click",()=>{
+        const nama=document.getElementById("productName").innerText;
+        const qty=Number(document.getElementById("qtyInput").value);
+        const harga=Number(document.getElementById("productPrice").innerText.replace(/\D/g,""));
+        const total=harga*qty;
+
+        const pesan=
 `Halo Admin FJ Store 👋
 
 Saya sudah melakukan pemesanan dengan detail:
 Nama :
-Produk : ${produk}
+Produk : ${nama}
 Jumlah : ${qty}
-Total : ${rupiah(total)}
+Total : Rp ${total.toLocaleString("id-ID")}
 Alamat :
 
 Saya siap melakukan pembayaran.
 Mohon info metode pembayarannya 🙏
 Terima kasih.`;
 
-            window.open(
-                `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`,
-                "_blank"
-            );
-        };
-    }
-
-    setTimeout(overrideWA, 800);
-})();
+        window.open(`https://wa.me/${ADMIN}?text=${encodeURIComponent(pesan)}`,"_blank");
+    });
+});
 </script>
 
 </body>
