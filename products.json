@@ -33,5 +33,12 @@
     "price": 168224,
     "image": "img/LongCargoPantsJoseBlack.jpg",
     "description": "Stok tersedia dalam variasi ukuran."
+  },
+  {
+    "id": 6,
+    "name": "Bag Gullit Black",
+    "price": 140324,
+    "image": "img/BagGullitBlack.jpg",
+    "description": "Style yang ramping dan minimalis pas untuk meringkas keperluan sekolah, ngampus atau traveling kamu."
   }
 ]
