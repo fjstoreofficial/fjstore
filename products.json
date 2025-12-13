@@ -40,5 +40,15 @@
     "price": 140324,
     "image": "img/BagGullitBlack.jpg",
     "description": "Style yang ramping dan minimalis pas untuk meringkas keperluan sekolah, ngampus atau traveling kamu."
-  }
+  },
+  {
+    "id": 7,
+    "name": "Sling Bag Basten - Black",
+    "price": 126525,
+    "image": "img/SlingBagBasten-Black.jpg",
+    "Description": "Sling Bag ini menggunakan bahan 1000 D Polyester dengan satu kompartemen dan bisa bantu kebutuhan simple kamu."
+  },
+  {
+    "id": 8,
+    "name": "
 ]
