@@ -103,8 +103,7 @@ header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:whi
 </div>
 
 <header>
-  FJ.Store
-  <span id="wishlistIcon">❤️ <span id="wishlistCount">(0)</span></span>
+  <span id="wishlistIcon">🛒 <span id="wishlistCount">(0)</span></span>
   <span id="searchIcon">🔍</span>
 </header>
 
@@ -145,7 +144,7 @@ async function loadProducts(){
 
     const heart = document.createElement("div");
     heart.className = "wishlist-heart";
-    heart.innerText = "❤";
+    heart.innerText = "🛒";
     if(wishlist.includes(p.id)) heart.classList.add("active");
 
     heart.onclick = e=>{
