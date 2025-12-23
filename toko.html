@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FJ.Store – Produk</title>
-
 <style>
-/* ================= KODE ASLI KAMU (UTUH) ================= */
+/* ================= KODE ASLI KAMU (TIDAK DIUBAH) ================= */
 body { font-family: Arial, sans-serif; margin:0; padding:0; background:url('latarbelakang.jpg') center/cover no-repeat fixed; position:relative; }
 body::before { content:""; position:fixed; inset:0; backdrop-filter:blur(9px); background:rgba(0,0,0,0.45); z-index:-1; }
 header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.2); position:relative; display:flex; justify-content:center; align-items:center; }
@@ -25,49 +24,96 @@ header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:whi
 .wishlist-heart:hover { transform:scale(1.15); opacity:1; }
 .wishlist-heart.active { color:#ff4d6d; transform:scale(1.25); animation:bounce 0.3s; }
 @keyframes bounce { 0%{transform:scale(1);} 50%{transform:scale(1.4);} 100%{transform:scale(1.25);} }
+.particle { position:absolute; width:6px; height:6px; background:#ff4d6d; border-radius:50%; pointer-events:none; animation:particleMove 0.8s forwards; z-index:100; }
+@keyframes particleMove { 0%{ transform:translate(0,0) scale(1); opacity:1; } 100%{ transform:translate(var(--x),var(--y)) scale(0); opacity:0; } }
+#searchOverlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(10px); display:none; justify-content:flex-start; align-items:center; padding-top:120px; z-index:99999; flex-direction:column; }
+#searchBox { width:80%; max-width:600px; padding:15px 20px; border-radius:12px; border:none; font-size:20px; outline:none; }
+#closeSearch { position:absolute; top:30px; right:35px; font-size:26px; color:white; cursor:pointer; opacity:.8; transition:.3s; }
+#closeSearch:hover { opacity:1; transform:scale(1.15); }
+#searchResults { width:80%; max-width:650px; margin:25px auto; }
+.search-item { display:flex; align-items:center; gap:15px; background: rgba(255,255,255,0.15); padding:12px; border-radius:12px; margin-bottom:10px; cursor:pointer; color:white; border:1px solid rgba(255,255,255,0.25); }
+.search-item:hover { background: rgba(255,255,255,0.28); transform:scale(1.02); }
+.search-thumb { width:65px; height:65px; border-radius:10px; object-fit:cover; }
+.search-text { display:flex; flex-direction:column; gap:4px; }
+.search-title { font-size:17px; font-weight:600; }
+.search-price { font-size:14px; color:#ffeb3b; }
 
-/* ================= OVERRIDE AMAN (TANPA SENTUH KODE) ================= */
-
-/* 1️⃣ GANTI IKON LOVE → KERANJANG */
-.wishlist-heart{
-  color:transparent !important;
+@media (max-width:500px){
+  header { font-size:20px; padding:15px; }
+  #wishlistIcon { right:50px; font-size:20px; }
+  #searchIcon { right:15px; font-size:18px; }
 }
-.wishlist-heart::before{
-  content:"🛒";
+
+/* ================= TAMBAHAN BARU (AMAN) ================= */
+
+/* NAV BERANDA & TOKO */
+.nav-top{
+  position:fixed;
+  top:15px;
+  left:15px;
+  display:flex;
+  gap:10px;
+  z-index:9999;
+}
+.nav-top a{
+  padding:8px 14px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.9);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+  color:#000;
+  box-shadow:0 3px 10px rgba(0,0,0,.3);
+  transition:.25s;
+}
+.nav-top a:hover{ transform:scale(1.08); }
+.nav-top .active{
+  background:#000;
+  color:#fff;
+}
+
+/* TRUST BAR */
+.trust-bar{
+  max-width:1100px;
+  margin:18px auto 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;
+  padding:0 15px;
+}
+.trust-bar div{
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(6px);
+  padding:12px;
+  text-align:center;
+  border-radius:14px;
   color:white;
-  font-size:22px;
-}
-
-/* 2️⃣ HILANGKAN ANGKA (0) WISHLIST */
-#wishlistCount{
-  display:none !important;
-}
-
-/* 3️⃣ HILANGKAN TEKS FJ.STORE DI HEADER */
-header{
-  font-size:0 !important;
-}
-
-/* 4️⃣ POSISI IKON TETAP RAPIH */
-#wishlistIcon, #searchIcon{
-  font-size:22px;
-}
-
-/* RESPONSIVE */
-@media(max-width:500px){
-  #wishlistIcon{ right:50px; }
-  #searchIcon{ right:15px; }
+  font-weight:bold;
+  box-shadow:0 4px 15px rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.3);
 }
 </style>
 </head>
-
 <body>
+
+<!-- NAV -->
+<div class="nav-top">
+  <a href="index.html">Beranda</a>
+  <a href="toko.html" class="active">Toko</a>
+</div>
 
 <header>
   FJ.Store
   <span id="wishlistIcon">❤️ <span id="wishlistCount">(0)</span></span>
   <span id="searchIcon">🔍</span>
 </header>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div>🔒 Pembayaran Aman</div>
+  <div>🚚 Pengiriman Cepat</div>
+  <div>✅ Produk Digital / Original</div>
+</div>
 
 <div class="products-container" id="products"></div>
 
@@ -78,7 +124,7 @@ header{
 </div>
 
 <script>
-/* ===== SCRIPT ASLI KAMU (UTUH, TIDAK DIUBAH) ===== */
+/* ===== SCRIPT ASLI KAMU (UTUH) ===== */
 let wishlist = JSON.parse(localStorage.getItem("wishlist")||"[]");
 function saveWishlist(){ localStorage.setItem("wishlist",JSON.stringify(wishlist)); }
 function updateWishlistCounter(){ document.getElementById("wishlistCount").innerText=`(${wishlist.length})`; }
@@ -100,7 +146,6 @@ async function loadProducts(){
     const heart = document.createElement("div");
     heart.className = "wishlist-heart";
     heart.innerText = "❤";
-
     if(wishlist.includes(p.id)) heart.classList.add("active");
 
     heart.onclick = e=>{
@@ -111,8 +156,10 @@ async function loadProducts(){
       } else {
         wishlist.push(p.id);
         heart.classList.add("active");
+        createParticles(heart);
       }
       saveWishlist(); updateWishlistCounter();
+      window.dispatchEvent(new Event("wishlistUpdated"));
     };
 
     card.appendChild(heart);
@@ -120,10 +167,55 @@ async function loadProducts(){
   });
 }
 
-document.getElementById("wishlistIcon").onclick=()=>{
-  window.location.href="wishlist.html";
-};
+function createParticles(heart){
+  for(let i=0;i<8;i++){
+    const p=document.createElement("div"); p.className="particle";
+    const angle=Math.random()*2*Math.PI, radius=30+Math.random()*20;
+    const rect = heart.getBoundingClientRect();
+    p.style.left = rect.left + rect.width/2 + "px";
+    p.style.top = rect.top + rect.height/2 + "px";
+    p.style.setProperty("--x", `${Math.cos(angle)*radius}px`);
+    p.style.setProperty("--y", `${Math.sin(angle)*radius}px`);
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),800);
+  }
+}
 
+const overlay=document.getElementById("searchOverlay");
+const searchBox=document.getElementById("searchBox");
+const searchResults=document.getElementById("searchResults");
+const closeSearch=document.getElementById("closeSearch");
+document.getElementById("searchIcon").onclick=()=>{ overlay.style.display="flex"; searchBox.focus(); };
+closeSearch.onclick=()=>{ overlay.style.display="none"; searchBox.value=""; searchResults.innerHTML=""; };
+overlay.addEventListener("click",e=>{ if(e.target===overlay) overlay.style.display="none"; });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") overlay.style.display="none"; });
+
+let allProducts = [];
+fetch("products.json").then(r=>r.json()).then(d=>allProducts=d);
+
+searchBox.addEventListener("input",()=>{
+  const key = searchBox.value.toLowerCase();
+  searchResults.innerHTML="";
+  if(!key) return;
+  const filtered = allProducts.filter(p=>p.name.toLowerCase().includes(key));
+  if(!filtered.length) {
+    searchResults.innerHTML="<div style='color:white'>Tidak ada produk ditemukan</div>";
+    return;
+  }
+  filtered.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="search-item";
+    div.innerHTML=`<img src="${p.image}" class="search-thumb">
+      <div class="search-text">
+        <div class="search-title">${p.name}</div>
+        <div class="search-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
+      </div>`;
+    div.onclick=()=>window.location.href=`detail.html?id=${p.id}`;
+    searchResults.appendChild(div);
+  });
+});
+
+document.getElementById("wishlistIcon").onclick=()=>{ window.location.href="wishlist.html"; };
 loadProducts();
 </script>
 
