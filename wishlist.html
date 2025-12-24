@@ -77,14 +77,14 @@ header{
   <a href="wishlist.html" class="active">Wishlist</a>
 </div>
 
-<header>Wishlist Saya ❤️</header>
+<header>Wishlist Saya 🛒</header>
 
 <div id="popupNotif"></div>
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
   <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot">
-  <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
+  <br>Wishlist kamu masih kosong <br>Tambahkan produk dari halaman toko!
 </div>
 
 <script>
@@ -98,7 +98,7 @@ async function removeWishlist(id, cardEl, triggerX, triggerY){
   if(typeof triggerX==="number"){
     const h=document.createElement("div");
     h.className="fly-heart";
-    h.innerText="❤️";
+    h.innerText="🛒";
     h.style.left=triggerX+"px";
     h.style.top=triggerY+"px";
     document.body.appendChild(h);
@@ -110,7 +110,7 @@ async function removeWishlist(id, cardEl, triggerX, triggerY){
   const filtered=raw.filter(item=>Number(item)!==Number(id));
   saveWishlist(filtered);
   if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
-  showNotif("❤️ Dihapus dari wishlist");
+  showNotif("🛒 Dihapus dari wishlist");
   dispatchWishlistUpdated();
   if(filtered.length===0) loadWishlist();
 }
@@ -133,7 +133,7 @@ async function loadWishlist(){
       <div class="product-name">${product.name}</div>
       <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
       <button class="detail-btn">Lihat Detail</button>
-      <button class="remove-btn">Hapus dari Wishlist ❤️‍🩹</button>`;
+      <button class="remove-btn">Hapus dari Wishlist 🛒</button>`;
     card.querySelector(".detail-btn").onclick=()=>window.location.href=`detail.html?id=${product.id}`;
     card.querySelector(".remove-btn").onclick=ev=>{
       const r=ev.target.getBoundingClientRect();
