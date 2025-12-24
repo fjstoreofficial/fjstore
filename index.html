@@ -173,6 +173,35 @@
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-8px); }
     }
+
+    /* ================= TAMBAHAN OPTIMASI MOBILE ================= */
+    @media (max-width: 768px) {
+        .hero {
+            padding: 55px 16px 40px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+        }
+
+        .logo-area img { width: 58px; }
+        .logo-area span { font-size: 26px; }
+        .headline { font-size: 18px; }
+        .subtext { font-size: 14px; }
+
+        .btn-store {
+            font-size: 16px;
+            padding: 14px 24px;
+            width: 90%;
+            max-width: 320px;
+        }
+
+        .feature { width: 45%; font-size: 14px; }
+        .product-highlight img { width: 88%; }
+        .footer { font-size: 13px; }
+    }
+
+    @media (max-width: 420px) {
+        .feature { width: 100%; }
+    }
 </style>
 </head>
 
@@ -233,7 +262,6 @@ window.onload = typeWriter;
     © 2025 FJ STORE – Semua Hak Dilindungi
 </div>
 
-<!-- ===== TAMBAHAN SCRIPT (TANPA SENTUH KODE ASLI) ===== -->
 <script>
 document.querySelectorAll(".feature").forEach(btn=>{
     btn.addEventListener("click",()=>{
