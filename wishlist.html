@@ -61,23 +61,11 @@ header{ background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:2
   color:#fff;
 }
 
-/* HEADER TEKS DI TURUNKAN BIAR GA TABRAK */
-header{
-  margin-top:55px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- NAV BAR (BARU) -->
-<div class="nav-top">
-  <a href="index.html">Beranda</a>
-  <a href="toko.html">Toko</a>
-  <a href="wishlist.html" class="active">Keranjang</a>
+<div class="header-bar">
+  <div class="back" onclick="history.back()">←</div>
+  <div>Keranjang Saya🛒</div>
+  <div class="cart" onclick="location.href='wishlist.html'">🛒</div>
 </div>
-
-<header>Keranjang Saya 🛒</header>
 
 <div id="popupNotif"></div>
 <div id="wishlistContainer" class="wishlist-container"></div>
