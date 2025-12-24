@@ -110,7 +110,7 @@ async function removeWishlist(id, cardEl, triggerX, triggerY){
   const filtered=raw.filter(item=>Number(item)!==Number(id));
   saveWishlist(filtered);
   if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
-  showNotif("🛒 Dihapus dari wishlist");
+  showNotif("🛒 Dihapus dari Keranjang");
   dispatchWishlistUpdated();
   if(filtered.length===0) loadWishlist();
 }
