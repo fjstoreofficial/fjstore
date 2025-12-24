@@ -6,133 +6,200 @@
 <title>Wishlist – FJ.Store</title>
 
 <style>
-/* ================= KODE ASLI KAMU (UTUH) ================= */
-body { margin:0; padding:0; font-family:Poppins,sans-serif; background:url("latarbelakang.jpg") center/cover no-repeat fixed; position:relative; }
-body::before{ content:""; position:fixed; inset:0; backdrop-filter: blur(10px); background: rgba(0,0,0,0.45); z-index:-1; }
-header{ background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:24px; font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,0.3); }
-.wishlist-container{ max-width:900px; margin:40px auto; padding:20px; display:grid; gap:20px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
-.wishlist-card{ position: relative; background: rgba(255,255,255,0.15); border-radius:16px; padding:15px; text-align:center; color:#fff; border:1px solid rgba(255,255,255,0.25); box-shadow:0 4px 25px rgba(0,0,0,0.25); backdrop-filter: blur(8px); transition:0.3s; overflow:hidden; }
-.wishlist-card:hover{ transform: scale(1.03); background: rgba(255,255,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35); }
-.wishlist-card img{ width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
-.product-name{ font-size:18px; font-weight:600; margin:5px 0; text-shadow:1px 1px 3px #000; }
-.product-price{ font-size:16px; color:#ffe066; margin-bottom:10px; font-weight:600; }
-.detail-btn, .remove-btn{ padding:10px; width:100%; border:none; border-radius:10px; font-weight:600; cursor:pointer; transition:.25s; }
-.detail-btn{ background: linear-gradient(135deg,#0099ff,#006aff); color:#fff; margin-bottom:10px; }
-.detail-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,110,255,0.5); }
-.remove-btn{ background: linear-gradient(135deg,#ff2d55,#ff005e); color:#fff; }
-.remove-btn:hover{ transform:translateY(-3px); box-shadow:0 6px 20px rgba(255,0,80,0.5); }
-@keyframes heartBreakKey{0%{transform:scale(1);opacity:1}50%{transform:scale(1.15)}100%{transform:scale(0);opacity:0}} .heart-break{ animation: heartBreakKey 0.45s ease-out forwards; }
-.empty{ text-align:center; margin-top:50px; font-size:22px; font-weight:600; color:#fff; }
-.empty img{ width:160px; opacity:.9; margin-bottom:10px; animation: float 2s infinite ease-in-out; }
-@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-#popupNotif{ position:fixed; top:20px; right:20px; padding:12px 20px; background:rgba(255,255,255,0.92); color:#000; border-radius:12px; font-weight:600; display:none; backdrop-filter:blur(6px); z-index:9999; }
-.fly-heart{ position:fixed; font-size:28px; pointer-events:none; animation:flyToWishlist 0.9s ease-out forwards; z-index:9999; }
-@keyframes flyToWishlist{0%{transform:scale(1) translate(0,0);opacity:1}50%{transform:scale(1.4) translate(40px,-40px)}100%{transform:scale(0.35) translate(120px,-80px);opacity:0}}
-.particle{ position:fixed; font-size:10px; opacity:1; animation:particleMove 0.7s ease-out forwards; z-index:9999; }
-@keyframes particleMove{from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
-#wishlist-icon.glow{ animation:wishlistGlow .6s ease-out }
-@keyframes wishlistGlow{0%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}50%{filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25)}100%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}}
-
-/* ================= TAMBAHAN BARU (AMAN) ================= */
-
-/* NAV ATAS */
-.nav-top{
+body{
+  margin:0;
+  padding:0;
+  font-family:Poppins,sans-serif;
+  background:url("latarbelakang.jpg") center/cover no-repeat fixed;
+}
+body::before{
+  content:"";
   position:fixed;
-  top:15px;
-  left:15px;
-  display:flex;
-  gap:10px;
-  z-index:9999;
+  inset:0;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.45);
+  z-index:-1;
 }
-.nav-top a{
-  padding:8px 14px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.9);
-  text-decoration:none;
-  font-size:14px;
+
+header{
+  background:rgba(0,0,0,0.6);
+  padding:20px;
+  text-align:center;
+  font-size:24px;
+  font-weight:700;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+}
+
+.wishlist-container{
+  max-width:900px;
+  margin:100px auto 40px;
+  padding:20px;
+  display:grid;
+  gap:20px;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+}
+
+.wishlist-card{
+  background: rgba(255,255,255,0.15);
+  border-radius:16px;
+  padding:15px;
+  text-align:center;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow:0 4px 25px rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  transition:.3s;
+}
+
+.wishlist-card:hover{
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.25);
+}
+
+.wishlist-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.product-name{
+  font-size:18px;
   font-weight:600;
-  color:#000;
-  box-shadow:0 3px 10px rgba(0,0,0,.3);
-  transition:.25s;
+  margin:8px 0;
 }
-.nav-top a:hover{ transform:scale(1.08); }
-.nav-top .active{
-  background:#000;
+
+.product-price{
+  font-size:16px;
+  color:#ffe066;
+  margin-bottom:12px;
+}
+
+.detail-btn,
+.remove-btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.detail-btn{
+  background:linear-gradient(135deg,#0099ff,#006aff);
+  color:#fff;
+  margin-bottom:8px;
+}
+
+.remove-btn{
+  background:linear-gradient(135deg,#ff2d55,#ff005e);
   color:#fff;
 }
 
-<div class="header-bar">
-  <div class="back" onclick="history.back()">←</div>
-  <div>Keranjang Saya🛒</div>
-  <div class="cart" onclick="location.href='wishlist.html'">🛒</div>
-</div>
+.empty{
+  text-align:center;
+  margin-top:140px;
+  font-size:20px;
+  font-weight:600;
+  color:#fff;
+}
+
+#popupNotif{
+  position:fixed;
+  top:20px;
+  right:20px;
+  padding:12px 20px;
+  background:#fff;
+  border-radius:12px;
+  display:none;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<header>Wishlist Saya ❤️</header>
 
 <div id="popupNotif"></div>
+
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-  <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot">
-  <br>Keranjang belanja Anda kosong <br>Tambahkan produk dari halaman toko
+  Wishlist kamu masih kosong<br>
+  Tambahkan produk dari halaman toko!
 </div>
 
 <script>
-/* ===== SCRIPT ASLI KAMU (UTUH, TIDAK DIUBAH) ===== */
-function getWishlist(){ return JSON.parse(localStorage.getItem("wishlist"))||[]; }
-function saveWishlist(list){ localStorage.setItem("wishlist",JSON.stringify(list)); }
-function showNotif(txt){ const n=document.getElementById("popupNotif"); n.innerText=txt; n.style.display="block"; clearTimeout(n._t); n._t=setTimeout(()=>n.style.display="none",1500); }
-function dispatchWishlistUpdated(){ try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){} }
+function getWishlist(){
+  return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+function saveWishlist(list){
+  localStorage.setItem("wishlist", JSON.stringify(list));
+}
+function showNotif(txt){
+  const n=document.getElementById("popupNotif");
+  n.innerText=txt;
+  n.style.display="block";
+  setTimeout(()=>n.style.display="none",1500);
+}
 
-async function removeWishlist(id, cardEl, triggerX, triggerY){
-  if(typeof triggerX==="number"){
-    const h=document.createElement("div");
-    h.className="fly-heart";
-    h.innerText="🛒";
-    h.style.left=triggerX+"px";
-    h.style.top=triggerY+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),900);
-  }
-  cardEl.classList.add("heart-break");
-  await new Promise(r=>setTimeout(r,450));
-  let raw=getWishlist();
-  const filtered=raw.filter(item=>Number(item)!==Number(id));
-  saveWishlist(filtered);
-  if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
-  showNotif("🛒 Dihapus dari Keranjang");
-  dispatchWishlistUpdated();
-  if(filtered.length===0) loadWishlist();
+async function removeWishlist(id, card){
+  let raw=getWishlist().filter(x=>Number(x)!==Number(id));
+  saveWishlist(raw);
+  card.remove();
+  showNotif("Dihapus dari wishlist");
+  if(raw.length===0) loadWishlist();
 }
 
 async function loadWishlist(){
   const container=document.getElementById("wishlistContainer");
-  const emptyMsg=document.getElementById("emptyMessage");
+  const empty=document.getElementById("emptyMessage");
   container.innerHTML="";
+
   let products=[];
-  try{ const res=await fetch("products.json"); products=await res.json(); }catch(e){}
+  try{
+    const res=await fetch("products.json");
+    products=await res.json();
+  }catch(e){}
+
   const wish=getWishlist();
-  if(!wish || wish.length===0){ emptyMsg.style.display="block"; return; }
-  emptyMsg.style.display="none";
+  if(wish.length===0){
+    empty.style.display="block";
+    return;
+  }
+  empty.style.display="none";
+
   wish.forEach(id=>{
-    const product=products.find(p=>Number(p.id)===Number(id));
-    if(!product) return;
+    const p=products.find(x=>Number(x.id)===Number(id));
+    if(!p) return;
+
     const card=document.createElement("div");
     card.className="wishlist-card";
-    card.innerHTML=`<img src="${product.image}">
-      <div class="product-name">${product.name}</div>
-      <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
+    card.innerHTML=`
+      <img src="${p.image}">
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
       <button class="detail-btn">Lihat Detail</button>
-      <button class="remove-btn">Hapus dari Keranjang 🛒</button>`;
-    card.querySelector(".detail-btn").onclick=()=>window.location.href=`detail.html?id=${product.id}`;
-    card.querySelector(".remove-btn").onclick=ev=>{
-      const r=ev.target.getBoundingClientRect();
-      removeWishlist(product.id,card,r.left+r.width/2,r.top+r.height/2);
+      <button class="remove-btn">Hapus</button>
+    `;
+
+    card.querySelector(".detail-btn").onclick=()=>{
+      location.href="detail.html?id="+p.id;
     };
+    card.querySelector(".remove-btn").onclick=()=>{
+      removeWishlist(p.id, card);
+    };
+
     container.appendChild(card);
   });
 }
+
 loadWishlist();
-window.addEventListener("storage",e=>{ if(e.key==="wishlist") loadWishlist(); });
-window.addEventListener("wishlistUpdated",()=>loadWishlist());
+window.addEventListener("storage", e=>{
+  if(e.key==="wishlist") loadWishlist();
+});
 </script>
 
 </body>
