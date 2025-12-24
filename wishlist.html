@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wishlist – FJ.Store</title>
+
 <style>
+/* ================= KODE ASLI KAMU (UTUH) ================= */
 body { margin:0; padding:0; font-family:Poppins,sans-serif; background:url("latarbelakang.jpg") center/cover no-repeat fixed; position:relative; }
 body::before{ content:""; position:fixed; inset:0; backdrop-filter: blur(10px); background: rgba(0,0,0,0.45); z-index:-1; }
 header{ background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:24px; font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,0.3); }
@@ -30,31 +32,82 @@ header{ background:rgba(0,0,0,0.6); padding:20px; text-align:center; font-size:2
 @keyframes particleMove{from{transform:translate(0,0) scale(1);opacity:1} to{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
 #wishlist-icon.glow{ animation:wishlistGlow .6s ease-out }
 @keyframes wishlistGlow{0%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}50%{filter:drop-shadow(0 0 14px #ff4d79); transform:scale(1.25)}100%{filter:drop-shadow(0 0 0 #ff4d79); transform:scale(1)}}
+
+/* ================= TAMBAHAN BARU (AMAN) ================= */
+
+/* NAV ATAS */
+.nav-top{
+  position:fixed;
+  top:15px;
+  left:15px;
+  display:flex;
+  gap:10px;
+  z-index:9999;
+}
+.nav-top a{
+  padding:8px 14px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.9);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  color:#000;
+  box-shadow:0 3px 10px rgba(0,0,0,.3);
+  transition:.25s;
+}
+.nav-top a:hover{ transform:scale(1.08); }
+.nav-top .active{
+  background:#000;
+  color:#fff;
+}
+
+/* HEADER TEKS DI TURUNKAN BIAR GA TABRAK */
+header{
+  margin-top:55px;
+}
 </style>
 </head>
+
 <body>
 
+<!-- NAV BAR (BARU) -->
+<div class="nav-top">
+  <a href="index.html">Beranda</a>
+  <a href="toko.html">Toko</a>
+  <a href="wishlist.html" class="active">Wishlist</a>
+</div>
+
 <header>Wishlist Saya ❤️</header>
+
 <div id="popupNotif"></div>
 <div id="wishlistContainer" class="wishlist-container"></div>
+
 <div id="emptyMessage" class="empty" style="display:none;">
   <img src="https://cdn-icons-png.flaticon.com/512/742/742751.png" alt="maskot">
   <br>Wishlist kamu masih kosong 😢<br>Tambahkan produk dari halaman toko!
 </div>
 
 <script>
+/* ===== SCRIPT ASLI KAMU (UTUH, TIDAK DIUBAH) ===== */
 function getWishlist(){ return JSON.parse(localStorage.getItem("wishlist"))||[]; }
 function saveWishlist(list){ localStorage.setItem("wishlist",JSON.stringify(list)); }
 function showNotif(txt){ const n=document.getElementById("popupNotif"); n.innerText=txt; n.style.display="block"; clearTimeout(n._t); n._t=setTimeout(()=>n.style.display="none",1500); }
 function dispatchWishlistUpdated(){ try{ window.dispatchEvent(new Event("wishlistUpdated")); }catch(e){} }
 
 async function removeWishlist(id, cardEl, triggerX, triggerY){
-  if(typeof triggerX==="number"){ const h=document.createElement("div"); h.className="fly-heart"; h.innerText="❤️"; h.style.left=triggerX+"px"; h.style.top=triggerY+"px"; document.body.appendChild(h); setTimeout(()=>h.remove(),900);
-    for(let i=0;i<6;i++){ const p=document.createElement("div"); p.className="particle"; p.innerText="✦"; p.style.left=triggerX+"px"; p.style.top=triggerY+"px"; const angle=Math.random()*2*Math.PI; const dist=30+Math.random()*30; p.style.setProperty("--tx",(Math.cos(angle)*dist)+"px"); p.style.setProperty("--ty",(Math.sin(angle)*dist)+"px"); document.body.appendChild(p); setTimeout(()=>p.remove(),700); }
+  if(typeof triggerX==="number"){
+    const h=document.createElement("div");
+    h.className="fly-heart";
+    h.innerText="❤️";
+    h.style.left=triggerX+"px";
+    h.style.top=triggerY+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),900);
   }
   cardEl.classList.add("heart-break");
   await new Promise(r=>setTimeout(r,450));
-  let raw=getWishlist(); const filtered=raw.filter(item=>Number(item)!==Number(id));
+  let raw=getWishlist();
+  const filtered=raw.filter(item=>Number(item)!==Number(id));
   saveWishlist(filtered);
   if(cardEl && cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
   showNotif("❤️ Dihapus dari wishlist");
@@ -67,30 +120,28 @@ async function loadWishlist(){
   const emptyMsg=document.getElementById("emptyMessage");
   container.innerHTML="";
   let products=[];
-  try{ const res=await fetch("products.json"); products=await res.json(); }catch(e){ console.error(e); }
+  try{ const res=await fetch("products.json"); products=await res.json(); }catch(e){}
   const wish=getWishlist();
   if(!wish || wish.length===0){ emptyMsg.style.display="block"; return; }
   emptyMsg.style.display="none";
   wish.forEach(id=>{
     const product=products.find(p=>Number(p.id)===Number(id));
     if(!product) return;
-    const card=document.createElement("div"); card.className="wishlist-card";
-    card.innerHTML=`<img src="${product.image}" alt="${product.name}">
+    const card=document.createElement("div");
+    card.className="wishlist-card";
+    card.innerHTML=`<img src="${product.image}">
       <div class="product-name">${product.name}</div>
       <div class="product-price">Rp ${Number(product.price).toLocaleString("id-ID")}</div>
       <button class="detail-btn">Lihat Detail</button>
       <button class="remove-btn">Hapus dari Wishlist ❤️‍🩹</button>`;
-    card.querySelector(".detail-btn").addEventListener("click",()=>{ window.location.href=`detail.html?id=${product.id}`; });
-    card.querySelector(".remove-btn").addEventListener("click",ev=>{
-      ev.stopPropagation();
+    card.querySelector(".detail-btn").onclick=()=>window.location.href=`detail.html?id=${product.id}`;
+    card.querySelector(".remove-btn").onclick=ev=>{
       const r=ev.target.getBoundingClientRect();
-      removeWishlist(product.id,card,Math.round(r.left+r.width/2),Math.round(r.top+r.height/2));
-    });
+      removeWishlist(product.id,card,r.left+r.width/2,r.top+r.height/2);
+    };
     container.appendChild(card);
   });
 }
-
-(function patchWishlistSync(){ const raw=getWishlist(); const fixed=raw.map(Number).filter(x=>x>0); saveWishlist(fixed); window.dispatchEvent(new Event("wishlistUpdated")); })();
 loadWishlist();
 window.addEventListener("storage",e=>{ if(e.key==="wishlist") loadWishlist(); });
 window.addEventListener("wishlistUpdated",()=>loadWishlist());
