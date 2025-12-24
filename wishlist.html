@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wishlist – FJ.Store</title>
+<title>Keranjang – FJ.Store</title>
 
 <style>
 body{
@@ -21,16 +21,29 @@ body::before{
   z-index:-1;
 }
 
+/* HEADER */
 header{
   background:rgba(0,0,0,0.6);
-  padding:20px;
+  padding:18px;
   text-align:center;
-  font-size:24px;
+  font-size:22px;
   font-weight:700;
   color:#fff;
   border-bottom:1px solid rgba(255,255,255,0.3);
+  position:relative;
 }
 
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* CONTAINER */
 .wishlist-container{
   max-width:900px;
   margin:100px auto 40px;
@@ -40,6 +53,7 @@ header{
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
 }
 
+/* CARD */
 .wishlist-card{
   background: rgba(255,255,255,0.15);
   border-radius:16px;
@@ -51,12 +65,10 @@ header{
   backdrop-filter: blur(8px);
   transition:.3s;
 }
-
 .wishlist-card:hover{
   transform: scale(1.03);
   background: rgba(255,255,255,0.25);
 }
-
 .wishlist-card img{
   width:100%;
   height:220px;
@@ -64,18 +76,19 @@ header{
   border-radius:12px;
 }
 
+/* TEXT */
 .product-name{
   font-size:18px;
   font-weight:600;
   margin:8px 0;
 }
-
 .product-price{
   font-size:16px;
   color:#ffe066;
   margin-bottom:12px;
 }
 
+/* BUTTON */
 .detail-btn,
 .remove-btn{
   width:100%;
@@ -85,18 +98,17 @@ header{
   font-weight:600;
   cursor:pointer;
 }
-
 .detail-btn{
   background:linear-gradient(135deg,#0099ff,#006aff);
   color:#fff;
   margin-bottom:8px;
 }
-
 .remove-btn{
   background:linear-gradient(135deg,#ff2d55,#ff005e);
   color:#fff;
 }
 
+/* EMPTY */
 .empty{
   text-align:center;
   margin-top:140px;
@@ -105,6 +117,7 @@ header{
   color:#fff;
 }
 
+/* NOTIF */
 #popupNotif{
   position:fixed;
   top:20px;
@@ -120,15 +133,18 @@ header{
 
 <body>
 
-<header>Wishlist Saya ❤️</header>
+<header>
+  <div class="back-btn" onclick="history.back()">←</div>
+  Keranjang Saya 🛒
+</header>
 
 <div id="popupNotif"></div>
 
 <div id="wishlistContainer" class="wishlist-container"></div>
 
 <div id="emptyMessage" class="empty" style="display:none;">
-  Wishlist kamu masih kosong<br>
-  Tambahkan produk dari halaman toko!
+  Keranjang belanja Anda kosong<br>
+  Tambahkan produk dari halaman toko
 </div>
 
 <script>
@@ -149,7 +165,7 @@ async function removeWishlist(id, card){
   let raw=getWishlist().filter(x=>Number(x)!==Number(id));
   saveWishlist(raw);
   card.remove();
-  showNotif("Dihapus dari wishlist");
+  showNotif("🛒 Dihapus dari keranjang");
   if(raw.length===0) loadWishlist();
 }
 
@@ -182,7 +198,7 @@ async function loadWishlist(){
       <div class="product-name">${p.name}</div>
       <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
       <button class="detail-btn">Lihat Detail</button>
-      <button class="remove-btn">Hapus</button>
+      <button class="remove-btn">Hapus dari Keranjang 🛒</button>
     `;
 
     card.querySelector(".detail-btn").onclick=()=>{
