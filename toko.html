@@ -4,185 +4,236 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FJ.Store – Produk</title>
+
 <style>
-/* ================= KODE ASLI KAMU (TIDAK DIUBAH) ================= */
-body { font-family: Arial, sans-serif; margin:0; padding:0; background:url('latarbelakang.jpg') center/cover no-repeat fixed; position:relative; }
-body::before { content:""; position:fixed; inset:0; backdrop-filter:blur(9px); background:rgba(0,0,0,0.45); z-index:-1; }
-header { background:rgba(0,0,0,0.65); padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold; border-bottom:1px solid rgba(255,255,255,0.2); position:relative; display:flex; justify-content:center; align-items:center; }
-#searchIcon, #wishlistIcon { position:absolute; top:50%; transform:translateY(-50%); cursor:pointer; transition:.3s; }
-#wishlistIcon { right:60px; font-size:22px; color:white; opacity:.9; display:flex; align-items:center; gap:5px; }
-#wishlistIcon:hover { transform:translateY(-50%) scale(1.15); opacity:1; text-shadow:0 0 15px #ff4d6d; }
-#searchIcon { right:20px; font-size:20px; color:white; opacity:.8; }
-#searchIcon:hover { opacity:1; transform:translateY(-50%) scale(1.15); }
-.products-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; max-width:1200px; margin:20px auto; }
-.product-card { background: rgba(255,255,255,0.15); backdrop-filter:blur(7px); border-radius:14px; padding:15px; text-align:center; color:white; box-shadow:0 4px 20px rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.25); position:relative; overflow:hidden; transition:.3s; cursor:pointer; }
-.product-card:hover { transform:scale(1.05); background: rgba(255,255,255,0.26); box-shadow:0 6px 30px rgba(0,0,0,0.35); }
-.product-card img { width:100%; height:220px; object-fit:cover; border-radius:10px; margin-bottom:12px; }
-.product-name { font-size:18px; font-weight:bold; color:#fff; text-shadow:1px 1px 3px #000; }
-.product-price { font-size:16px; color:#ffeb3b; font-weight:bold; margin-top:5px; text-shadow:1px 1px 3px #000; }
-.wishlist-heart { position:absolute; top:12px; right:12px; font-size:22px; cursor:pointer; transition:transform .25s,color .25s; text-shadow:1px 1px 4px black; opacity:.85; z-index:99; }
-.wishlist-heart:hover { transform:scale(1.15); opacity:1; }
-.wishlist-heart.active { color:#ff4d6d; transform:scale(1.25); animation:bounce 0.3s; }
-@keyframes bounce { 0%{transform:scale(1);} 50%{transform:scale(1.4);} 100%{transform:scale(1.25);} }
-.particle { position:absolute; width:6px; height:6px; background:#ff4d6d; border-radius:50%; pointer-events:none; animation:particleMove 0.8s forwards; z-index:100; }
-@keyframes particleMove { 0%{ transform:translate(0,0) scale(1); opacity:1; } 100%{ transform:translate(var(--x),var(--y)) scale(0); opacity:0; } }
-#searchOverlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(10px); display:none; justify-content:flex-start; align-items:center; padding-top:120px; z-index:99999; flex-direction:column; }
-#searchBox { width:80%; max-width:600px; padding:15px 20px; border-radius:12px; border:none; font-size:20px; outline:none; }
-#closeSearch { position:absolute; top:30px; right:35px; font-size:26px; color:white; cursor:pointer; opacity:.8; transition:.3s; }
-#closeSearch:hover { opacity:1; transform:scale(1.15); }
-#searchResults { width:80%; max-width:650px; margin:25px auto; }
-.search-item { display:flex; align-items:center; gap:15px; background: rgba(255,255,255,0.15); padding:12px; border-radius:12px; margin-bottom:10px; cursor:pointer; color:white; border:1px solid rgba(255,255,255,0.25); }
-.search-item:hover { background: rgba(255,255,255,0.28); transform:scale(1.02); }
-.search-thumb { width:65px; height:65px; border-radius:10px; object-fit:cover; }
-.search-text { display:flex; flex-direction:column; gap:4px; }
-.search-title { font-size:17px; font-weight:600; }
-.search-price { font-size:14px; color:#ffeb3b; }
-
-@media (max-width:500px){
-  header { font-size:20px; padding:15px; }
-  #wishlistIcon { right:50px; font-size:20px; }
-  #searchIcon { right:15px; font-size:18px; }
+/* ================= KODE ASLI (AMAN) ================= */
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  background:url('latarbelakang.jpg') center/cover no-repeat fixed;
 }
-
-/* ================= TAMBAHAN BARU (AMAN) ================= */
-.nav-top{
+body::before{
+  content:"";
   position:fixed;
-  top:15px;
-  left:15px;
+  inset:0;
+  backdrop-filter:blur(9px);
+  background:rgba(0,0,0,.45);
+  z-index:-1;
+}
+
+/* ================= HEADER BAR BARU ================= */
+header{
+  position:sticky;
+  top:0;
+  height:56px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
   display:flex;
-  gap:10px;
+  align-items:center;
+  justify-content:center;
+  color:white;
   z-index:9999;
+  border-bottom:1px solid rgba(255,255,255,.2);
 }
-.nav-top a{
-  padding:8px 14px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.9);
-  text-decoration:none;
-  font-size:14px;
+
+/* tombol back ala shopee */
+#backBtn{
+  position:absolute;
+  left:15px;
+  font-size:24px;
+  cursor:pointer;
+  opacity:.9;
+}
+#backBtn:hover{ opacity:1; transform:scale(1.1); }
+
+#headerTitle{
+  font-size:20px;
   font-weight:bold;
-  color:#000;
-  box-shadow:0 3px 10px rgba(0,0,0,.3);
-  transition:.25s;
 }
-.nav-top a:hover{ transform:scale(1.08); }
-.nav-top .active{
-  background:#000;
-  color:#fff;
+
+#searchIcon,#wishlistIcon{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
 }
-.trust-bar{
-  max-width:1100px;
-  margin:18px auto 0;
+#wishlistIcon{
+  right:55px;
+  font-size:22px;
+}
+#searchIcon{
+  right:15px;
+  font-size:20px;
+}
+
+/* ================= PRODUK ================= */
+.products-container{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+  max-width:1200px;
+  margin:20px auto;
   padding:0 15px;
 }
-.trust-bar div{
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(6px);
-  padding:12px;
-  text-align:center;
+
+.product-card{
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(7px);
   border-radius:14px;
+  padding:15px;
+  text-align:center;
   color:white;
+  border:1px solid rgba(255,255,255,.25);
+  cursor:pointer;
+  transition:.3s;
+  position:relative;
+}
+.product-card:hover{
+  transform:scale(1.05);
+  background:rgba(255,255,255,.26);
+}
+
+.product-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.product-name{
+  font-size:17px;
   font-weight:bold;
-  box-shadow:0 4px 15px rgba(0,0,0,.25);
-  border:1px solid rgba(255,255,255,.3);
+  margin-top:10px;
+}
+.product-price{
+  color:#ffeb3b;
+  font-weight:bold;
 }
 
-/* ============ OPTIMASI MOBILE TAMBAHAN (HP ENAK) ============ */
-@media (max-width:768px){
-  .products-container{
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    padding:0 12px;
-  }
-  .product-card img{
-    height:180px;
-  }
-  .product-name{ font-size:15px; }
-  .product-price{ font-size:14px; }
+/* wishlist icon */
+.wishlist-heart{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:22px;
+  cursor:pointer;
+}
+.wishlist-heart.active{ color:#ff4d6d; }
+
+/* ================= SEARCH ================= */
+#searchOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  flex-direction:column;
+  padding-top:100px;
+  z-index:99999;
+}
+#searchBox{
+  width:80%;
+  max-width:600px;
+  padding:15px;
+  border-radius:12px;
+  border:none;
+  font-size:18px;
+}
+#closeSearch{
+  position:absolute;
+  top:25px;
+  right:25px;
+  font-size:26px;
+  cursor:pointer;
+}
+#searchResults{
+  width:80%;
+  max-width:650px;
+  margin-top:20px;
 }
 
-@media (max-width:420px){
-  header{ font-size:18px; }
+.search-item{
+  display:flex;
+  gap:12px;
+  background:rgba(255,255,255,.15);
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+  cursor:pointer;
+  color:white;
+}
+.search-thumb{
+  width:60px;
+  height:60px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
   .products-container{
     grid-template-columns:repeat(2,1fr);
-    gap:12px;
   }
-  .product-card{
-    padding:12px;
-    border-radius:12px;
-  }
-  .product-card img{
-    height:160px;
-  }
-  .wishlist-heart{
-    font-size:20px;
-  }
-  #searchBox{
-    font-size:17px;
-    padding:12px 16px;
-  }
+  .product-card img{ height:160px; }
 }
 </style>
 </head>
+
 <body>
 
-<div class="nav-top">
-  <a href="index.html">Beranda</a>
-  <a href="toko.html" class="active">Toko</a>
-</div>
-
 <header>
-  <span id="wishlistIcon">🛒 <span id="wishlistCount">(0)</span></span>
-  <span id="searchIcon">🔍</span>
+  <div id="backBtn" onclick="history.back()">←</div>
+  <div id="headerTitle">Toko</div>
+  <div id="wishlistIcon">🛒 <span id="wishlistCount">(0)</span></div>
+  <div id="searchIcon">🔍</div>
 </header>
 
 <div class="products-container" id="products"></div>
 
 <div id="searchOverlay">
   <div id="closeSearch">✖</div>
-  <input id="searchBox" type="text" placeholder="Cari produk..." autocomplete="off" />
+  <input id="searchBox" placeholder="Cari produk...">
   <div id="searchResults"></div>
 </div>
 
 <script>
-/* ===== SCRIPT ASLI KAMU (UTUH) ===== */
+/* ================= SCRIPT ASLI ================= */
 let wishlist = JSON.parse(localStorage.getItem("wishlist")||"[]");
 function saveWishlist(){ localStorage.setItem("wishlist",JSON.stringify(wishlist)); }
-function updateWishlistCounter(){ document.getElementById("wishlistCount").innerText=`(${wishlist.length})`; }
+function updateWishlistCounter(){
+  document.getElementById("wishlistCount").innerText=`(${wishlist.length})`;
+}
 updateWishlistCounter();
 
 async function loadProducts(){
   const res = await fetch("products.json");
   const data = await res.json();
   const container = document.getElementById("products");
-  container.innerHTML = "";
+  container.innerHTML="";
   data.forEach(p=>{
-    const card = document.createElement("div");
-    card.className = "product-card";
-    card.innerHTML = `<img src="${p.image}" alt="${p.name}">
+    const card=document.createElement("div");
+    card.className="product-card";
+    card.innerHTML=`
+      <img src="${p.image}">
       <div class="product-name">${p.name}</div>
-      <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>`;
-    card.onclick = () => window.location.href = `detail.html?id=${p.id}`;
+      <div class="product-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
+    `;
+    card.onclick=()=>location.href=`detail.html?id=${p.id}`;
 
-    const heart = document.createElement("div");
-    heart.className = "wishlist-heart";
-    heart.innerText = "🛒";
+    const heart=document.createElement("div");
+    heart.className="wishlist-heart";
+    heart.innerText="🛒";
     if(wishlist.includes(p.id)) heart.classList.add("active");
 
-    heart.onclick = e=>{
+    heart.onclick=e=>{
       e.stopPropagation();
       if(wishlist.includes(p.id)){
-        wishlist = wishlist.filter(x=>x!==p.id);
+        wishlist=wishlist.filter(x=>x!==p.id);
         heart.classList.remove("active");
-      } else {
+      }else{
         wishlist.push(p.id);
         heart.classList.add("active");
-        createParticles(heart);
       }
-      saveWishlist(); updateWishlistCounter();
-      window.dispatchEvent(new Event("wishlistUpdated"));
+      saveWishlist();
+      updateWishlistCounter();
     };
 
     card.appendChild(heart);
@@ -190,55 +241,34 @@ async function loadProducts(){
   });
 }
 
-function createParticles(heart){
-  for(let i=0;i<8;i++){
-    const p=document.createElement("div"); p.className="particle";
-    const angle=Math.random()*2*Math.PI, radius=30+Math.random()*20;
-    const rect = heart.getBoundingClientRect();
-    p.style.left = rect.left + rect.width/2 + "px";
-    p.style.top = rect.top + rect.height/2 + "px";
-    p.style.setProperty("--x", `${Math.cos(angle)*radius}px`);
-    p.style.setProperty("--y", `${Math.sin(angle)*radius}px`);
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),800);
-  }
-}
-
 const overlay=document.getElementById("searchOverlay");
-const searchBox=document.getElementById("searchBox");
-const searchResults=document.getElementById("searchResults");
-const closeSearch=document.getElementById("closeSearch");
-document.getElementById("searchIcon").onclick=()=>{ overlay.style.display="flex"; searchBox.focus(); };
-closeSearch.onclick=()=>{ overlay.style.display="none"; searchBox.value=""; searchResults.innerHTML=""; };
-overlay.addEventListener("click",e=>{ if(e.target===overlay) overlay.style.display="none"; });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") overlay.style.display="none"; });
+document.getElementById("searchIcon").onclick=()=>overlay.style.display="flex";
+document.getElementById("closeSearch").onclick=()=>overlay.style.display="none";
 
-let allProducts = [];
+let allProducts=[];
 fetch("products.json").then(r=>r.json()).then(d=>allProducts=d);
 
-searchBox.addEventListener("input",()=>{
-  const key = searchBox.value.toLowerCase();
-  searchResults.innerHTML="";
+document.getElementById("searchBox").addEventListener("input",e=>{
+  const key=e.target.value.toLowerCase();
+  const res=document.getElementById("searchResults");
+  res.innerHTML="";
   if(!key) return;
-  const filtered = allProducts.filter(p=>p.name.toLowerCase().includes(key));
-  if(!filtered.length) {
-    searchResults.innerHTML="<div style='color:white'>Tidak ada produk ditemukan</div>";
-    return;
-  }
-  filtered.forEach(p=>{
+  allProducts.filter(p=>p.name.toLowerCase().includes(key))
+  .forEach(p=>{
     const div=document.createElement("div");
     div.className="search-item";
-    div.innerHTML=`<img src="${p.image}" class="search-thumb">
-      <div class="search-text">
-        <div class="search-title">${p.name}</div>
-        <div class="search-price">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
+    div.innerHTML=`
+      <img src="${p.image}" class="search-thumb">
+      <div>
+        <div>${p.name}</div>
+        <div style="color:#ffeb3b">Rp ${Number(p.price).toLocaleString("id-ID")}</div>
       </div>`;
-    div.onclick=()=>window.location.href=`detail.html?id=${p.id}`;
-    searchResults.appendChild(div);
+    div.onclick=()=>location.href=`detail.html?id=${p.id}`;
+    res.appendChild(div);
   });
 });
 
-document.getElementById("wishlistIcon").onclick=()=>{ window.location.href="wishlist.html"; };
+document.getElementById("wishlistIcon").onclick=()=>location.href="wishlist.html";
 loadProducts();
 </script>
 
